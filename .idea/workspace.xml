@@ -2,19 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0572a869-2f58-4d6f-856e-2074ef100d0d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/local_library_white_192x192.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/css/AddBook.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/css/colors.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/finalbookshop.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/utils/Footer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/utils/NavigationBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DropZone.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utils/Footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigationBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utils/NavigationBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/admin/AddBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/AddBook.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/css/AddBookForm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/route/RouterSwitch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/AxiosService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,12 +49,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="sortByType" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/css" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="Sass" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -65,17 +64,17 @@
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\css" />
-      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src" />
-      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components" />
-      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop" />
-      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\public" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components" />
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components\utils" />
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components\admin" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop" />
+      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\css" />
+      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src" />
+      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components" />
+      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\public" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -98,7 +97,8 @@
       <workItem from="1589006608920" duration="371000" />
       <workItem from="1589007526258" duration="18108000" />
       <workItem from="1589043959006" duration="2283000" />
-      <workItem from="1589080416556" duration="3148000" />
+      <workItem from="1589080416556" duration="3658000" />
+      <workItem from="1588497264030" duration="1208000" />
     </task>
     <servers />
   </component>
