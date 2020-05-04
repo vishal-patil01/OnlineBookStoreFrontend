@@ -4,12 +4,10 @@
     height: 88vh;
     background-color: #eeeeee;
 }
-
 .MuiGrid-spacing-xs-1 > .MuiGrid-item {
     padding-right: 10px;
     padding-left: 10px;
 }
-
 .card {
     width: 30%;
     margin: 0;
@@ -21,9 +19,8 @@
     border-radius: 5px;
     padding: 8px;
 }
-
-.input {
-    width: 200px;
+.input{
+    width:200px;
 }
 
 .MuiCardContent-root {
@@ -54,13 +51,11 @@ h3 {
         width: 100%;
         margin: auto;
     }
-
     .container {
         padding: 2vh;
         height: 100vh;
     }
 }
-
 @media only screen
 and (min-device-width: 769px)
 and (max-device-width: 1024px)
@@ -73,7 +68,6 @@ and (-webkit-min-device-pixel-ratio: 1) {
         width: 75%;
         margin: auto;
     }
-
     .container {
         height: 100vh;
     }

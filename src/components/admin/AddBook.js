@@ -11,7 +11,6 @@ import CardContent from "@material-ui/core/CardContent";
 import {StylesProvider} from "@material-ui/core/styles";
 import AdminHeader from "./Header";
 
-
 export default class AddBook extends React.Component {
     constructor(props) {
         super(props);
@@ -25,9 +24,38 @@ export default class AddBook extends React.Component {
             bookPrice: "",
             publishingYear: "",
             bookImageSrc: "",
+
+            isbnNumberError: "",
+            bookNameError: "",
+            authorNameError: "",
+            bookPriceError: "",
+            noOfCopiesError: "",
+            bookDetailsError: "",
+            publishingYearError: "",
+            bookImageError: "",
+
+            requiredFieldCheck: "",
         };
     }
 
+    validation = (event, pattern, errorMessage) => {
+        if (event.target.value.match(pattern)) {
+            this.setState({
+                [event.target.id + "Error"]: " ",
+                tempName: event.target.id,
+            })
+            if (!this.state.requiredFieldCheck.includes(event.target.name.charAt(0))) {
+                this.setState({requiredFieldCheck: this.state.requiredFieldCheck + event.target.name.charAt(0)})
+            }
+        } else {
+            this.setState({
+                [event.target.id + "Error"]: errorMessage
+            })
+            if (this.state.requiredFieldCheck.includes(event.target.name.charAt(0))) {
+                this.setState({requiredFieldCheck: this.state.requiredFieldCheck.replace(event.target.name.charAt(0), "")})
+            }
+        }
+    }
     handleChange = ({target}) => {
         this.setState({[target.id]: target.value});
     };
@@ -66,6 +94,9 @@ export default class AddBook extends React.Component {
                                                    variant="outlined"
                                                    fullWidth
                                                    size="small"
+                                                   onBlur={event => this.validation(event, "^.{3,}$", "Enter Minimum 3 Characters")}
+                                                   error={this.state.bookNameError.trim().length !== 0}
+                                                   helperText={this.state.bookNameError}
                                                    required/>
                                     </Grid>
                                     <Grid item xs={12} sm={6} md={6}>
@@ -75,6 +106,9 @@ export default class AddBook extends React.Component {
                                                    value={this.state.authorName}
                                                    variant="outlined"
                                                    fullWidth
+                                                   onBlur={event => this.validation(event, "^[A-za-z]{1}[A-Za-z .]{2,}$", "Enter Minimum 3 Characters(Only Alphabets)")}
+                                                   error={this.state.authorNameError.trim().length !== 0}
+                                                   helperText={this.state.authorNameError}
                                                    required/>
                                     </Grid>
 
@@ -84,6 +118,9 @@ export default class AddBook extends React.Component {
                                                    fullWidth
                                                    size="small"
                                                    onFocus
+                                                   onBlur={event => this.validation(event, "^.{10,13}$", "Enter 10-13 Characters")}
+                                                   error={this.state.isbnNumberError.trim().length !== 0}
+                                                   helperText={this.state.isbnNumberError}
                                                    required/>
                                     </Grid>
                                     <Grid item xs={12} sm={4} md={4}>
@@ -94,6 +131,9 @@ export default class AddBook extends React.Component {
                                                    variant="outlined"
                                                    fullWidth
                                                    size="small"
+                                                   onBlur={event => this.validation(event, "^[1-9]{1}[0-9]{0,}", "Enter Value (greater Than 0)")}
+                                                   error={this.state.noOfCopiesError.trim().length !== 0}
+                                                   helperText={this.state.noOfCopiesError}
                                                    required/>
                                     </Grid>
                                     <Grid item xs={12} sm={4} md={4}>
@@ -104,9 +144,11 @@ export default class AddBook extends React.Component {
                                             variant="outlined"
                                             fullWidth
                                             size="small"
+                                            onBlur={event => this.validation(event, "^[1-9]{1}[0-9]{0,}", "Enter Value (greater Than 0)")}
+                                            error={this.state.bookPriceError.trim().length !== 0}
+                                            helperText={this.state.bookPriceError}
                                             required/>
                                     </Grid>
-
                                     <Grid item xs={12} sm={6} md={6}>
                                         <TextField
                                             id="publishingYear" label="Year" name="Year"
@@ -115,12 +157,16 @@ export default class AddBook extends React.Component {
                                             variant="outlined"
                                             fullWidth
                                             size="small"
+                                            onBlur={event => this.validation(event, `^(140[0-9]|19[5-9]\\d|20[0-${[2] - 1}]\\d|20${[2]}[0-${[3]}])$`, "Enter value greater than 1400 to 2023")}
+                                            error={this.state.publishingYearError.trim().length !== 0}
+                                            helperText={this.state.publishingYearError}
                                             required/>
                                     </Grid>
                                     <Grid item xs={12} sm={6} md={6}>
                                         <div className="fileInputDiv">
                                             <input
                                                 name="File"
+                                                onBlur={event => this.validation(event, "^.{3,}$", "Choose Image")}
                                                 accept="image/*"
                                                 className="input"
                                                 id="bookImageSrc"
@@ -139,6 +185,9 @@ export default class AddBook extends React.Component {
                                                    variant="outlined"
                                                    fullWidth
                                                    size="small"
+                                                   onBlur={event => this.validation(event, "^.{10,}$", "Enter Minimum 10 Character")}
+                                                   error={this.state.bookDetailsError.trim().length !== 0}
+                                                   helperText={this.state.bookDetailsError}
                                                    required/>
                                     </Grid>
                                     <Grid item xs={12} sm={12} md={12}>
@@ -147,7 +196,10 @@ export default class AddBook extends React.Component {
                                                 variant="contained"
                                                 color="primary"
                                                 size="large"
-                                                startIcon={<SaveIcon/>}>
+                                                startIcon={<SaveIcon/>}
+                                                onClick={this.addBook}
+                                                disabled={this.state.requiredFieldCheck.length <= 7}
+                                        >
                                             Save
                                         </Button>
                                         <Button className="btn"
