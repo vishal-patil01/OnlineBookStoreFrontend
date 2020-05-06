@@ -26,14 +26,17 @@ export default class AddBook extends React.Component {
             publishingYear: "",
             bookImageSrc: "",
 
-            isbnNumberError: "",
-            bookNameError: "",
-            authorNameError: "",
-            bookPriceError: "",
-            noOfCopiesError: "",
-            bookDetailsError: "",
-            publishingYearError: "",
-            bookImageError: "",
+            isbnNumberError: " ",
+            bookNameError: " ",
+            authorNameError: " ",
+            bookPriceError: " ",
+            noOfCopiesError: " ",
+            bookDetailsError: " ",
+            publishingYearError: " ",
+            bookImageError: " ",
+
+            alertShow: false,
+            alertResponse: "",
 
             requiredFieldCheck: "",
         };
@@ -75,7 +78,6 @@ export default class AddBook extends React.Component {
             console.log(error);
         });
     }
-
     handleChange = ({target}) => {
         this.setState({[target.id]: target.value});
     };
