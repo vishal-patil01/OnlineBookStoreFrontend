@@ -35,9 +35,6 @@ export default class AddBook extends React.Component {
             publishingYearError: "",
             bookImageError: "",
 
-            alertShow: false,
-            alertResponse: "",
-
             requiredFieldCheck: "",
         };
     }
