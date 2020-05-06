@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from '@material-ui/icons/Save';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import TextField from '@material-ui/core/TextField'
+import {post} from "../../services/HttpService";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -34,6 +35,9 @@ export default class AddBook extends React.Component {
             publishingYearError: "",
             bookImageError: "",
 
+            alertShow: false,
+            alertResponse: "",
+
             requiredFieldCheck: "",
         };
     }
@@ -56,6 +60,25 @@ export default class AddBook extends React.Component {
             }
         }
     }
+    addBook = () => {
+        const book = {
+            isbnNumber: this.state.isbnNumber,
+            bookName: this.state.bookName,
+            authorName: this.state.authorName,
+            bookPrice: this.state.bookPrice,
+            noOfCopies: this.state.noOfCopies,
+            bookDetails: this.state.bookDetails,
+            bookImageSrc: this.state.bookImageSrc,
+            publishingYear: this.state.publishingYear
+        }
+        console.log("book ", book)
+        post(book, "admin/addbook").then((response) => {
+            console.log(response.data);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
     handleChange = ({target}) => {
         this.setState({[target.id]: target.value});
     };
