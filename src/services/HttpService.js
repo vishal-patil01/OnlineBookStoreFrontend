@@ -1,5 +1,5 @@
 import Axios from "axios";
-import BASEURL from '../config/url'
+import BASEURL from '../config/Url'
 
 function post(bookData, url) {
     return Axios({

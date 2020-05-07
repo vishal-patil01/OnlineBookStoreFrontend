@@ -11,6 +11,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import {StylesProvider} from "@material-ui/core/styles";
 import AdminHeader from "./Header";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 
 export default class AddBook extends React.Component {
     constructor(props) {
@@ -74,10 +76,23 @@ export default class AddBook extends React.Component {
         console.log("book ", book)
         post(book, "admin/addbook").then((response) => {
             console.log(response.data);
-        }).catch((error) => {
-            console.log(error);
+            if (response.status === 200) {
+                this.setState({
+                    severity: "success",
+                    alertShow: true,
+                    alertResponse: response.data.message
+                });
+                this.clearFieldsData();
+            } else {
+                this.setState({
+                    severity: "error",
+                    alertShow: true,
+                    alertResponse: response.data.message
+                });
+            }
         });
     }
+
     handleChange = ({target}) => {
         this.setState({[target.id]: target.value});
     };
@@ -94,10 +109,19 @@ export default class AddBook extends React.Component {
             publishingYear: "",
         });
     };
+    closeAlertBox = () => {
+        this.setState({alertShow: false});
+    };
 
     render() {
         return (
             <Fragment>
+                <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={this.state.alertShow}
+                          autoHideDuration={6000} onClose={this.closeAlertBox}>
+                    <Alert onClose={this.closeAlertBox} severity={this.state.severity} variant={"filled"}>
+                        {this.state.alertResponse}
+                    </Alert>
+                </Snackbar>
                 <AdminHeader/>
                 <Container className="container">
                     <StylesProvider injectFirst>
