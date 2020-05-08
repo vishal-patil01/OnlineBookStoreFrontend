@@ -1,0 +1,56 @@
+#CardContainer {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    background-color: lightgrey;
+}
+
+#bookImage {
+    margin: 14px auto;
+    width: 40%;
+    height: 135px;
+}
+
+.bookTitle {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+#addToCartButton {
+    color: #eeeeee;
+}
+
+.bookAuthorName {
+    line-height: 0;
+    text-align: left;
+    color: #B1B1B1;
+    padding-top: 6px;
+    font-size: 13px;
+    margin: 0;
+}
+
+.bookPrice {
+    font-size: 14px;
+    text-align: left;
+    font-weight: bold;
+
+}
+
+.outOfStockLabel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22%;
+    width: 60%;
+    font-weight: bold;
+    font-size: 12px;
+}

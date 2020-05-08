@@ -1,5 +1,5 @@
 import Axios from "axios";
-import BASEURL from '../config/Url'
+import BASEURL from '../config/urlConstants'
 
 function post(bookData, url) {
     return Axios({
@@ -8,5 +8,11 @@ function post(bookData, url) {
         data: bookData
     })
 }
+function get(url) {
+    return Axios({
+        method: 'get', headers: {"Content-Type": "application/json"},
+        url: `${BASEURL.appUrl}${url}`,
+    })
+}
 
-export {post}
+export {post,get}

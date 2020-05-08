@@ -2,9 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0572a869-2f58-4d6f-856e-2074ef100d0d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/uploads/a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/uploads/b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/uploads/c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/uploads/d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/uploads/e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/uploads/f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/uploads/g.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/uploads/h.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/user/BookCard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/user/Homepage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/css/BookCard.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/css/CustomScrollbar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/css/Homepage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/admin/AddBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/AddBook.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/css/AddBook.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/AddBook.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/utils/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utils/Footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/Url.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/urlConstants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/route/RouterSwitch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/route/RouterSwitch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/HttpService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/HttpService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,17 +73,17 @@
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components" />
-      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components\utils" />
-      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components\admin" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\public" />
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop" />
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\css" />
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src" />
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components" />
+      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components\utils" />
+      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components\admin" />
     </key>
   </component>
   <component name="SvnConfiguration">

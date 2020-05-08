@@ -35,7 +35,7 @@
 }
 
 .App-footer {
-    background-color: #b90f4b;
+    background-color: #2E1D1E;
     display: flex;
     width: 100%;
     position: fixed;
@@ -43,17 +43,17 @@
     color: white;
     justify-content: center;
     align-items: center;
-    background-position: 0% 0%;
+    margin-top: 10px;
+    background-position: 0 0;
     bottom: 0;
 }
 
 .footer {
     display: flex;
     flex-flow: row wrap;
-    padding: 30px 30px 20px 30px;
-    color: #2f2f2f;
-    background-color: #fff;
-    border-top: 1px solid #e5e5e5;
+    padding: 8px;
+    color: white;
+    background-color: #2E1D1E;
 }
 
 .footer > * {

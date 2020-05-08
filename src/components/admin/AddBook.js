@@ -80,7 +80,7 @@ export default class AddBook extends React.Component {
             bookPrice: this.state.bookPrice,
             noOfCopies: this.state.noOfCopies,
             bookDetails: this.state.bookDetails,
-            bookImageSrc: "../../assets/uploads/" + this.state.bookImageSrc,
+            bookImageSrc: this.state.bookImageSrc,
             publishingYear: this.state.publishingYear
         }
         console.log("book ", book)
@@ -276,8 +276,7 @@ export default class AddBook extends React.Component {
                                                 size="large"
                                                 startIcon={<CancelOutlinedIcon/>}
                                                 onClick={this.clearFieldsData}
-                                        >
-                                            Clear
+                                        >Clear
                                         </Button>
                                     </Grid>
                                 </Grid>
