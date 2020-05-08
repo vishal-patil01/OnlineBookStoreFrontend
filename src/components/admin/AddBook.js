@@ -13,6 +13,8 @@ import {StylesProvider} from "@material-ui/core/styles";
 import AdminHeader from "./Header";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 export default class AddBook extends React.Component {
     constructor(props) {
@@ -35,7 +37,7 @@ export default class AddBook extends React.Component {
             noOfCopiesError: " ",
             bookDetailsError: " ",
             publishingYearError: " ",
-            bookImageError: " ",
+            bookImageSrcError: " ",
 
             alertShow: false,
             alertResponse: "",
@@ -44,15 +46,23 @@ export default class AddBook extends React.Component {
         };
     }
 
+    imageNotNullValidation = (event) => {
+        this.setState({
+            bookImageSrc: event.target.value.replace(/^.*[\\/]/, ''),
+        })
+        if (!this.state.requiredFieldCheck.includes("C")) {
+            this.setState({
+                requiredFieldCheck: this.state.requiredFieldCheck + "C",
+            })
+        }
+    }
     validation = (event, pattern, errorMessage) => {
         if (event.target.value.match(pattern)) {
-            this.setState({
-                [event.target.id + "Error"]: " ",
-                tempName: event.target.id,
-            })
+            this.setState({[event.target.id + "Error"]: " ", tempName: event.target.id,})
             if (!this.state.requiredFieldCheck.includes(event.target.name.charAt(0))) {
                 this.setState({requiredFieldCheck: this.state.requiredFieldCheck + event.target.name.charAt(0)})
             }
+            console.log(this.state.requiredFieldCheck)
         } else {
             this.setState({
                 [event.target.id + "Error"]: errorMessage
@@ -70,11 +80,11 @@ export default class AddBook extends React.Component {
             bookPrice: this.state.bookPrice,
             noOfCopies: this.state.noOfCopies,
             bookDetails: this.state.bookDetails,
-            bookImageSrc: this.state.bookImageSrc,
+            bookImageSrc: "../../assets/uploads/" + this.state.bookImageSrc,
             publishingYear: this.state.publishingYear
         }
         console.log("book ", book)
-        post(book, "admin/addbook").then((response) => {
+        post(book, "admin/book").then((response) => {
             console.log(response.data);
             if (response.status === 200) {
                 this.setState({
@@ -112,6 +122,7 @@ export default class AddBook extends React.Component {
     closeAlertBox = () => {
         this.setState({alertShow: false});
     };
+
 
     render() {
         return (
@@ -152,7 +163,7 @@ export default class AddBook extends React.Component {
                                                    value={this.state.authorName}
                                                    variant="outlined"
                                                    fullWidth
-                                                   onBlur={event => this.validation(event, "^[A-za-z]{1}[A-Za-z .]{2,}$", "Enter Minimum 3 Characters(Only Alphabets)")}
+                                                   onBlur={event => this.validation(event, "^[A-za-z][A-Za-z .]{3,}$", "Enter Minimum 3 Characters(Only Alphabets)")}
                                                    error={this.state.authorNameError.trim().length !== 0}
                                                    helperText={this.state.authorNameError}
                                                    required/>
@@ -203,24 +214,35 @@ export default class AddBook extends React.Component {
                                             variant="outlined"
                                             fullWidth
                                             size="small"
-                                            onBlur={event => this.validation(event, `^(140[0-9]|19[5-9]\\d|20[0-${[2] - 1}]\\d|20${[2]}[0-${[3]}])$`, "Enter value greater than 1400 to 2023")}
+                                            onBlur={event => this.validation(event, `^(140[0-9]|19[5-9]\\d|20[0-${[2] - 1}]\\d|20${[2]}[0-${[1]}])$`, "Enter value greater than 1400 to 2023")}
                                             error={this.state.publishingYearError.trim().length !== 0}
                                             helperText={this.state.publishingYearError}
                                             required/>
                                     </Grid>
+
                                     <Grid item xs={12} sm={6} md={6}>
                                         <div className="fileInputDiv">
-                                            <input
-                                                name="File"
-                                                onBlur={event => this.validation(event, "^.{3,}$", "Choose Image")}
-                                                accept="image/*"
-                                                className="input"
-                                                id="bookImageSrc"
-                                                type="file"
-                                                required
-                                                onChange={this.handleChange}
-                                                value={this.state.bookImageSrc}
+                                            <input accept="image/*"
+                                                   style={{visibility: "hidden", height: "0px", width: "0px"}}
+                                                   className=""
+                                                   id="bookImageSrc" type="file"
+                                                   onChange={event => this.imageNotNullValidation(event)}
                                             />
+                                            <label htmlFor="bookImageSrc">
+                                                <TextField className="imageUrl"
+                                                           id="bookImageSrc" label="Image" name="CoverImage"
+                                                           value={this.state.bookImageSrc}
+                                                           variant="outlined"
+                                                           size="small"
+                                                           fullWidth
+                                                           disabled
+                                                           helperText=" "
+                                                           required/>
+                                                <IconButton color="primary" aria-label="upload picture"
+                                                            component="span">
+                                                    <PhotoCamera/>
+                                                </IconButton>
+                                            </label>
                                         </div>
                                     </Grid>
                                     <Grid item xs={12} sm={12} md={12}>

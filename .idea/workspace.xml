@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0572a869-2f58-4d6f-856e-2074ef100d0d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/utils/DropZone.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/admin/AddBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/AddBook.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/css/AddBook.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/AddBook.css" afterDir="false" />
@@ -46,9 +45,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
     <property name="list.type.of.created.stylesheet" value="Sass" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -63,11 +63,11 @@
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components\admin" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\public" />
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop" />
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\css" />
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src" />
       <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\src\components" />
-      <recent name="D:\vishal\Projects\WebProjects\Final Project\Working\finalbookshop\public" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -91,7 +91,8 @@
       <workItem from="1589007526258" duration="18108000" />
       <workItem from="1589043959006" duration="2283000" />
       <workItem from="1589080416556" duration="3658000" />
-      <workItem from="1588497264030" duration="6239000" />
+      <workItem from="1588497264030" duration="26784000" />
+      <workItem from="1588844040394" duration="12990000" />
     </task>
     <servers />
   </component>
@@ -107,14 +108,30 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="481" y="254" key="Github.Dialog.Accounts.Choose/0.0.1280.680@0.0.1280.680" timestamp="1589004135680" />
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1588833102382">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588833102382" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1588833102382">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588833102382" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1588833102382">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588833102382" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1588833102382">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588833102382" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1589082777246">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1589082777246" />
-    <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1589080420177">
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1588844039337">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1589080420177" />
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1588844039337" />
     <state x="359" y="54" key="git4idea.branch.GitSmartOperationDialog" timestamp="1589004196285">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
