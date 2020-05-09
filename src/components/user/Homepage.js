@@ -4,6 +4,7 @@ import "../../css/CustomScrollbar.css";
 import NavBarAdmin from "../../components/utils/NavigationBar";
 import Grid from "@material-ui/core/Grid";
 import Card from "./BookCard";
+import Pagination from "@material-ui/lab/Pagination";
 import {get} from "../../services/HttpService";
 
 export default class Homepage extends Component {
@@ -12,11 +13,12 @@ export default class Homepage extends Component {
         this.state = {
             id: 0,
             bookList: [],
+            pageValue: 0
         };
     }
 
     getBooks() {
-        get(`book/${0}/12`,)
+        get(`book/${this.state.pageValue}/5`,)
             .then((response) => {
                 console.log(response.data.bookList)
                 this.setState({bookList: response.data.bookList});
@@ -28,6 +30,12 @@ export default class Homepage extends Component {
 
     componentDidMount() {
         this.getBooks();
+    }
+
+    handleChange = (event, value) => {
+        this.setState({pageValue: value - 1}, () => {
+            this.getBooks()
+        })
     }
 
     render() {
@@ -51,6 +59,11 @@ export default class Homepage extends Component {
                         )}
                     </Grid>
                 </div>
+                <br/>
+                <Grid container justify="center">
+                    <Pagination count={Math.floor(this.state.count / 5)} variant="text" color="secondary"
+                                onChange={this.handleChange}/>
+                </Grid>
                 <br/>
             </Fragment>
         );

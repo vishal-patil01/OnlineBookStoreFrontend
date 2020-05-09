@@ -15,6 +15,7 @@
       <change afterPath="$PROJECT_DIR$/src/css/BookCard.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/css/CustomScrollbar.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/css/Homepage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/admin/AddBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/AddBook.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/utils/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/utils/Footer.js" afterDir="false" />
