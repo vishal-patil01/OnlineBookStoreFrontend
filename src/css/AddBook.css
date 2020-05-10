@@ -1,19 +1,25 @@
 .container {
-    padding: 8vh;
+    display: flex;
+    position: relative;
+    padding: 4%;
     justify-content: center;
-    height: 88vh;
+    height: 100%;
+    width: 100%;
     background-color: #eeeeee;
 }
-.MuiGrid-spacing-xs-1 > .MuiGrid-item {
-    padding-right: 10px;
-    padding-left: 10px;
-}
+
+/*.MuiGrid-spacing-xs-1 > .MuiGrid-item {*/
+/*    padding-right: 10px;*/
+/*    padding-left: 10px;*/
+/*}*/
+
 .card {
     width: 30%;
     margin: 0;
     padding: 0;
 }
-.selectBtn{
+
+.selectBtn {
     width: fit-content;
 }
 
@@ -22,12 +28,14 @@
     display: flex;
     flex-wrap: wrap;
 }
-.imageUrl{
+
+.imageUrl {
     height: 7px;
     width: 22vw;
 }
-.input{
-    width:200px;
+
+.input {
+    width: 200px;
 }
 
 .MuiCardContent-root {
@@ -53,18 +61,22 @@ h3 {
     .MuiCardContent-root {
         padding: 5px 10px;
     }
+
     .card {
         width: 100%;
         margin: auto;
     }
+
     .container {
         padding: 2vh;
         height: 138vh;
     }
-    .imageUrl{
+
+    .imageUrl {
         width: 65vw;
     }
 }
+
 @media only screen
 and (min-device-width: 768px)
 and (max-device-width: 1024px)
@@ -77,10 +89,12 @@ and (-webkit-min-device-pixel-ratio: 1) {
         width: 75%;
         margin: auto;
     }
+
     .container {
         height: 100vh;
     }
-    .imageUrl{
+
+    .imageUrl {
         width: 25vw;
     }
 }
@@ -93,11 +107,13 @@ and (-webkit-min-device-pixel-ratio: 1) {
     .root {
         width: 35%;
     }
+
     .card {
         width: 65%;
         margin: auto;
     }
-    .imageUrl{
+
+    .imageUrl {
         width: 18vw;
     }
 }

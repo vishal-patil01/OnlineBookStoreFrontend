@@ -1,11 +1,14 @@
 import React, {Component, Fragment} from "react";
 import "../../css/Homepage.css";
 import "../../css/CustomScrollbar.css";
-import NavBarAdmin from "../../components/utils/NavigationBar";
 import Grid from "@material-ui/core/Grid";
 import Card from "./BookCard";
 import Pagination from "@material-ui/lab/Pagination";
 import {get} from "../../services/HttpService";
+import NavigationBar from "../utils/NavigationBar";
+import Container from "@material-ui/core/Container";
+
+import TextField from "@material-ui/core/TextField";
 
 export default class Homepage extends Component {
     constructor(props) {
@@ -14,15 +17,18 @@ export default class Homepage extends Component {
             id: 0,
             bookList: [],
             count: 0,
-            pageValue: 0
+            pageValue: 0,
+            searchText: "",
         };
     }
 
     getBooks() {
-        get(`book/${this.state.pageValue}/5`,)
+        get(`book/${this.state.pageValue}/8`,)
             .then((response) => {
                 console.log(response.data.bookList)
-                this.setState({bookList: response.data.bookList});
+                this.setState({
+                    bookList: response.data.bookList,
+                });
             })
             .catch((error) => {
                 console.log(error)
@@ -33,7 +39,9 @@ export default class Homepage extends Component {
         get('count')
             .then((response) => {
                 console.log(response.data)
-                this.setState({count: response.data});
+                this.setState({
+                    count: response.data,
+                });
             })
             .catch((error) => {
                 console.log(error)
@@ -45,7 +53,7 @@ export default class Homepage extends Component {
         this.getTotalBooksCount();
     }
 
-    handleChange = (event, value) => {
+    onPageChange = (event, value) => {
         this.setState({pageValue: value - 1}, () => {
             this.getBooks()
         })
@@ -54,16 +62,15 @@ export default class Homepage extends Component {
     render() {
         return (
             <Fragment>
-                <NavBarAdmin/>
-                <div className="secondaryHeader">
-                    <p className="secondaryHeader-main-font">Books <span
-                        className="subHeader">({this.state.count} items) </span></p>
-                </div>
-                <div className="homePageContainer">
-                    <Grid container spacing={3}>
+                <NavigationBar searchedText={this.getSearchFieldTextValue}/>
+                <Container id="homePageContainer">
+                    <div className="secondaryHeader">
+                        <p className="secondaryHeader-main-font">Books <span
+                            className="subHeader">({this.state.count} items) </span></p>
+                    </div>
+                    <Grid container spacing={4}>
                         {this.state.bookList.map(id =>
-                            <Grid alignItems="center" key={id.id} item xs={12} sm={6} md={4} lg={3} xl={1}
-                            >
+                            <Grid alignItems="center" key={id.id} item xs={12} sm={6} md={4} lg={3} xl={1}>
                                 <Card
                                     key={id.id}
                                     bookName={id.bookName}
@@ -75,13 +82,12 @@ export default class Homepage extends Component {
                             </Grid>
                         )}
                     </Grid>
-                </div>
-                <br/>
-                <Grid container justify="center">
-                    <Pagination count={Math.floor(this.state.count / 5)} variant="text" color="secondary"
-                                onChange={this.handleChange}/>
+                    <br/>
+                </Container>
+                <Grid container justify={"center"}>
+                    <Pagination count={Math.round(this.state.count / 8)} variant="text" color="secondary"
+                                onChange={this.onPageChange}/>
                 </Grid>
-                <br/>
             </Fragment>
         );
     }

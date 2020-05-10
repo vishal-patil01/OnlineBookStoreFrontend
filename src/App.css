@@ -13,47 +13,9 @@
     }
 }
 
-.App-header {
+#App-header {
     background-color: #b90f4b;
     position: sticky;
-}
-
-.App-icon {
-    justify-content: center;
-    justify-items: center;
-    font-size: 2.8vmax;
-    margin-left: 1%;
-    margin-right: 1%;
-    padding: 1% 1%;
-}
-
-.Headers-font {
-    font-size: 1.8vmax;
-}
-.footer-font {
-    font-size: 1vmax;
-}
-
-.App-footer {
-    background-color: #2E1D1E;
-    display: flex;
-    width: 100%;
-    position: fixed;
-    height: fit-content;
-    color: white;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    background-position: 0 0;
-    bottom: 0;
-}
-
-.footer {
-    display: flex;
-    flex-flow: row wrap;
-    padding: 8px;
-    color: white;
-    background-color: #2E1D1E;
 }
 
 .footer > * {
@@ -70,39 +32,5 @@
     }
     to {
         transform: rotate(360deg);
-    }
-}
-
-
-@media only screen and (max-width: 768px) {
-    .App-icon {
-        font-size: 3.8vh;
-    }
-    .Headers-font {
-        font-size: 2.8vh;
-    }
-}
-
-@media only screen
-and (min-device-width: 769px)
-and (max-device-width: 1024px)
-and (-webkit-min-device-pixel-ratio: 1) {
-    .App-icon {
-        font-size: 4.6vh;
-    }
-    .Headers-font {
-        font-size: 3.2vh;
-    }
-}
-
-@media only screen
-and (min-device-width: 1025px)
-and (max-device-width: 2000px)
-and (-webkit-min-device-pixel-ratio: 1) {
-    .App-icon {
-        font-size: 5vh;
-    }
-    .Headers-font {
-        font-size: 3.6vh;
     }
 }

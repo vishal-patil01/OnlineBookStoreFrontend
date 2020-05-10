@@ -3,7 +3,6 @@
     font-size: 1.4vmax;
     color: black;
     font-weight: bold;
-    padding-left: 10vw;
     display: flex;
     padding-top: 0;
     padding-bottom: 0;
@@ -21,14 +20,26 @@
     font-size: 12px;
 }
 
-.homePageContainer {
-    display: flex;
-    justify-content: space-around;
-    margin-left: 10vw;
-    margin-right: 10vw;
+#homePageContainer {
+    padding-left: 10vw;
+    padding-right: 10vw;
 }
 
 #items {
     width: 20px;
     height: 20px;
+}
+
+#homePageContainer {
+    padding-left: 10vw;
+    padding-right: 10vw;
+    position: relative;
+    min-height: 80vh;
+}
+
+@media only screen and (max-width: 768px) {
+    #homePageContainer {
+        padding-left: 15vw;
+        padding-right: 15vw;
+    }
 }

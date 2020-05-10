@@ -1,0 +1,93 @@
+.App-icon {
+    justify-content: center;
+    justify-items: center;
+    font-size: 2.8vmax;
+    padding: 0 2px;
+}
+
+.Headers-font {
+    font-size: 1.8vmax;
+}
+
+#footer-font {
+    font-size: 10px;
+    margin: 3px;
+    padding: 3px;
+}
+
+#footer {
+    display: flex;
+    flex-direction: column-reverse;
+    color: white;
+    background-color: #2E1D1E;
+}
+
+.grow {
+    flex-grow: 1
+}
+
+.search {
+    display: flex;
+    margin-left: 10%;
+    padding: 5px;
+    width: 28%;
+    height: 2%;
+    background-color: white;
+    border-radius: 6px;
+}
+
+.search:hover {
+    background-color: lightcyan
+}
+
+.searchIcon {
+    padding: 5px 5px;
+    height: 5%;
+    color: black;
+}
+
+#searchText {
+    width: 32%;
+}
+
+.shoppingIcon {
+    margin-right: 3%;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .App-icon {
+        font-size: 3.8vh;
+        margin-left: 0;
+    }
+
+    .Headers-font {
+        font-size: 2.8vh;
+    }
+}
+
+@media only screen
+and (min-device-width: 769px)
+and (max-device-width: 1024px)
+and (-webkit-min-device-pixel-ratio: 1) {
+    .App-icon {
+        font-size: 4.6vh;
+    }
+
+    .Headers-font {
+        font-size: 3.2vh;
+    }
+}
+
+@media only screen
+and (min-device-width: 1025px)
+and (max-device-width: 2000px)
+and (-webkit-min-device-pixel-ratio: 1) {
+    .App-icon {
+        font-size: 5vh;
+    }
+
+    .Headers-font {
+        font-size: 3.6vh;
+    }
+}

@@ -4,12 +4,13 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import {StylesProvider} from "@material-ui/core/styles";
+import "../../css/NavigationBar.css"
 
 export default class AdminHeader extends Component {
     render() {
         return (
             <StylesProvider injectFirst>
-                <AppBar className="App-header">
+                <AppBar id="App-header">
                     <Toolbar >
                         <LocalLibraryIcon className="App-icon"/>
                         <Typography className="Headers-font">
