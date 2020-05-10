@@ -13,6 +13,7 @@ export default class Homepage extends Component {
         this.state = {
             id: 0,
             bookList: [],
+            count: 0,
             pageValue: 0
         };
     }
@@ -28,8 +29,20 @@ export default class Homepage extends Component {
             });
     }
 
+    getTotalBooksCount() {
+        get('count')
+            .then((response) => {
+                console.log(response.data)
+                this.setState({count: response.data});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     componentDidMount() {
         this.getBooks();
+        this.getTotalBooksCount();
     }
 
     handleChange = (event, value) => {
@@ -42,6 +55,10 @@ export default class Homepage extends Component {
         return (
             <Fragment>
                 <NavBarAdmin/>
+                <div className="secondaryHeader">
+                    <p className="secondaryHeader-main-font">Books <span
+                        className="subHeader">({this.state.count} items) </span></p>
+                </div>
                 <div className="homePageContainer">
                     <Grid container spacing={3}>
                         {this.state.bookList.map(id =>
