@@ -8,8 +8,6 @@ import {get} from "../../services/HttpService";
 import NavigationBar from "../utils/NavigationBar";
 import Container from "@material-ui/core/Container";
 
-import TextField from "@material-ui/core/TextField";
-
 export default class Homepage extends Component {
     constructor(props) {
         super(props);
@@ -19,11 +17,12 @@ export default class Homepage extends Component {
             count: 0,
             pageValue: 0,
             searchText: "",
+            selectValue: "None"
         };
     }
 
     getBooks() {
-        get(`book/${this.state.pageValue}/8`,)
+        get(`book/${this.state.pageValue}/5`,)
             .then((response) => {
                 console.log(response.data.bookList)
                 this.setState({
@@ -54,8 +53,36 @@ export default class Homepage extends Component {
     }
 
     onPageChange = (event, value) => {
-        this.setState({pageValue: value - 1}, () => {
-            this.getBooks()
+        if (this.state.searchText.length === 0) {
+            this.setState({pageValue: value - 1}, () => {
+                this.getBooks()
+            })
+        } else {
+            this.setState({pageValue: value - 1}, () => {
+                this.showSearchedBooks()
+            })
+        }
+    }
+
+    getSearchFieldTextValue = (text) => {
+        this.setState({
+            searchText: text,
+        }, () => this.showSearchedBooks())
+    }
+
+    showSearchedBooks = () => {
+        get(`search/${this.state.pageValue}/${this.state.searchText}`).then(response => {
+            if (this.state.searchText.trim().length === 0) {
+                this.getBooks()
+                this.getTotalBooksCount()
+            } else {
+                this.setState({
+                    bookList: response.data.searchedBookList.content,
+                    count: response.data.searchedBookList.totalElements
+                })
+            }
+        }).catch((error) => {
+            console.log(error)
         })
     }
 

@@ -9,6 +9,10 @@ import '../../css/NavigationBar.css'
 
 export default class NavigationBar extends Component {
 
+    returnSearchTextValue = (searchText) => {
+        this.props.searchedText(searchText)
+    }
+
     render() {
         return (
             <AppBar id="App-header">
@@ -21,10 +25,11 @@ export default class NavigationBar extends Component {
                         <div className="searchIcon">
                             <SearchIcon/>
                         </div>
-                        <InputBase
-                            placeholder=" Search"
-                            className="inputRoot inputInput"
-                            inputProps={{'aria-label': 'search'}}
+                        <InputBase id="searchText"
+                                   placeholder=" Search"
+                                   className="inputRoot inputInput"
+                                   inputProps={{'aria-label': 'search'}}
+                                   onChange={(event) => this.returnSearchTextValue(event.target.value)}
                         />
                     </div>
                 </Toolbar>
