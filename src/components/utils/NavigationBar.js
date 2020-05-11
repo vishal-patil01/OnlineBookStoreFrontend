@@ -6,14 +6,8 @@ import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from '@material-ui/icons/Search';
 import '../../css/NavigationBar.css'
-import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
 
 export default class NavigationBar extends Component {
-
-    returnSearchTextValue = (searchText) => {
-        this.props.searchedText(searchText)
-    }
 
     render() {
         return (
@@ -23,6 +17,16 @@ export default class NavigationBar extends Component {
                     <Typography className="Headers-font">
                         Book Store
                     </Typography>
+                    <div className="search">
+                        <div className="searchIcon">
+                            <SearchIcon/>
+                        </div>
+                        <InputBase
+                            placeholder=" Search"
+                            className="inputRoot inputInput"
+                            inputProps={{'aria-label': 'search'}}
+                        />
+                    </div>
                 </Toolbar>
             </AppBar>
 
