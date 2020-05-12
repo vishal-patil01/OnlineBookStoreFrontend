@@ -6,7 +6,9 @@ import DefaultRoutes from "./route/RouterSwitch";
 function App() {
     return (
         <div className="App">
-            <DefaultRoutes/>
+            <div className="mainDiv">
+                <DefaultRoutes/>
+            </div>
             <Footer/>
         </div>
     );

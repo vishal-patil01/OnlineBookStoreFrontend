@@ -1,45 +1,44 @@
-.secondaryHeader {
-    text-align: left;
-    font-size: 1.4vmax;
-    color: black;
-    font-weight: bold;
-    display: flex;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin: 0;
+#homePageContainer {
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 50px;
+    position: relative;
+    min-height: 91vh;
 }
 
-.secondaryHeader-main-font {
+.resultNotFound{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 300px;
+}
+
+.BooksCountSortFieldDiv {
+    display: flex;
+    padding-top: 2%;
+    justify-content: space-between;
     font-weight: bold;
     font-size: 18px;
+    padding-bottom: 14px;
 }
 
-.subHeader {
+.BooksCountSortFieldDiv span {
     color: #B1B1B1;
     font-weight: bold;
     font-size: 12px;
 }
 
-#homePageContainer {
-    padding-left: 10vw;
-    padding-right: 10vw;
+#sortField {
+    padding: 8px 14px 10px;
+    font-size: 14px;
 }
 
-#items {
-    width: 20px;
-    height: 20px;
+.select-filter {
+    border: none;
+    outline: none;
+    width: 170px;
+    height: 1%;
+    margin-top: 12px;
 }
 
-#homePageContainer {
-    padding-left: 10vw;
-    padding-right: 10vw;
-    position: relative;
-    min-height: 80vh;
-}
-
-@media only screen and (max-width: 768px) {
-    #homePageContainer {
-        padding-left: 15vw;
-        padding-right: 15vw;
-    }
-}
