@@ -42,3 +42,44 @@
     margin-top: 12px;
 }
 
+@media only screen and (max-width: 768px) {
+    #homePageContainer {
+        padding-left: 15vw;
+        padding-right: 15vw;
+    }
+}
+
+/* Media Query To Adjust BooksCount And Sort Field Div On Small Screen */
+@media only screen and (max-width: 400px) {
+    #homePageContainer{
+        margin-top: 65px;
+    }
+    .BooksCountSortFieldDiv {
+        font-size: 12px;
+    }
+
+    .BooksCountSortFieldDiv span {
+        font-size: 9px;
+    }
+
+    #sortField {
+        padding: 8px 14px 10px;
+        font-size: 12px;
+    }
+
+    .select-filter {
+        width: 140px;
+        margin-top: 3px;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    #homePageContainer {
+        max-width: 2800px;
+        max-height: 2000px;
+    }
+
+    .BooksCountSortFieldDiv {
+        max-width: 1800px;
+    }
+}
