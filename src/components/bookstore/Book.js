@@ -10,13 +10,17 @@ import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {withRouter} from 'react-router';
 
-
 class Book extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            cartList: [],
+            counter: 0,
+        };
     }
 
     render() {
+
         const DetailTooltip = withStyles((theme) => ({
             arrow: {
                 color: theme.palette.common.white,
@@ -62,7 +66,7 @@ class Book extends React.Component {
                     <Button id="addToCartButton" variant="contained" size="small"
                             style={{
                                 color: "white",
-                                backgroundColor: '#b90f4b'
+                                backgroundColor: "#b90f4b"
                             }}>
                     </Button>
                 </CardContent>

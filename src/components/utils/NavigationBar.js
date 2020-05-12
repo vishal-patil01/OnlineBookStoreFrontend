@@ -19,7 +19,6 @@ class NavigationBar extends Component {
         };
     }
 
-
     handleClose = () => {
         this.setState({
             isDialogBoxVisible: false,
@@ -29,7 +28,6 @@ class NavigationBar extends Component {
     returnSearchTextValue = (searchText) => {
         this.props.searchedText(searchText)
     };
-
 
     render() {
         const urlPath = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
