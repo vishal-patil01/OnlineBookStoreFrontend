@@ -9,12 +9,14 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {withRouter} from 'react-router';
+import DialogBoxPage from "../utils/CustomDialogBox";
+import CustomSnackBar from "../utils/CustomSnackBar";
+
 
 class Book extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            cartList: [],
             counter: 0,
         };
     }
@@ -37,6 +39,11 @@ class Book extends React.Component {
         }))(Tooltip);
         return (
             <Card id="card">
+                <CustomSnackBar alertShow={this.state.alertShow}
+                                severity={this.state.severity}
+                                alertResponse={this.state.alertResponse}
+                                closeAlertBox={this.closeAlertBox}/>
+                <DialogBoxPage isDialogBoxVisible={this.state.isDialogBoxVisible} close={this.dialogBoxClose}/>
                 <DetailTooltip title={
                     <React.Fragment>
                         <Typography variant="h6" gutterBottom color="inherit"><b style={{fontSize: '16px'}}>Book
@@ -66,7 +73,7 @@ class Book extends React.Component {
                     <Button id="addToCartButton" variant="contained" size="small"
                             style={{
                                 color: "white",
-                                backgroundColor: "#b90f4b"
+                                backgroundColor: '#b90f4b'
                             }}>
                     </Button>
                 </CardContent>

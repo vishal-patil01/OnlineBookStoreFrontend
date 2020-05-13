@@ -9,9 +9,6 @@ import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
 import BookStoreService from "../../services/BookStoreService";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
-import CartService from "../../services/CartService";
-import Loader from "../utils/Loader";
-import WishListService from "../../services/WishListService";
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -32,15 +29,15 @@ export default class HomePage extends Component {
             .then((response) => {
                     console.log("fetchbook")
                     console.log(response);
-                        response.data.statusCode === 208 ?
-                            this.setState({
-                                bookList: [],
-                                count: 0,
-                            }) :
-                            this.setState({
-                                bookList: response.data.data.content,
-                                count: response.data.data.totalElements,
-                            });
+                    response.data.statusCode === 208 ?
+                        this.setState({
+                            bookList: [],
+                            count: 0,
+                        }) :
+                        this.setState({
+                            bookList: response.data.data.content,
+                            count: response.data.data.totalElements,
+                        });
                 }
             )
             .catch((error) => {
@@ -76,9 +73,6 @@ export default class HomePage extends Component {
         }, () => this.getBooks())
     };
 
-    badgeCount = (count) => {
-        this.setState({badgeCount: count})
-    };
 
     render() {
         const theme = createMuiTheme({
@@ -91,7 +85,7 @@ export default class HomePage extends Component {
         return (
             <Fragment>
 
-                <NavigationBar searchedText={this.getSearchFieldTextValue} badgeCount={this.state.counter}/>
+                <NavigationBar searchedText={this.getSearchFieldTextValue}/>
                 <Container id="homePageContainer">
                     <div className="BooksCountSortFieldDiv">
                         <p>Books <span>({this.state.count} items) </span></p>
@@ -119,18 +113,11 @@ export default class HomePage extends Component {
                         <h2>Sorry, no results found!</h2>
                     </div>}
 
-                    {this.state.loaded === false && <Loader/>}
-                    {this.state.loaded === true && this.state.count !== 0 &&
                     <Grid container spacing={4}>
                         {this.state.bookList.map(id =>
                             <Grid alignItems="center" key={id.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
                                 <Card
                                     bookId={id}
-                                    badgeCount={this.badgeCount}
-                                    cart={this.state.cartList}
-                                    wishList={this.state.wishList}
-                                    updateCartList={this.fetchCartList}
-                                    updateWishList={this.fetchWishList}
                                 />
                             </Grid>
                         )}
