@@ -59,75 +59,9 @@
     font-size: small;
 }
 
-.shoppingCartDiv {
-    font-size: 12px;
-}
-
-#cartIcon{
-    padding: 16px;
-}
-
-#profileIcon{
-    padding: 16px;
-    transition: none;
-    font-size: 22px;
-}
-
-.logoutDiv {
-    margin-right: 8%;
-    font-size: 12px;
-}
-
-#cartIcon {
-    font-size: 125%;
-    background-color: #b90f4b;
-}
-.MuiBadge-colorPrimary{
-    color: #b90f4b !important;
-    background-color: white !important;
-}
-
-.loginPopUp{
-    display: flex;
-    flex-direction: column;
-    font-size: 11px;
-    margin: 10px;
-    color: #B1B1B1;
-    width: 220px;
-}
-
-.loginSignUp{
-    border: 1px solid #b90f4b !important;
-    margin-top: 20px !important;
-    margin-bottom: 10px !important;
-    align-self: center !important;
-    padding: 6px !important;
-    color: #b90f4b !important;
-}
-
-#logout{
-    border: 1px solid #b90f4b !important;
-    margin: 10px auto !important;
-    padding: 2px 20px !important;
-    color: #b90f4b !important;
-}
-
-.logoutTitle{
-    color: black;
-    font-weight: bold;
-    font-size: 12px;
-    margin: 0 0 5px 5px;
-}
-
 #mainDialogBox{
     max-width: 800px;
     background-color: transparent;
-}
-
-.myOrder{
-    display: flex;
-    padding: 2px 5px !important;
-    align-self: flex-start;
 }
 
 #listTitle{
@@ -171,17 +105,6 @@ h6{
 
     #Headers-font {
         font-size: 16px;
-    }
-
-    .shoppingCartDiv {
-        margin-right: 15px;
-    }
-
-    #profileIcon{
-        margin-right: -40px;
-        padding: 16px;
-        transition: none;
-        font-size: 22px;
     }
 }
 

@@ -48,6 +48,30 @@ export default class AddBook extends React.Component {
         };
     }
 
+    onFileChangeHandler = (e) => {
+        e.preventDefault();
+        this.setState({
+            selectedFile: e.target.files[0]
+        });
+        const formData = new FormData();
+        formData.append('file', e.target.files[0]);
+        new AdminService().uploadImage(formData).then(response => {
+            console.log(response)
+            if (response.status === 200) {
+                this.setState({
+                    url: response.data.data
+                })
+            } else {
+                this.setState({
+                    severity: "success",
+                    alertShow: true,
+                    alertResponse: response.data.message
+                });
+            }
+        }).catch(response => {
+            console.log(response)
+        })
+    };
     imageNotNullValidation = (event) => {
         this.setState({
             bookImageSrc: "",
@@ -58,9 +82,13 @@ export default class AddBook extends React.Component {
                 bookImageSrc: imageName,
             });
         }
+        // // if (!this.state.requiredFieldCheck.includes("C")) {
+        // //     this.setState({
+        // //         requiredFieldCheck: this.state.requiredFieldCheck + "C",
+        // //     });
+        this.onFileChangeHandler(event);
+
     };
-
-
     validation = (event, pattern, errorMessage) => {
         if (event.target.value.match(pattern)) {
             this.setState({[event.target.id + "Error"]: " ", tempName: event.target.id,});
