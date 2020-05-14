@@ -9,20 +9,62 @@ import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
 import BookStoreService from "../../services/BookStoreService";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import CartService from "../../services/CartService";
+import WishListService from "../../services/WishListService";
 
 export default class HomePage extends Component {
     constructor(props) {
         super(props);
+        this.fetchCartList();
+        this.fetchWishList();
         this.state = {
             id: 0,
             bookList: [],
             count: 0,
             pageValue: 1,
             searchText: " ",
+            badgeCount: 0,
             selectValue: "",
+            counter: 0,
+            cartList: "",
+            wishList: "",
+            loaded: false
         };
     }
 
+    fetchCartList = () => {
+        new CartService().fetchCart("cart").then((response) => {
+                console.log("fff");
+                console.log(response);
+                (response.data.statusCode === 200) ?
+                    this.setState({
+                        counter: response.data.data.length,
+                        cartList: response.data.data.map(value => value.book.isbnNumber).toString()
+                    })
+                    :
+                    this.setState({
+                        counter: 0,
+                        cartList: ""
+                    });
+            }
+        );
+    };
+
+    fetchWishList = () => {
+        new WishListService().fetchWishList().then((response) => {
+                console.log("wishList");
+                console.log(response);
+                (response.data.statusCode === 200) ?
+                    this.setState({
+                        wishList: response.data.data.map(value => value.book.isbnNumber).toString()
+                    })
+                    :
+                    this.setState({
+                        wishList: ""
+                    });
+            }
+        );
+    };
 
     getBooks = () => {
         new BookStoreService().fetchBooks(this.state.pageValue, this.state.searchText, this.state.selectValue)
@@ -73,6 +115,9 @@ export default class HomePage extends Component {
         }, () => this.getBooks())
     };
 
+    badgeCount = (count) => {
+        this.setState({badgeCount: count})
+    };
 
     render() {
         const theme = createMuiTheme({
@@ -106,12 +151,12 @@ export default class HomePage extends Component {
                             }
                         </ThemeProvider>
                     </div>
-                    {this.state.loaded === true && this.state.count === 0 &&
                     <div className="resultNotFound">
                         <img src={require(`../../assets/uploads/noResult.png`)} alt="No Result Found"
                              width="300px" height="200px"/>
                         <h2>Sorry, no results found!</h2>
-                    </div>}
+                    </div>
+                    }
 
                     <Grid container spacing={4}>
                         {this.state.bookList.map(id =>

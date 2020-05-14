@@ -29,38 +29,10 @@ class NavigationBar extends Component {
         };
     }
 
-    handleClickOpen = () => {
-
-        localStorage.getItem('token') === null ?
-            this.setState({
-                isDialogBoxVisible: true,
-            }) :
-            this.props.history.push('/cart');
-    };
-
-    handleClose = () => {
-        this.setState({
-            isDialogBoxVisible: false,
-        })
-    };
-
-    handleLink = () => {
-
-        localStorage.getItem('token') !== null &&
-        this.setState({
-            url: "/cart"
-        })
-
-    }
 
     returnSearchTextValue = (searchText) => {
         this.props.searchedText(searchText)
     };
-
-    logout() {
-        localStorage.clear();
-        window.location.href = '/';
-    }
 
     render() {
         const urlPath = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
@@ -89,73 +61,7 @@ class NavigationBar extends Component {
                         />
                     </div>
                     <div className="grow"/>
-                    <div className="shoppingCartDiv"
-                         style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}
-                    >
-                        <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
-                                    onClick={this.handleClickOpen}>
-                            <Badge badgeContent={this.props.badgeCount} id="badge" style={{border: "2px solid #b90f4b"}}
-                                   color="primary">
-                                <ShoppingCartOutlinedIcon
-                                    style={{fontSize: '100%', display: 'flex'}}/>
-                            </Badge>
-                        </IconButton>
-                    </div>
-                    <div className="logoutDiv"
-                         style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}
-                    >
-                        <PopupState variant="popover" popupId="demo-popup-popover">
-                            {(popupState) => (
-                                <div>
-                                    <IconButton id="profileIcon" color="inherit">
-                                        <PersonIcon variant="contained" {...bindTrigger(popupState)}>
-                                        </PersonIcon>
-                                    </IconButton>
-                                    <Popover
-                                        style={{marginTop: "38px"}}
-                                        {...bindPopover(popupState)}
-                                        anchorOrigin={{
-                                            vertical: 'bottom',
-                                            horizontal: 'center',
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'bottom',
-                                            horizontal: 'right',
-                                        }}
-                                    >
-                                        {localStorage.length === 0 ?
-                                            <div className="loginPopUp">
-                                                <h6>Welcome</h6>
-                                                <div style={{fontSize: '13px'}}>
-                                                    To access account and manage orders
-                                                </div>
-                                                <Button className="loginSignUp" onClick={this.handleClickOpen}>
-                                                    Login/SignUp
-                                                </Button>
-                                            </div> :
-                                            <div className="loginPopUp">
-                                                <p className="logoutTitle">Hello,{localStorage.getItem('userName')}</p>
-
-                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
-                                                            color="inherit">
-                                                    <ShoppingBasketOutlinedIcon fontSize="small"/> <b
-                                                    id="listTitle"><Link to="/orders">My Orders</Link></b>
-                                                </IconButton>
-                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
-                                                            color="inherit">
-                                                    <FavoriteBorderOutlinedIcon fontSize="small"/> <b
-                                                    id="listTitle"><Link to="/wishlist">Wishlist</Link></b>
-                                                </IconButton>
-                                                <Button id="logout" onClick={this.logout}>
-                                                    Logout
-                                                </Button>
-                                            </div>}
-                                    </Popover>
-                                </div>
-                            )}
-                        </PopupState>
-                    </div>
-                </Toolbar>
+                                    </Toolbar>
             </AppBar>
         );
     }

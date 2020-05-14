@@ -48,6 +48,35 @@ export default class AddBook extends React.Component {
         };
     }
 
+    imageNotNullValidation = (event) => {
+        this.setState({
+            bookImageSrc: "",
+        });
+        const imageName = event.target.value.substring(event.target.value.lastIndexOf('\\') + 1);
+        if (imageName.toLowerCase().includes("png") || imageName.toLowerCase().includes("jpg") || imageName.toLowerCase().includes("jpeg")) {
+            this.setState({
+                bookImageSrc: imageName,
+            });
+        }
+    };
+
+
+    validation = (event, pattern, errorMessage) => {
+        if (event.target.value.match(pattern)) {
+            this.setState({[event.target.id + "Error"]: " ", tempName: event.target.id,});
+            // if (!this.state.requiredFieldCheck.includes(event.target.name.charAt(0))) {
+            //     this.setState({requiredFieldCheck: this.state.requiredFieldCheck + event.target.name.charAt(0)})
+            // }
+            // console.log(this.state.requiredFieldCheck)
+        } else {
+            this.setState({
+                [event.target.id + "Error"]: errorMessage
+            });
+            // if (this.state.requiredFieldCheck.includes(event.target.name.charAt(0))) {
+            //     this.setState({requiredFieldCheck: this.state.requiredFieldCheck.replace(event.target.name.charAt(0), "")})
+            // }
+        }
+    };
     addBook = () => {
         const book = {
             isbnNumber: this.state.isbnNumber,
@@ -150,6 +179,7 @@ export default class AddBook extends React.Component {
                                                    variant="outlined"
                                                    fullWidth
                                                    size="small"
+                                                   onBlur={event => this.validation(event, "^.{3,}$", "Enter Minimum 3 Characters")}
                                                    error={this.state.bookNameError.trim().length !== 0}
                                                    helperText={this.state.bookNameError}
                                                    required/>
@@ -162,6 +192,7 @@ export default class AddBook extends React.Component {
                                                value={this.state.authorName}
                                                variant="outlined"
                                                fullWidth
+                                               onBlur={event => this.validation(event, "^[A-za-z][A-Za-z .]{3,}$", "Enter Minimum 3 Characters(Only Alphabets)")}
                                                error={this.state.authorNameError.trim().length !== 0}
                                                helperText={this.state.authorNameError}
                                                required/>
@@ -173,6 +204,7 @@ export default class AddBook extends React.Component {
                                                fullWidth
                                                size="small"
                                                onFocus
+                                               onBlur={event => this.validation(event, "^.{10,13}$", "Enter 10-13 Characters")}
                                                error={this.state.isbnNumberError.trim().length !== 0}
                                                helperText={this.state.isbnNumberError}
                                                required/>
@@ -185,6 +217,7 @@ export default class AddBook extends React.Component {
                                                variant="outlined"
                                                fullWidth
                                                size="small"
+                                               onBlur={event => this.validation(event, "^[1-9]{1}[0-9]{0,}", "Enter Value (greater Than 0)")}
                                                error={this.state.noOfCopiesError.trim().length !== 0}
                                                helperText={this.state.noOfCopiesError}
                                                required/>
@@ -197,6 +230,7 @@ export default class AddBook extends React.Component {
                                         variant="outlined"
                                         fullWidth
                                         size="small"
+                                        onBlur={event => this.validation(event, "^[1-9]{1}[0-9]{0,}", "Enter Value (greater Than 0)")}
                                         error={this.state.bookPriceError.trim().length !== 0}
                                         helperText={this.state.bookPriceError}
                                         required/>
@@ -209,6 +243,7 @@ export default class AddBook extends React.Component {
                                         variant="outlined"
                                         fullWidth
                                         size="small"
+                                        onBlur={event => this.validation(event, `^(140[0-9]|19[5-9]\\d|20[0-${[2] - 1}]\\d|20${[2]}[0-${[1]}])$`, "Enter value greater than 1400 to 2023")}
                                         error={this.state.publishingYearError.trim().length !== 0}
                                         helperText={this.state.publishingYearError}
                                         required/>
@@ -220,6 +255,7 @@ export default class AddBook extends React.Component {
                                                style={{visibility: "hidden", height: "0px", width: "0px"}}
                                                className=""
                                                id="bookImageSrc" type="file"
+                                               onChange={event => this.imageNotNullValidation(event)}
                                         />
                                         <label htmlFor="bookImageSrc">
                                             <TextField className="imageUrl"
@@ -248,6 +284,7 @@ export default class AddBook extends React.Component {
                                                variant="outlined"
                                                fullWidth
                                                size="small"
+                                               onBlur={event => this.validation(event, "^.{10,}$", "Enter Minimum 10 Character")}
                                                error={this.state.bookDetailsError.trim().length !== 0}
                                                helperText={this.state.bookDetailsError}
                                                required/>
