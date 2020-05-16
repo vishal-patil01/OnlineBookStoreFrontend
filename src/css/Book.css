@@ -4,19 +4,21 @@
     display: flex;
     background-color: lightgrey;
 }
+
 #card:hover {
     margin: 0;
     padding: 0;
     border-radius: 6px;
     box-shadow: 3px 3px 3px 3px rgba(65, 66, 69, 0.44);
 }
+
 #bookImage {
     margin: 10px auto 10px auto;
     width: 40%;
     height: 135px;
 }
 
-.wishlist{
+.wishlist {
     margin-right: -195px !important;
     margin-top: -50px !important;
 }
@@ -31,12 +33,13 @@
 
 #addToCartButton {
     width: 140px;
-    color:white;
+    color: white;
     background-color: #b90f4b;
 }
+
 #addedToCartButton {
     width: 140px;
-    color:white;
+    color: white;
     background-color: #4d8cb9;
 }
 

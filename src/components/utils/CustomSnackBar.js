@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import {Component} from "react";
 import Alert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 

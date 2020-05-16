@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from "react";
+import {Component, Fragment} from "react";
 import "../../css/Homepage.css";
 import "../../css/CustomScrollbar.css";
 import Grid from "@material-ui/core/Grid";

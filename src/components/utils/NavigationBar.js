@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import {Component} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -6,17 +6,7 @@ import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from '@material-ui/icons/Search';
 import '../../css/NavigationBar.css'
-import IconButton from "@material-ui/core/IconButton";
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-import PersonIcon from '@material-ui/icons/Person';
-import Badge from "@material-ui/core/Badge";
 import {Link} from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import Popover from "@material-ui/core/Popover";
-import PopupState, {bindPopover, bindTrigger} from 'material-ui-popup-state';
-import Divider from "@material-ui/core/Divider";
-import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
-import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import DialogBoxPage from "./CustomDialogBox";
 import {withRouter} from "react-router";
 
