@@ -9,6 +9,7 @@ export default class DefaultRoutes extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
+
                     <Route path={"/admin"} exact component={AddBook}/>
                     <Route path={"/admin/books"} exact component={Variants}/>
                     <Route path={"/"} exact component={HomePage}/>

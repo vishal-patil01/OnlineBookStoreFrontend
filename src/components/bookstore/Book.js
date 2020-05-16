@@ -18,9 +18,35 @@ class Book extends React.Component {
         super(props);
         this.state = {
             counter: 0,
+
+            isDialogBoxVisible: false,
+
+            alertShow: false,
+            alertResponse: "",
+            severity: "",
         };
     }
 
+    handle = () => {
+        this.props.history.push('/login');
+    }
+
+    dialogBoxOpen = () => {
+        if (localStorage.getItem('token') === null)
+            this.setState({
+                isDialogBoxVisible: true,
+            });
+    };
+
+    dialogBoxClose = () => {
+        this.setState({
+            isDialogBoxVisible: false,
+        })
+    };
+
+    closeAlertBox = () => {
+        this.setState({alertShow: false});
+    };
 
     render() {
 
@@ -74,8 +100,9 @@ class Book extends React.Component {
                     <Button id="addToCartButton" variant="contained" size="small"
                             style={{
                                 color: "white",
-                                backgroundColor: '#b90f4b'
+                                backgroundColor: '#b904b'
                             }}>
+                        Add to Cart
                     </Button>
                 </CardContent>
             </Card>

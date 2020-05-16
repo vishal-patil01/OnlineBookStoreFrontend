@@ -6,7 +6,7 @@
     min-height: 91vh;
 }
 
-.resultNotFound {
+.resultNotFound{
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -51,10 +51,9 @@
 
 /* Media Query To Adjust BooksCount And Sort Field Div On Small Screen */
 @media only screen and (max-width: 400px) {
-    #homePageContainer {
+    #homePageContainer{
         margin-top: 65px;
     }
-
     .BooksCountSortFieldDiv {
         font-size: 12px;
     }

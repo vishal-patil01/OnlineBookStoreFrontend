@@ -55,6 +55,37 @@ h3 {
     margin: 3px;
 }
 
+@media only screen and (max-width: 768px) {
+    .root {
+        width: 80%;
+    }
+
+    .MuiCardContent-root {
+        padding: 5px 10px;
+    }
+
+    .card {
+        width: 100%;
+        margin: auto;
+    }
+
+    .container {
+        padding-top: 15% !important;
+        height: 138vh;
+    }
+
+    .imageIcon {
+        position: absolute !important;
+        margin-top: -12.5% !important;
+        margin-left: 39% !important;
+    }
+
+    .imageUrl {
+        width: 133% !important;
+        margin-bottom: 15% !important;
+    }
+
+}
 
 @media only screen
 and (min-device-width: 768px)
