@@ -6,7 +6,11 @@ export default class AdminService {
         return (post(formData, 'user/register'))
     }
 
-    loginUser = (formData) => {
-        return (post(formData, 'user/login'))
+    sendEmailWithTokenLink(email) {
+        return (post(email, `user/send/email/${email}`))
+    }
+
+    verifyEmail(token) {
+        return (update(`user/verify/email/${token}`))
     }
 }
