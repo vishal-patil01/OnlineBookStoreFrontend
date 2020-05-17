@@ -12,14 +12,16 @@ import {withRouter} from 'react-router';
 import DialogBoxPage from "../utils/CustomDialogBox";
 import CustomSnackBar from "../utils/CustomSnackBar";
 
-
 class Book extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            cartList: [],
+            buttonText1: "Add To CartPage",
             counter: 0,
-
+            
             isDialogBoxVisible: false,
+            isAddToWishList: false,
 
             alertShow: false,
             alertResponse: "",
@@ -32,7 +34,7 @@ class Book extends React.Component {
     }
 
     dialogBoxOpen = () => {
-        if (localStorage.getItem('token') === null)
+        if (localStorage.getItem('token')===null)
             this.setState({
                 isDialogBoxVisible: true,
             });
@@ -100,8 +102,7 @@ class Book extends React.Component {
                     <Button id="addToCartButton" variant="contained" size="small"
                             style={{
                                 color: "white",
-                                backgroundColor: '#b904b'
-                            }}>
+                                backgroundColor: '#b90f4b'}}>
                         Add to Cart
                     </Button>
                 </CardContent>

@@ -9,9 +9,6 @@ import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
 import BookStoreService from "../../services/BookStoreService";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
-import CartService from "../../services/CartService";
-import Loader from "../utils/Loader";
-import WishListService from "../../services/WishListService";
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -27,21 +24,20 @@ export default class HomePage extends Component {
         };
     }
 
-
     getBooks = () => {
         new BookStoreService().fetchBooks(this.state.pageValue, this.state.searchText, this.state.selectValue)
             .then((response) => {
                     console.log("fetchbook")
                     console.log(response);
-                        response.data.statusCode === 208 ?
-                            this.setState({
-                                bookList: [],
-                                count: 0,
-                            }) :
-                            this.setState({
-                                bookList: response.data.data.content,
-                                count: response.data.data.totalElements,
-                            });
+                    response.data.statusCode === 208 ?
+                        this.setState({
+                            bookList: [],
+                            count: 0,
+                        }) :
+                        this.setState({
+                            bookList: response.data.data.content,
+                            count: response.data.data.totalElements,
+                        });
                 }
             )
             .catch((error) => {
@@ -76,7 +72,6 @@ export default class HomePage extends Component {
             selectValue: value,
         }, () => this.getBooks())
     };
-
 
     render() {
         const theme = createMuiTheme({
@@ -114,7 +109,7 @@ export default class HomePage extends Component {
                         <img src={require(`../../assets/uploads/noResult.png`)} alt="No Result Found"
                              width="300px" height="200px"/>
                         <h2>Sorry, no results found!</h2>
-                    </div>}
+                    </div>
 
                     <Grid container spacing={4}>
                         {this.state.bookList.map(id =>
@@ -124,7 +119,6 @@ export default class HomePage extends Component {
                                 />
                             </Grid>
                         )}
-
                     </Grid>
                     }
                     <br/>
