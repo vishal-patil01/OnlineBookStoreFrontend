@@ -19,7 +19,6 @@ class Book extends React.Component {
             counter: 0,
 
             isDialogBoxVisible: false,
-            isAddToWishList: false,
 
             alertShow: false,
             alertResponse: "",
@@ -50,6 +49,7 @@ class Book extends React.Component {
 
 
     render() {
+
         const DetailTooltip = withStyles((theme) => ({
             arrow: {
                 color: theme.palette.common.white,

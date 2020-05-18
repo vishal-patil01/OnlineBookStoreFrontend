@@ -9,25 +9,25 @@ import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
 import BookStoreService from "../../services/BookStoreService";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import Loader from "../utils/Loader";
 
 export default class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             id: 0,
-            bookList: [],
             count: 0,
             pageValue: 1,
             searchText: " ",
             selectValue: "",
             counter: 0,
+            loaded: false
         };
     }
 
     getBooks = () => {
         new BookStoreService().fetchBooks(this.state.pageValue, this.state.searchText, this.state.selectValue)
             .then((response) => {
-                    console.log("fetchbook")
                     console.log(response);
                     response.data.statusCode === 208 ?
                         this.setState({
@@ -73,6 +73,9 @@ export default class HomePage extends Component {
         }, () => this.getBooks())
     };
 
+    badgeCount = (count) => {
+        this.setState({badgeCount: count})
+    };
 
     render() {
         const theme = createMuiTheme({
@@ -84,7 +87,6 @@ export default class HomePage extends Component {
         });
         return (
             <Fragment>
-
                 <NavigationBar searchedText={this.getSearchFieldTextValue}/>
                 <Container id="homePageContainer">
                     <div className="BooksCountSortFieldDiv">
@@ -106,12 +108,15 @@ export default class HomePage extends Component {
                             }
                         </ThemeProvider>
                     </div>
+                    {this.state.loaded === true && this.state.count === 0 &&
                     <div className="resultNotFound">
                         <img src={require(`../../assets/uploads/noResult.png`)} alt="No Result Found"
                              width="300px" height="200px"/>
                         <h2>Sorry, no results found!</h2>
-                    </div>
+                    </div>}
 
+                    {this.state.loaded === false && <Loader/>}
+                    {this.state.loaded === true && this.state.count !== 0 &&
                     <Grid container spacing={4}>
                         {this.state.bookList.map(id =>
                             <Grid alignItems="center" key={id.id} item xs={12} sm={6} md={4} lg={3} xl={2}>

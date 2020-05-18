@@ -6,7 +6,6 @@ export default class AdminService {
         return (post(formData, 'user/register'))
     }
 
-
     sendEmailWithTokenLink(email) {
         return (post(email, `user/resend/email/${email}`))
     }

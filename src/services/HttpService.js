@@ -32,5 +32,4 @@ function update(url) {
     })
 }
 
-
 export {post, get, update}

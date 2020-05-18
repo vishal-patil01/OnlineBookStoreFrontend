@@ -79,6 +79,25 @@ class SendEmailLink extends Component {
                 <NavigationBar/>
                 <div style={{paddingTop: "3%"}}>
                     <DialogBoxPage isDialogBoxVisible={this.state.isDialogBoxVisible} close={this.dialogBoxClose}/>
+                    {(this.state.showProgress && !(this.props.isVerificationLinkSend || this.props.isEmailVerified)) &&
+                    <div style={{padding: "150px", justifyContent: "center", justifyItems: "center"}}>
+                        <Loader
+                            type="ThreeDots"
+                            color="#b90f4b"
+                            height={60}
+                            width={100}
+                            timeout={50000} //8 secs
+                        />
+                        <div style={{display: "flex", justifyContent: "center", justifyItems: "center"}}>
+                            <Typography id="message" variant="subtitle1"
+                                        style={{margin: "2%", color: "grey", textAlign: "left"}}>
+                                Wait while we are processing your request...
+                            </Typography>
+                            {/*<CircularProgress color="secondary" />*/}
+                        </div>
+                    </div>
+                    }
+                    {(this.props.isVerificationLinkSend || this.props.isEmailVerified) &&
                     <Grid container spacing={0} style={{paddingTop: "80px"}}>
                         <Grid item xs={12}>
                             <img height="150px" width="150px" src={require("../../assets/uploads/successcheck.png")}
