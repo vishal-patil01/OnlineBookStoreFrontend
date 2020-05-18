@@ -48,6 +48,22 @@ export default class AddBook extends React.Component {
         };
     }
 
+    componentDidMount() {
+        console.log("This State")
+        console.log(this.props.location.state)
+        if (this.props.location.state !==undefined) {
+            this.setState({
+                isbnNumber: this.props.location.state.bookData.isbnNumber.toString(),
+                bookName: this.props.location.state.bookData.bookName.toString(),
+                authorName: this.props.location.state.bookData.authorName.toString(),
+                bookPrice: this.props.location.state.bookData.bookPrice.toString(),
+                noOfCopies: this.props.location.state.bookData.noOfCopies.toString(),
+                bookDetails: this.props.location.state.bookData.bookDetail.toString(),
+                publishingYear: this.props.location.state.bookData.publishingYear.toString(),
+            });
+        }
+    }
+
     onFileChangeHandler = (e) => {
         e.preventDefault();
         this.setState({
@@ -82,27 +98,16 @@ export default class AddBook extends React.Component {
                 bookImageSrc: imageName,
             });
         }
-        // // if (!this.state.requiredFieldCheck.includes("C")) {
-        // //     this.setState({
-        // //         requiredFieldCheck: this.state.requiredFieldCheck + "C",
-        // //     });
         this.onFileChangeHandler(event);
 
     };
     validation = (event, pattern, errorMessage) => {
         if (event.target.value.match(pattern)) {
             this.setState({[event.target.id + "Error"]: " ", tempName: event.target.id,});
-            // if (!this.state.requiredFieldCheck.includes(event.target.name.charAt(0))) {
-            //     this.setState({requiredFieldCheck: this.state.requiredFieldCheck + event.target.name.charAt(0)})
-            // }
-            // console.log(this.state.requiredFieldCheck)
         } else {
             this.setState({
                 [event.target.id + "Error"]: errorMessage
             });
-            // if (this.state.requiredFieldCheck.includes(event.target.name.charAt(0))) {
-            //     this.setState({requiredFieldCheck: this.state.requiredFieldCheck.replace(event.target.name.charAt(0), "")})
-            // }
         }
     };
     addBook = () => {
@@ -170,7 +175,6 @@ export default class AddBook extends React.Component {
     }
 
     canBeSubmitted() {
-        // alert(this.formFilledCheck())
         return this.errorCheck() && this.formFilledCheck();
     }
 
@@ -190,7 +194,6 @@ export default class AddBook extends React.Component {
                                 closeAlertBox={this.closeAlertBox}/>
                 <NavigationBar/>
                 <Container className="container">
-
                     <Card className="card">
                         <CardContent>
                             <Grid container spacing={1}>

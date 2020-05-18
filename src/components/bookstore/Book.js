@@ -16,16 +16,15 @@ class Book extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            cartList: [],
-            buttonText1: "Add To CartPage",
             counter: 0,
-            
+
             isDialogBoxVisible: false,
             isAddToWishList: false,
 
             alertShow: false,
             alertResponse: "",
             severity: "",
+            url: this.props.location.pathname,
         };
     }
 
@@ -34,7 +33,7 @@ class Book extends React.Component {
     }
 
     dialogBoxOpen = () => {
-        if (localStorage.getItem('token')===null)
+        if (localStorage.getItem('token') === null)
             this.setState({
                 isDialogBoxVisible: true,
             });
@@ -45,13 +44,12 @@ class Book extends React.Component {
             isDialogBoxVisible: false,
         })
     };
-
     closeAlertBox = () => {
         this.setState({alertShow: false});
     };
 
-    render() {
 
+    render() {
         const DetailTooltip = withStyles((theme) => ({
             arrow: {
                 color: theme.palette.common.white,
@@ -99,12 +97,19 @@ class Book extends React.Component {
                     <p className="bookTitle">{this.props.bookId.bookName}</p>
                     <p className="bookAuthorName">by {this.props.bookId.authorName}</p>
                     <p className="bookPrice">Rs. {this.props.bookId.bookPrice}</p>
-                    <Button id="addToCartButton" variant="contained" size="small"
-                            style={{
-                                color: "white",
-                                backgroundColor: '#b90f4b'}}>
-                        Add to Cart
-                    </Button>
+                    {this.state.url === "/" ?
+                        <Button id="addToCartButton" variant="contained" size="small"
+                                style={{
+                                    color: "white",
+                                    backgroundColor: '#b90f4b'
+                                }}>
+                            Add to Cart
+                        </Button>
+                        : <Button style={{
+                            color: "white",
+                            backgroundColor: '#b90f4b'
+                        }} onClick={() => this.updateBook(this.props.bookId)}>Update Book </Button>
+                    }
                 </CardContent>
             </Card>
         )

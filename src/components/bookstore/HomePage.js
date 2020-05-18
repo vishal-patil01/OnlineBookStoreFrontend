@@ -73,6 +73,7 @@ export default class HomePage extends Component {
         }, () => this.getBooks())
     };
 
+
     render() {
         const theme = createMuiTheme({
             palette: {
@@ -119,6 +120,7 @@ export default class HomePage extends Component {
                                 />
                             </Grid>
                         )}
+
                     </Grid>
                     }
                     <br/>

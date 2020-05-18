@@ -1,4 +1,4 @@
-import {post} from "./HttpService";
+import {post, update} from "./HttpService";
 
 export default class AdminService {
 
@@ -6,8 +6,9 @@ export default class AdminService {
         return (post(formData, 'user/register'))
     }
 
+
     sendEmailWithTokenLink(email) {
-        return (post(email, `user/send/email/${email}`))
+        return (post(email, `user/resend/email/${email}`))
     }
 
     verifyEmail(token) {

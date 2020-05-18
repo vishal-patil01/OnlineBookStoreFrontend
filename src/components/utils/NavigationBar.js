@@ -7,11 +7,16 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from '@material-ui/icons/Search';
 import '../../css/NavigationBar.css'
 import IconButton from "@material-ui/core/IconButton";
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import PersonIcon from '@material-ui/icons/Person';
+import Badge from "@material-ui/core/Badge";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import PopupState, {bindPopover, bindTrigger} from 'material-ui-popup-state';
+import Divider from "@material-ui/core/Divider";
+import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import DialogBoxPage from "./CustomDialogBox";
 import {withRouter} from "react-router";
 
@@ -75,6 +80,18 @@ class NavigationBar extends Component {
                         />
                     </div>
                     <div className="grow"/>
+                    <div className="shoppingCartDiv"
+                         style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}
+                    >
+                        <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
+                                    onClick={this.handleClickOpen}>
+                            <Badge badgeContent={this.props.badgeCount} id="badge" style={{border: "2px solid #b90f4b"}}
+                                   color="primary">
+                                <ShoppingCartOutlinedIcon
+                                    style={{fontSize: '100%', display: 'flex'}}/>
+                            </Badge>
+                        </IconButton>
+                    </div>
                     <div className="logoutDiv"
                          style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}
                     >
@@ -109,6 +126,17 @@ class NavigationBar extends Component {
                                             </div> :
                                             <div className="loginPopUp">
                                                 <p className="logoutTitle">Hello,{localStorage.getItem('userName')}</p>
+
+                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
+                                                            color="inherit">
+                                                    <ShoppingBasketOutlinedIcon fontSize="small"/> <b
+                                                    id="listTitle"><Link to="/orders">My Orders</Link></b>
+                                                </IconButton>
+                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
+                                                            color="inherit">
+                                                    <FavoriteBorderOutlinedIcon fontSize="small"/> <b
+                                                    id="listTitle"><Link to="/wishlist">Wishlist</Link></b>
+                                                </IconButton>
                                                 <Button id="logout" onClick={this.logout}>
                                                     Logout
                                                 </Button>
@@ -123,5 +151,4 @@ class NavigationBar extends Component {
         );
     }
 }
-
 export default withRouter(NavigationBar);
