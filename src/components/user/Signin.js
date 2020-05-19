@@ -104,12 +104,7 @@ class Signin extends Component {
                                        id="password" label="Password"
                                        type="password" variant="outlined"
                                        fullWidth required autoComplete="off" name="password"/>
-                            {this.props.isVisible === false ?
-                                < VisibilityIcon onClick={this.props.handlePasswordVisibility}
-                                                 className="passwordVisibility"/> :
-                                <VisibilityOffIcon onClick={this.props.handlePasswordVisibility}
-                                                   className="passwordVisibility"/>
-                            }
+                          
                         </div>
                         <div className="forgetPassword">
                             <Link  to={'/forget/password'}>

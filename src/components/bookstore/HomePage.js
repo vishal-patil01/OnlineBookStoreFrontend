@@ -16,6 +16,7 @@ export default class HomePage extends Component {
         super(props);
         this.state = {
             id: 0,
+            bookList: [],
             count: 0,
             pageValue: 1,
             searchText: " ",
@@ -25,9 +26,11 @@ export default class HomePage extends Component {
         };
     }
 
+
     getBooks = () => {
         new BookStoreService().fetchBooks(this.state.pageValue, this.state.searchText, this.state.selectValue)
             .then((response) => {
+                    console.log("fetchbook")
                     console.log(response);
                     response.data.statusCode === 208 ?
                         this.setState({
@@ -73,9 +76,6 @@ export default class HomePage extends Component {
         }, () => this.getBooks())
     };
 
-    badgeCount = (count) => {
-        this.setState({badgeCount: count})
-    };
 
     render() {
         const theme = createMuiTheme({
@@ -87,6 +87,7 @@ export default class HomePage extends Component {
         });
         return (
             <Fragment>
+
                 <NavigationBar searchedText={this.getSearchFieldTextValue}/>
                 <Container id="homePageContainer">
                     <div className="BooksCountSortFieldDiv">

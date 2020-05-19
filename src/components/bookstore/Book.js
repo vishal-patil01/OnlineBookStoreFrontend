@@ -31,6 +31,7 @@ class Book extends React.Component {
         this.props.history.push('/login');
     }
 
+
     dialogBoxOpen = () => {
         if (localStorage.getItem('token') === null)
             this.setState({
@@ -47,9 +48,7 @@ class Book extends React.Component {
         this.setState({alertShow: false});
     };
 
-
     render() {
-
         const DetailTooltip = withStyles((theme) => ({
             arrow: {
                 color: theme.palette.common.white,
