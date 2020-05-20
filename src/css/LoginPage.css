@@ -211,3 +211,55 @@ a {
     color: #B1B1B1;
 }
 
+@media only screen and (max-width: 1024px) {
+
+    .hero {
+        width: 90%;
+        margin-left: -6%;
+    }
+
+    .loginHtml {
+        padding: 24px 20px 47px 20px;
+    }
+
+    .loginHtml .tab1 {
+        font-size: 20px;
+        margin-right: 25%;
+        margin-left: 15%;
+    }
+
+    .loginHtml .tab2 {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .formBox {
+        display: none;
+    }
+
+    .hero {
+        width: 100%;
+        margin-top: 20px;
+        margin-left: -15px;
+    }
+
+    .loginBox {
+        width: 90%;
+        margin-left: 0;
+    }
+
+    .loginHtml {
+        padding: 24px 20px 47px 20px;
+    }
+
+    .loginHtml .tab1 {
+        font-size: 20px;
+        margin-right: 25%;
+        margin-left: 15%;
+    }
+
+    .loginHtml .tab2 {
+        font-size: 20px;
+    }
+}
