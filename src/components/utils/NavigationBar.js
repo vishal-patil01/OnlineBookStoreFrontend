@@ -7,7 +7,9 @@ import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from '@material-ui/icons/Search';
 import '../../css/NavigationBar.css'
 import IconButton from "@material-ui/core/IconButton";
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import PersonIcon from '@material-ui/icons/Person';
+import Badge from "@material-ui/core/Badge";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
@@ -73,6 +75,19 @@ class NavigationBar extends Component {
                                    inputProps={{'aria-label': 'search'}}
                                    onChange={(event) => this.returnSearchTextValue(event.target.value)}
                         />
+                    </div>
+                    <div className="grow"/>
+                    <div className="shoppingCartDiv"
+                         style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}
+                    >
+                        <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
+                                    onClick={this.handleClickOpen}>
+                            <Badge badgeContent={this.props.badgeCount} id="badge" style={{border: "2px solid #b90f4b"}}
+                                   color="primary">
+                                <ShoppingCartOutlinedIcon
+                                    style={{fontSize: '100%', display: 'flex'}}/>
+                            </Badge>
+                        </IconButton>
                     </div>
                     <div className="logoutDiv"
                          style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}

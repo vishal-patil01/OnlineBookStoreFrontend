@@ -9,22 +9,46 @@ import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
 import BookStoreService from "../../services/BookStoreService";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import CartService from "../../services/CartService";
 import Loader from "../utils/Loader";
+import WishListService from "../../services/WishListService";
 
 export default class HomePage extends Component {
     constructor(props) {
         super(props);
+        this.fetchCartList();
+        this.fetchWishList();
         this.state = {
             id: 0,
             bookList: [],
             count: 0,
             pageValue: 1,
             searchText: " ",
+            badgeCount: 0,
             selectValue: "",
             counter: 0,
+            cartList: "",
             loaded: false
         };
     }
+
+    fetchCartList = () => {
+        new CartService().fetchCart("cart").then((response) => {
+                console.log("fff");
+                 console.log(response);
+                    (response.data.statusCode === 200) ?
+                        this.setState({
+                            counter: response.data.data.length,
+                            cartList: response.data.data.map(value => value.book.isbnNumber).toString()
+                        })
+                        :
+                        this.setState({
+                            counter: 0,
+                            cartList: ""
+                        });
+                }
+        );
+    };
 
 
     getBooks = () => {
@@ -32,15 +56,15 @@ export default class HomePage extends Component {
             .then((response) => {
                     console.log("fetchbook")
                     console.log(response);
-                    response.data.statusCode === 208 ?
-                        this.setState({
-                            bookList: [],
-                            count: 0,
-                        }) :
-                        this.setState({
-                            bookList: response.data.data.content,
-                            count: response.data.data.totalElements,
-                        });
+                        response.data.statusCode === 208 ?
+                            this.setState({
+                                bookList: [],
+                                count: 0,
+                            }) :
+                            this.setState({
+                                bookList: response.data.data.content,
+                                count: response.data.data.totalElements,
+                            });
                 }
             )
             .catch((error) => {
@@ -76,6 +100,9 @@ export default class HomePage extends Component {
         }, () => this.getBooks())
     };
 
+    badgeCount = (count) => {
+        this.setState({badgeCount: count})
+    };
 
     render() {
         const theme = createMuiTheme({
@@ -88,7 +115,7 @@ export default class HomePage extends Component {
         return (
             <Fragment>
 
-                <NavigationBar searchedText={this.getSearchFieldTextValue}/>
+                <NavigationBar searchedText={this.getSearchFieldTextValue} badgeCount={this.state.counter}/>
                 <Container id="homePageContainer">
                     <div className="BooksCountSortFieldDiv">
                         <p>Books <span>({this.state.count} items) </span></p>
@@ -123,6 +150,9 @@ export default class HomePage extends Component {
                             <Grid alignItems="center" key={id.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
                                 <Card
                                     bookId={id}
+                                    badgeCount={this.badgeCount}
+                                    cart={this.state.cartList}
+                                    updateCartList={this.fetchCartList}
                                 />
                             </Grid>
                         )}

@@ -19,6 +19,24 @@ export default class verifyEmail extends Component {
         };
     }
 
+    sendResetPasswordLink = (emailId) => {
+        new UserService().sendEmailWithTokenLink(emailId).then((response) => {
+            console.log(response.data);
+            if (response.status === 200) {
+                this.setState({
+                    alertShow: true,
+                    alertResponse: response.data.message,
+                    responseStatus: true,
+                    isVerificationEmailSent: true
+                });
+            } else {
+                this.setState({
+                    alertShow: true,
+                    alertResponse: response.data.message
+                });
+            }
+        });
+    };
 
     closeAlertBox = () => {
         this.setState({alertShow: false});
