@@ -51,6 +51,32 @@ export default class ResetPassword extends Component {
             isDialogBoxVisible: true
         })
     }
+    setNewPassword = () => {
+        const newPassword = {
+            password: this.state.password,
+        };
+        new UserService().setNewPassword(newPassword, this.props.location.search).then((response) => {
+            console.log(response.data);
+            this.setState({
+                showProgress: true,
+            })
+            if (response.status === 200) {
+                this.setState({
+                    alertShow: true,
+                    alertResponse: response.data.message,
+                    responseStatus: true,
+                    isPasswordReset:true,
+                  //  isDialogBoxVisible:true
+                });
+            } else {
+                this.setState({
+                    alertShow: true,
+                    alertResponse: response.data.message,
+                    showProgress:false
+                });
+            }
+        });
+    };
 
     setValue = (event) => {
         this.setState({
