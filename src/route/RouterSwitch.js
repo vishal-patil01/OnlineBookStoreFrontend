@@ -2,10 +2,12 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import React from "react";
 import AddBook from "../components/admin/AddBook";
 import HomePage from "../components/bookstore/HomePage";
+import Signup from "../components/user/Signup";
 import ForgetPassword from "../components/user/ForgetPassword";
 import ResetPassword from "../components/user/ResetPassword";
 import VerifyEmail from "../components/user/VerifyEmail";
 import Variants from "../components/bookstore/test";
+
 
 export default class DefaultRoutes extends React.Component {
     render() {

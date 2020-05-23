@@ -22,5 +22,14 @@ function get(url) {
     })
 }
 
+function update(url) {
+    return Axios({
+        method: 'put', //you can set what request you want to be
+        url: `${BASEURL.appUrl}${url}`,
+        headers: {
+            'token': localStorage.getItem('token')
+        }
+    })
+}
 
-export {post, get}
+export {post, get, update}

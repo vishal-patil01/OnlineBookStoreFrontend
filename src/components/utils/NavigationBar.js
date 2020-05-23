@@ -14,6 +14,9 @@ import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import PopupState, {bindPopover, bindTrigger} from 'material-ui-popup-state';
+import Divider from "@material-ui/core/Divider";
+import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import DialogBoxPage from "./CustomDialogBox";
 import {withRouter} from "react-router";
 
@@ -123,6 +126,17 @@ class NavigationBar extends Component {
                                             </div> :
                                             <div className="loginPopUp">
                                                 <p className="logoutTitle">Hello,{localStorage.getItem('userName')}</p>
+
+                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
+                                                            color="inherit">
+                                                    <ShoppingBasketOutlinedIcon fontSize="small"/> <b
+                                                    id="listTitle"><Link to="/orders">My Orders</Link></b>
+                                                </IconButton>
+                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
+                                                            color="inherit">
+                                                    <FavoriteBorderOutlinedIcon fontSize="small"/> <b
+                                                    id="listTitle"><Link to="/wishlist">Wishlist</Link></b>
+                                                </IconButton>
                                                 <Button id="logout" onClick={this.logout}>
                                                     Logout
                                                 </Button>
@@ -137,5 +151,4 @@ class NavigationBar extends Component {
         );
     }
 }
-
 export default withRouter(NavigationBar);
