@@ -3,7 +3,6 @@ import React from "react";
 import AddBook from "../components/admin/AddBook";
 import HomePage from "../components/bookstore/HomePage";
 import CartPage from "../components/bookstore/CartPage";
-import Signup from "../components/user/Signup";
 import ForgetPassword from "../components/user/ForgetPassword";
 import ResetPassword from "../components/user/ResetPassword";
 import VerifyEmail from "../components/user/VerifyEmail";

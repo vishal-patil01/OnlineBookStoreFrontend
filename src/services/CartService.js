@@ -1,8 +1,13 @@
-import {post} from "./HttpService";
+import {get, post} from "./HttpService";
 
 export default class CartService {
 
     async addToCart(cart) {
         return (await post(cart, `cart`));
     }
+
+    fetchCart() {
+        return (get(`cart`));
+    }
+
 }

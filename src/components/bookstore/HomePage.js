@@ -9,6 +9,7 @@ import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
 import BookStoreService from "../../services/BookStoreService";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import CartService from "../../services/CartService";
 import Loader from "../utils/Loader";
 
 export default class HomePage extends Component {
@@ -27,6 +28,24 @@ export default class HomePage extends Component {
             loaded: false
         };
     }
+
+    fetchCartList = () => {
+        new CartService().fetchCart("cart").then((response) => {
+                console.log("fff");
+                console.log(response);
+                (response.data.statusCode === 200) ?
+                    this.setState({
+                        counter: response.data.data.length,
+                        cartList: response.data.data.map(value => value.book.isbnNumber).toString()
+                    })
+                    :
+                    this.setState({
+                        counter: 0,
+                        cartList: ""
+                    });
+            }
+        );
+    };
 
     getBooks = () => {
         new BookStoreService().fetchBooks(this.state.pageValue, this.state.searchText, this.state.selectValue)
@@ -133,7 +152,6 @@ export default class HomePage extends Component {
                                 />
                             </Grid>
                         )}
-
                     </Grid>
                     }
                     <br/>
@@ -147,4 +165,3 @@ export default class HomePage extends Component {
         );
     }
 }
-
