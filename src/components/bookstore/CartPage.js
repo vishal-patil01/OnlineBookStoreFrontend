@@ -36,12 +36,6 @@ class CartPage extends React.Component {
         };
     }
 
-    handleChange = ({target}) => {
-        this.setState({
-            [target.id]: target.value,
-        });
-    };
-
     getBooksAddedToCart() {
         get("cart").then(response => {
             console.log("cart fetch");
