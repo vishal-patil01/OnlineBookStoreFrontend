@@ -44,6 +44,12 @@ class CartPage extends React.Component {
         })
     }
 
+    handleRemove = id => event => {
+        new CartService().deleteCart(id).then(response => {
+            this.getBooksAddedToCart()
+        });
+    };
+
     test = () => {
         this.setState({
             totalPrice: this.state.AddedToCart.reduce(function (tot, arr) {
