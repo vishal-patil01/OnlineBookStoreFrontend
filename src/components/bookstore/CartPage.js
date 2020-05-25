@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react';
 import {ExpansionPanel, Grid, Typography} from '@material-ui/core';
 import CartView from "./CartView.js";
-import {get} from "../../services/HttpService";
 import NavigationBar from "../utils/NavigationBar";
 import "../../css/CartPage.css";
 import {createMuiTheme} from "@material-ui/core/styles";
@@ -31,29 +30,9 @@ class CartPage extends React.Component {
             isTest: false,
             isScrolled: false,
             isDialogBoxVisible: false,
-
             showProgress: false
         };
     }
-
-    getBooksAddedToCart() {
-        get("cart").then(response => {
-            console.log("cart fetch");
-            console.log(response);
-            {
-                (response.data.statusCode === 200) ?
-                    this.setState({
-                        AddedToCart: response.data.data,
-                        count: response.data.data.length,
-                    }, () => this.test())
-                    :
-                    this.setState({
-                        isDialogBoxVisible: true,
-                    })
-            }
-        })
-            .catch(error => this.setState({error, isLoading: false}));
-    };
 
     componentDidMount() {
         this.getBooksAddedToCart();
@@ -64,12 +43,6 @@ class CartPage extends React.Component {
             console.log(isTop);
         })
     }
-
-    handleRemove = id => event => {
-        new CartService().deleteCart(id).then(response => {
-            this.getBooksAddedToCart()
-        });
-    };
 
     test = () => {
         this.setState({
@@ -90,6 +63,8 @@ class CartPage extends React.Component {
                 },
             },
         });
+        const {expanded2} = this.state;
+        const {expanded3} = this.state;
         const AddedToCart = this.state.AddedToCart;
         const count = this.state.count;
         return (

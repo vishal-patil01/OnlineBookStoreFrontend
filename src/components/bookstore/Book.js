@@ -11,7 +11,10 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import {Link} from "react-router-dom";
 import CartService from "../../services/CartService";
 import {withRouter} from 'react-router';
+import IconButton from "@material-ui/core/IconButton";
+import {Favorite} from "@material-ui/icons";
 import DialogBoxPage from "../utils/CustomDialogBox";
+import WishListService from "../../services/WishListService";
 import CustomSnackBar from "../utils/CustomSnackBar";
 
 class Book extends React.Component {
@@ -35,25 +38,11 @@ class Book extends React.Component {
         this.props.history.push('/login');
     }
 
-    addToCart = async (id) => {
-        const cart = {
-            id: id,
-            quantity: 1,
-            price: this.props.bookId.bookPrice
-        };
-        this.setState({buttonText: 'Added To CartPage'});
-
-        new CartService().addToCart(cart).then((response) => {
-            console.log(cart);
-            console.log(response);
-
-            (response.data.statusCode === 200) ?
-                this.props.updateCartList()
-                :
-                this.setState({
-                    isDialogBoxVisible: true,
-                })
-        });
+    dialogBoxOpen = () => {
+        if (localStorage.getItem('token') === null)
+            this.setState({
+                isDialogBoxVisible: true,
+            });
     };
 
     dialogBoxClose = () => {
@@ -65,11 +54,8 @@ class Book extends React.Component {
         this.setState({alertShow: false});
     };
 
+
     render() {
-        const goToCartButtonLink = (
-            <Link style={{color: 'white', textDecoration: 'none'}} to={'/cart'}>
-                Go To Cart
-            </Link>);
         const DetailTooltip = withStyles((theme) => ({
             arrow: {
                 color: theme.palette.common.white,
@@ -115,21 +101,28 @@ class Book extends React.Component {
                 </DetailTooltip>
                 <CardContent id="cardBottom">
                     <p className="bookTitle">{this.props.bookId.bookName}</p>
+                    <IconButton className="wishlist"
+                                onClick={this.dialogBoxOpen}
+                                color="inherit">
+                        {this.props.wishList.includes(this.props.bookId.isbnNumber) ?
+                            <Favorite color="primary" onClick={this.handleWishListOperations}/> :
+                            <Favorite color="disabled" onClick={this.handleWishListOperations}/>
+                        }
+                    </IconButton>
                     <p className="bookAuthorName">by {this.props.bookId.authorName}</p>
                     <p className="bookPrice">Rs. {this.props.bookId.bookPrice}</p>
-                    <Button id="addToCartButton" variant="contained" size="small"
-                            style={this.props.bookId.noOfCopies === 0 ? {
-                                color: "black",
-                                backgroundColor: '#C2C1C2'
-                            } : (this.props.cart.includes(this.props.bookId.isbnNumber) ? {
-                                color: "white",
-                                backgroundColor: "#4d8cb9"
-                            } : {color: "white", backgroundColor: "#b90f4b"})}
-                            onClick={() => this.props.cart.includes(this.props.bookId.isbnNumber) ? console.log() : this.addToCart(this.props.bookId.id)}
-                            disabled={this.props.bookId.noOfCopies === 0}>
-                        {this.props.cart.includes(this.props.bookId.isbnNumber) ? goToCartButtonLink : "Add To Cart"}
-                    </Button>
-                    }
+                        <Button id="addToCartButton" variant="contained" size="small"
+                                style={this.props.bookId.noOfCopies === 0 ? {
+                                    color: "black",
+                                    backgroundColor: '#C2C1C2'
+                                } : (this.props.cart.includes(this.props.bookId.isbnNumber) ? {
+                                    color: "white",
+                                    backgroundColor: "#4d8cb9"
+                                } : {color: "white", backgroundColor: "#b90f4b"})}
+                                onClick={() => this.props.cart.includes(this.props.bookId.isbnNumber) ? console.log() : this.addToCart(this.props.bookId.id)}
+                                disabled={this.props.bookId.noOfCopies === 0}>
+                            {this.props.cart.includes(this.props.bookId.isbnNumber) ? goToCartButtonLink : "Add To Cart"}
+                        </Button>
                 </CardContent>
             </Card>
         )
