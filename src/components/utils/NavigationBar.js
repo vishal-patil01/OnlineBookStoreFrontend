@@ -80,18 +80,6 @@ class NavigationBar extends Component {
                         />
                     </div>
                     <div className="grow"/>
-                    <div className="shoppingCartDiv"
-                         style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}
-                    >
-                        <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
-                                    onClick={this.handleClickOpen}>
-                            <Badge badgeContent={this.props.badgeCount} id="badge" style={{border: "2px solid #b90f4b"}}
-                                   color="primary">
-                                <ShoppingCartOutlinedIcon
-                                    style={{fontSize: '100%', display: 'flex'}}/>
-                            </Badge>
-                        </IconButton>
-                    </div>
                     <div className="logoutDiv"
                          style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}
                     >
@@ -126,17 +114,6 @@ class NavigationBar extends Component {
                                             </div> :
                                             <div className="loginPopUp">
                                                 <p className="logoutTitle">Hello,{localStorage.getItem('userName')}</p>
-
-                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
-                                                            color="inherit">
-                                                    <ShoppingBasketOutlinedIcon fontSize="small"/> <b
-                                                    id="listTitle"><Link to="/orders">My Orders</Link></b>
-                                                </IconButton>
-                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
-                                                            color="inherit">
-                                                    <FavoriteBorderOutlinedIcon fontSize="small"/> <b
-                                                    id="listTitle"><Link to="/wishlist">Wishlist</Link></b>
-                                                </IconButton>
                                                 <Button id="logout" onClick={this.logout}>
                                                     Logout
                                                 </Button>

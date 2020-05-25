@@ -3,6 +3,7 @@ import React, {Fragment} from 'react';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import "../../css/CartView.css"
+import Button from "@material-ui/core/Button";
 
 export default class CartView extends React.Component {
     constructor(props) {
@@ -63,8 +64,15 @@ export default class CartView extends React.Component {
                                 <AddCircleOutlineIcon onClick={this.handleIncrement} style={{color: "#b90f4b"}}/>
                             }
 
+                            <Button onClick={this.props.handleRemove(this.props.cartId)}
+                                    style={{marginLeft: "5px", paddingTop: '0px', fontSize: "14px"}}
+                                    className="remove" size="small"
+                                    disabled={this.props.pannel}>
+                                Remove
+                            </Button>
                         </div>
                     </div>
+
                 </div>
             </Fragment>
         )

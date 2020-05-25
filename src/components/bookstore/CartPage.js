@@ -6,6 +6,7 @@ import NavigationBar from "../utils/NavigationBar";
 import "../../css/CartPage.css";
 import {createMuiTheme} from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
+import CartService from "../../services/CartService";
 import {withRouter} from 'react-router';
 import Link from "@material-ui/core/Link";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
@@ -31,7 +32,6 @@ class CartPage extends React.Component {
             isScrolled: false,
             isDialogBoxVisible: false,
 
-            orderId: "",
             showProgress: false
         };
     }
@@ -57,11 +57,19 @@ class CartPage extends React.Component {
 
     componentDidMount() {
         this.getBooksAddedToCart();
+        this.getUserDetails();
+        this.fetchCustomerDetails();
         window.addEventListener("scroll", () => {
             const isTop = window.scrollY < 100;
             console.log(isTop);
         })
     }
+
+    handleRemove = id => event => {
+        new CartService().deleteCart(id).then(response => {
+            this.getBooksAddedToCart()
+        });
+    };
 
     test = () => {
         this.setState({
@@ -82,8 +90,6 @@ class CartPage extends React.Component {
                 },
             },
         });
-        const {expanded2} = this.state;
-        const {expanded3} = this.state;
         const AddedToCart = this.state.AddedToCart;
         const count = this.state.count;
         return (
