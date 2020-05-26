@@ -11,10 +11,12 @@ import BookStoreService from "../../services/BookStoreService";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import CartService from "../../services/CartService";
 import Loader from "../utils/Loader";
+import WishListService from "../../services/WishListService";
 
 export default class HomePage extends Component {
     constructor(props) {
         super(props);
+        this.fetchCartList();
         this.state = {
             id: 0,
             bookList: [],
@@ -25,42 +27,25 @@ export default class HomePage extends Component {
             selectValue: "",
             counter: 0,
             cartList: "",
+            wishList: "",
             loaded: false
         };
     }
-
-    fetchCartList = () => {
-        new CartService().fetchCart("cart").then((response) => {
-                console.log("fff");
-                console.log(response);
-                (response.data.statusCode === 200) ?
-                    this.setState({
-                        counter: response.data.data.length,
-                        cartList: response.data.data.map(value => value.book.isbnNumber).toString()
-                    })
-                    :
-                    this.setState({
-                        counter: 0,
-                        cartList: ""
-                    });
-            }
-        );
-    };
 
     getBooks = () => {
         new BookStoreService().fetchBooks(this.state.pageValue, this.state.searchText, this.state.selectValue)
             .then((response) => {
                     console.log("fetchbook")
                     console.log(response);
-                    response.data.statusCode === 208 ?
-                        this.setState({
-                            bookList: [],
-                            count: 0,
-                        }) :
-                        this.setState({
-                            bookList: response.data.data.content,
-                            count: response.data.data.totalElements,
-                        });
+                        response.data.statusCode === 208 ?
+                            this.setState({
+                                bookList: [],
+                                count: 0,
+                            }) :
+                            this.setState({
+                                bookList: response.data.data.content,
+                                count: response.data.data.totalElements,
+                            });
                 }
             )
             .catch((error) => {
@@ -152,6 +137,7 @@ export default class HomePage extends Component {
                                 />
                             </Grid>
                         )}
+
                     </Grid>
                     }
                     <br/>
@@ -165,3 +151,4 @@ export default class HomePage extends Component {
         );
     }
 }
+

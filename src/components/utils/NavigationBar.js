@@ -126,17 +126,6 @@ class NavigationBar extends Component {
                                             </div> :
                                             <div className="loginPopUp">
                                                 <p className="logoutTitle">Hello,{localStorage.getItem('userName')}</p>
-
-                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
-                                                            color="inherit">
-                                                    <ShoppingBasketOutlinedIcon fontSize="small"/> <b
-                                                    id="listTitle"><Link to="/orders">My Orders</Link></b>
-                                                </IconButton>
-                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
-                                                            color="inherit">
-                                                    <FavoriteBorderOutlinedIcon fontSize="small"/> <b
-                                                    id="listTitle"><Link to="/wishlist">Wishlist</Link></b>
-                                                </IconButton>
                                                 <Button id="logout" onClick={this.logout}>
                                                     Logout
                                                 </Button>
