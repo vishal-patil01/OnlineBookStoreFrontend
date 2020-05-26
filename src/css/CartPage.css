@@ -110,3 +110,71 @@
     font-size: small;
     margin: auto !important;
 }
+
+@media only screen and (max-width: 415px) {
+    #cartContainer {
+        padding-left: 4%;
+    }
+
+    #expansionPanel {
+        width: 95%;
+    }
+
+    #myCartHeader {
+        padding-top: 15px;
+        margin-bottom: 0;
+    }
+
+    #breadcrumb {
+        margin: 70px 4% 2%;
+    }
+
+    #cartScroll {
+        overflow-x: hidden;
+        /*overflow-y: visible;*/
+    }
+
+    #orderScroll {
+        overflow-x: hidden;
+        /*overflow-y: visible;*/
+
+    }
+
+    .customerName, .cityTown, .locality {
+        width: 130% !important;
+    }
+
+    .phoneNumber, .pinCode, .landmark {
+        margin-left: 18px !important;
+        width: 130% !important;
+    }
+
+    .address {
+        margin-left: 18px !important;
+        width: 130% !important;
+    }
+
+    .loaderDialog {
+        margin: auto !important;
+    }
+
+    .loaderText {
+        text-align: center !important;
+        margin: auto !important;
+        font-size: 14px !important;
+    }
+}
+
+@media only screen
+and (width: 768px) {
+    .address {
+        width: 110% !important;
+    }
+}
+
+@media only screen
+and (width: 1024px) {
+    .address {
+        width: 105% !important;
+    }
+}
