@@ -1,4 +1,4 @@
-import {get, post} from "./HttpService";
+import {deleteData, get, post, update} from "./HttpService";
 
 export default class CartService {
 
@@ -6,8 +6,8 @@ export default class CartService {
         return (await post(cart, `cart`));
     }
 
-    fetchCart() {
-        return (get(`cart`));
-    }
 
+    deleteCart(id) {
+        return (deleteData(`cart/${id}`))
+    }
 }

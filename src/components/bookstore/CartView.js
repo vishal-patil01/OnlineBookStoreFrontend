@@ -42,8 +42,7 @@ export default class CartView extends React.Component {
                         >
                             by {this.props.bookDetails.book.authorName}
                         </Typography>
-                        <Typography component="h2"
-                                    className="price">Rs {(this.props.bookDetails.book.bookPrice * this.state.qValue)}
+                        <Typography component="h2" className="price">Rs {(this.props.bookDetails.book.bookPrice * this.state.qValue)}
                         </Typography>
 
                         <div className="controls">
@@ -59,13 +58,13 @@ export default class CartView extends React.Component {
                                 value={this.state.qValue}
                             />
 
-                            {this.state.qValue === 5 || this.state.qValue >= this.props.bookDetails.book.noOfCopies || this.props.pannel ?
+                            {this.state.qValue === 5 || this.state.qValue>=this.props.bookDetails.book.noOfCopies || this.props.pannel ?
                                 <AddCircleOutlineIcon id="decrementButton" color="disabled"/> :
                                 <AddCircleOutlineIcon onClick={this.handleIncrement} style={{color: "#b90f4b"}}/>
                             }
 
                             <Button onClick={this.props.handleRemove(this.props.cartId)}
-                                    style={{marginLeft: "5px", paddingTop: '0px', fontSize: "14px"}}
+                                    style={{marginLeft: "5px",paddingTop:'0px', fontSize: "14px"}}
                                     className="remove" size="small"
                                     disabled={this.props.pannel}>
                                 Remove

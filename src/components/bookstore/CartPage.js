@@ -57,8 +57,6 @@ class CartPage extends React.Component {
 
     componentDidMount() {
         this.getBooksAddedToCart();
-        this.getUserDetails();
-        this.fetchCustomerDetails();
         window.addEventListener("scroll", () => {
             const isTop = window.scrollY < 100;
             console.log(isTop);
@@ -93,74 +91,126 @@ class CartPage extends React.Component {
         const AddedToCart = this.state.AddedToCart;
         const count = this.state.count;
         return (
-            <Fragment>
-                <NavigationBar/>
-                <Grid container>
-                    <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
-                        <Link color="inherit" href="/">
-                            Home
-                        </Link>
-                        <Typography color="textPrimary">Cart</Typography>
-                    </Breadcrumbs>
-                    <div id="cartContainer">
-                        {this.state.showProgress &&
-                        <Dialog className="processingDialog"
-                                fullWidth={true}
-                                onClose={this.state.showProgress}
-                                aria-labelledby="customized-dialog-title"
-                                open={this.state.showProgress}>
-                            <DialogContent>
-                                <div className="loaderDialog">
-                                    <Loader
-                                        type="ThreeDots"
-                                        color="#fff"
-                                        height={35}
-                                        width={200}
-                                        timeout={50000}
-                                    />
-                                </div>
-                                <div>
-                                    <Typography className="loaderText" variant="h6">
-                                        <b>Wait while we are processing your request...</b>
-                                    </Typography>
-                                </div>
-                            </DialogContent>
-                        </Dialog>
-                        }
-                        <ExpansionPanel expanded id="expansionPanel">
-                            <Typography component="h5" variant="h5" id="myCartHeader">My Cart
-                                ({count})</Typography>
-                            {count === 0 ?
-                                <div id="emptyCart">
-                                    <img src={require(`../../assets/uploads/emptyCart.png`)}
-                                         alt="Empty CartPage"
-                                         width="100px" height="100px"/>
-                                    <h3>Your cart is empty</h3>
-                                </div> : <div>
-                                    <div id={count > 2 ? "cartScroll" : ""}>
-                                        {AddedToCart.map((id, index) =>
-                                            <Grid key={id.id} item xs={24} sm={24} md={24} lg={12} xl={12}>
-                                                <CartView
-                                                    cartId={id.cartItemsId}
-                                                    bookDetails={id}
-                                                    qValue={id.quantity}
-                                                    handleRemove={this.handleRemove}
-                                                    totalPrice={this.getTotalPrice}
-                                                    pannel={this.state.isPanelOpen1}
-                                                />
-                                                {index !== AddedToCart.length - 1 ?
-                                                    <Divider/> : console.log()
-                                                }
-                                            </Grid>
-                                        )}
-                                    </div>
-                                </div>
-                            }
-                        </ExpansionPanel>
-                    </div>
-                </Grid>
-            </Fragment>
-        );
+            < Fragment >
+            < NavigationBar / >
+            < Grid
+        container >
+        < Breadcrumbs
+        aria - label = "breadcrumb"
+        id = "breadcrumb" >
+            < Link
+        color = "inherit"
+        href = "/" >
+            Home
+            < /Link>
+            < Typography
+        color = "textPrimary" > Cart < /Typography>
+            < /Breadcrumbs>
+            < div
+        id = "cartContainer" >
+            {
+                this.state.showProgress &&
+                    < Dialog className = "processingDialog"
+                fullWidth = {true}
+                onClose = {this.state.showProgress}
+                aria-labelledby = "customized-dialog-title"
+                open = {this.state.showProgress} >
+                < DialogContent >
+                < div className = "loaderDialog" >
+                < Loader
+                type = "ThreeDots"
+                color = "#fff"
+                height = {35}
+                width = {200}
+                timeout = {50000}
+        />
+        < /div>
+        < div >
+        < Typography
+        className = "loaderText"
+        variant = "h6" >
+            < b > Wait
+        while we are
+        processing
+        your
+        request
+    ...<
+        /b>
+        < /Typography>
+        < /div>
+        < /DialogContent>
+        < /Dialog>
+    }
+    <
+        ExpansionPanel
+        expanded
+        id = "expansionPanel" >
+            < Typography
+        component = "h5"
+        variant = "h5"
+        id = "myCartHeader" > My
+        Cart
+        ({count}) < /Typography>
+        {
+            count === 0 ?
+        <
+            div
+            id = "emptyCart" >
+                < img
+            src = {require(`../../assets/uploads/emptyCart.png`
+        )
+        }
+            alt = "Empty CartPage"
+            width = "100px"
+            height = "100px" / >
+                < h3 > Your
+            cart
+            is
+            empty < /h3>
+            < /div> : <div>
+            < div
+            id = {count > 2 ? "cartScroll" : ""
+        }>
+            {
+                AddedToCart.map((id, index) =>
+                < Grid
+                key = {id.id}
+                item
+                xs = {24}
+                sm = {24}
+                md = {24}
+                lg = {12}
+                xl = {12} >
+                    < CartView
+                cartId = {id.cartItemsId}
+                bookDetails = {id}
+                qValue = {id.quantity}
+                handleRemove = {this.handleRemove}
+                totalPrice = {this.getTotalPrice}
+                pannel = {this.state.isPanelOpen1}
+                />
+                {
+                    index !== AddedToCart.length - 1 ?
+                <
+                    Divider / >
+                :
+                    console.log()
+                }
+            <
+                /Grid>
+            )
+            }
+        <
+            /div>
+            < /div>
+        }
+    <
+        /ExpansionPanel>
+        < /div>
+        < /Grid>
+        < /Fragment>
+    )
+        ;
     }
 }
 
