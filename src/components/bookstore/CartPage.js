@@ -1,11 +1,22 @@
 import React, {Fragment} from 'react';
-import {ExpansionPanel, Grid, Typography} from '@material-ui/core';
+import {
+    ExpansionPanel,
+    ExpansionPanelDetails,
+    ExpansionPanelSummary,
+    FormControlLabel,
+    Grid,
+    Radio,
+    RadioGroup,
+    TextField,
+    Typography
+} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import CartView from "./CartView.js";
+import FormControl from "@material-ui/core/FormControl";
 import {get} from "../../services/HttpService";
 import NavigationBar from "../utils/NavigationBar";
 import "../../css/CartPage.css";
-import {createMuiTheme} from "@material-ui/core/styles";
+import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import CartService from "../../services/CartService";
 import {withRouter} from 'react-router';
@@ -187,6 +198,123 @@ class CartPage extends React.Component {
                                     </Grid>
                                 </div>
                             }
+                        </ExpansionPanel>
+                        <ExpansionPanel expanded={expanded2 === 'panel2'} id="expansionPanel">
+                            <ExpansionPanelSummary>
+                                <Typography component="h5" variant="h5" id="cartHeader"
+                                >Customer Details</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails style={{display: "flex", flexDirection: "column"}}>
+                                <Grid container spacing={1} alignItems="center" style={{width: "70%"}}>
+                                    <Grid item xs={12} sm={6} md={6}>
+                                        <ThemeProvider theme={theme}>
+                                            <TextField id="cName" label="Name" variant="outlined"
+                                                       className="customerName"
+                                                       name="Name"
+                                                       style={{marginLeft: "10%"}}
+                                                       value={this.state.cName}
+                                                       disabled
+                                                       size="small"
+                                                       helperText=" "
+                                                       fullWidth required/>
+                                        </ThemeProvider>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} md={6}>
+                                        <TextField id="cPhone" label="Phone Number" variant="outlined"
+                                                   className="phoneNumber" name="Phone Number"
+                                            // style={{marginLeft: "15%"}}
+                                                   value={this.state.cPhone}
+                                                   disabled
+                                                   size="small"
+                                                   helperText=" "
+                                                   fullWidth required/>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12}>
+                                        <TextField id="cAddress" label="Address" multiline
+                                                   onChange={this.handleChange}
+                                                   name="Address"
+                                                   className="address"
+                                                   style={{marginLeft: "5%", width: "103%"}}
+                                                   value={this.state.cAddress}
+                                                   size="small"
+                                                   disabled={this.state.isTest}
+                                                   helperText={this.state.cAddressError}
+                                                   rows={3} variant="outlined" fullWidth required/>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} md={6}>
+                                        <TextField id="cTown" label="City/Town" variant="outlined"
+                                                   name="City/Town"
+                                                   className="cityTown"
+                                                   style={{marginLeft: "10%"}}
+                                                   disabled={this.state.isTest}
+                                                   onChange={this.handleChange}
+                                                   value={this.state.cTown}
+                                                   size="small"
+                                                   helperText={this.state.cTownError}
+                                                   fullWidth required/>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} md={6}>
+                                        <TextField id="cPin" label="Pin Code" variant="outlined"
+                                                   name="Pin Code"
+                                                   className="pinCode"
+                                            // style={{marginLeft: "15%"}}
+                                                   value={this.state.cPin}
+                                                   disabled={this.state.isTest}
+                                                   onChange={this.handleChange}
+                                                   size="small"
+                                                   helperText={this.state.cPinError}
+                                                   fullWidth required/>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} md={6}>
+                                        <TextField id="cLocality" label="Locality" variant="outlined"
+                                                   name="Locality"
+                                                   className="locality"
+                                                   style={{marginLeft: "10%"}}
+                                                   value={this.state.cLocality}
+                                                   disabled={this.state.isTest}
+                                                   onChange={this.handleChange}
+                                                   size="small"
+                                                   helperText={this.state.cLocalityError}
+                                                   fullWidth required/>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} md={6}>
+                                        <TextField id="cLandmark" label="Landmark" variant="outlined"
+                                                   name="Landmark"
+                                                   className="landmark"
+                                            // style={{marginLeft: "15%"}}
+                                                   disabled={this.state.isTest}
+                                                   onChange={this.handleChange}
+                                                   value={this.state.cLandmark}
+                                                   size="small"
+                                                   helperText={this.state.cLandmarkError}
+                                                   fullWidth required/>
+                                    </Grid>
+                                    <Grid item xs={12} sm={7} md={7} style={{marginLeft: "5%"}}>
+                                        <Typography style={{display: "flex"}}>Type</Typography>
+
+                                        <FormControl component="fieldset" style={{display: "flex"}}>
+                                            <RadioGroup row aria-label="type" id="type" name="type"
+                                                        value={this.state.type}
+                                                        onChange={this.handleRadioButton}>
+                                                <FormControlLabel value="HOME"
+                                                                  disabled={this.state.isTest}
+                                                                  control={<Radio style={{color: "#b90f4b"}}/>}
+                                                                  label="Home"/>
+
+                                                <FormControlLabel value="WORK"
+                                                                  disabled={this.state.isTest} W
+                                                                  control={<Radio style={{color: "#b90f4b"}}/>}
+                                                                  label="Work"/>
+
+                                                <FormControlLabel value="OTHER"
+                                                                  disabled={this.state.isTest}
+                                                                  control={<Radio style={{color: "#b90f4b"}}/>}
+                                                                  label="Other"/>
+                                            </RadioGroup>
+                                        </FormControl>
+                                    </Grid>
+                                </Grid>
+                            </ExpansionPanelDetails>
                         </ExpansionPanel>
                     </div>
                 </Grid>
