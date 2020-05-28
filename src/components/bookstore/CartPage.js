@@ -44,15 +44,55 @@ class CartPage extends React.Component {
             isScrolled: false,
             isDialogBoxVisible: false,
 
+            cName: "",
+            cPhone: "",
+            cPin: "",
+            cLocality: "",
+            cAddress: "",
+            cTown: "",
+            cLandmark: "",
+            type: "HOME",
+
+            cPinError: " ",
+            cLocalityError: " ",
+            cAddressError: " ",
+            cTownError: " ",
+            cLandmarkError: " ",
+
+            orderId: "",
             showProgress: false
         };
     }
-
 
     handleChange = ({target}) => {
         this.setState({
             [target.id]: target.value,
         });
+    };
+
+
+    handleButtonClick2 = panel => (event, expanded2) => {
+        this.setState({
+            expanded2: panel,
+            isPanelOpen1: true,
+        });
+    };
+
+    validation = (event, pattern, message) => {
+        if (event.target.value.match(pattern)) {
+            this.setState({
+                [event.target.id + "Error"]: " "
+            })
+        } else {
+            this.setState({
+                [event.target.id + "Error"]: message
+            })
+        }
+    };
+
+    handleRadioButton = (event) => {
+        this.setState({type: event.target.value}, () => this.fetchCustomerDetails());
+
     };
 
     getBooksAddedToCart() {
@@ -76,8 +116,6 @@ class CartPage extends React.Component {
 
     componentDidMount() {
         this.getBooksAddedToCart();
-        this.getUserDetails();
-        this.fetchCustomerDetails();
         window.addEventListener("scroll", () => {
             const isTop = window.scrollY < 100;
             console.log(isTop);
@@ -89,6 +127,20 @@ class CartPage extends React.Component {
             this.getBooksAddedToCart()
         });
     };
+
+    formFilledCheck() {
+        return this.state.cPin.trim().length > 0 && this.state.cLocality.trim().length > 0 &&
+            this.state.cAddress.trim().length > 0 && this.state.cTown.trim().length > 0 && this.state.cLandmark.trim().length > 0 && this.state.type !== "";
+    }
+
+    errorCheck() {
+        return this.state.cPinError.trim().length === 0 && this.state.cLocalityError.trim().length === 0 &&
+            this.state.cAddressError.trim().length === 0 && this.state.cTownError.trim().length === 0 && this.state.cLandmarkError.trim().length === 0;
+    }
+
+    canBeSubmitted() {
+        return this.errorCheck() && this.formFilledCheck();
+    }
 
     test = () => {
         this.setState({
@@ -238,6 +290,8 @@ class CartPage extends React.Component {
                                                    value={this.state.cAddress}
                                                    size="small"
                                                    disabled={this.state.isTest}
+                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z0-9]{1,}[ ]*[A-Za-z0-9]*$", "Address cannot be empty")}
+                                                   error={this.state.cAddressError.trim().length !== 0}
                                                    helperText={this.state.cAddressError}
                                                    rows={3} variant="outlined" fullWidth required/>
                                     </Grid>
@@ -250,6 +304,8 @@ class CartPage extends React.Component {
                                                    onChange={this.handleChange}
                                                    value={this.state.cTown}
                                                    size="small"
+                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z]+[ ]*[A-Za-z]{2,}$", "Please enter minimum 3 character")}
+                                                   error={this.state.cTownError.trim().length !== 0}
                                                    helperText={this.state.cTownError}
                                                    fullWidth required/>
                                     </Grid>
@@ -262,6 +318,8 @@ class CartPage extends React.Component {
                                                    disabled={this.state.isTest}
                                                    onChange={this.handleChange}
                                                    size="small"
+                                                   onBlur={textEvent => this.validation(textEvent, "^[0-9]{6}$", "Please enter valid pincode")}
+                                                   error={this.state.cPinError.trim().length !== 0}
                                                    helperText={this.state.cPinError}
                                                    fullWidth required/>
                                     </Grid>
@@ -274,6 +332,8 @@ class CartPage extends React.Component {
                                                    disabled={this.state.isTest}
                                                    onChange={this.handleChange}
                                                    size="small"
+                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z]+[ ]*[A-Za-z]{2,}$", "Please enter minimum 3 character")}
+                                                   error={this.state.cLocalityError.trim().length !== 0}
                                                    helperText={this.state.cLocalityError}
                                                    fullWidth required/>
                                     </Grid>
@@ -286,6 +346,8 @@ class CartPage extends React.Component {
                                                    onChange={this.handleChange}
                                                    value={this.state.cLandmark}
                                                    size="small"
+                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z]+[ ]*[A-Za-z]{2,}$", "Please enter minimum 3 character")}
+                                                   error={this.state.cLandmarkError.trim().length !== 0}
                                                    helperText={this.state.cLandmarkError}
                                                    fullWidth required/>
                                     </Grid>
@@ -313,6 +375,39 @@ class CartPage extends React.Component {
                                             </RadioGroup>
                                         </FormControl>
                                     </Grid>
+                                </Grid>
+                                <Grid item xs={12} sm={12} md={12}>
+                                    <Button
+                                        variant="outlined"
+                                        size="large"
+                                        color="inherit"
+                                        disabled={!this.canBeSubmitted()}
+                                        onClick={this.handleButtonClick3('panel3')}
+                                        style=
+                                            {this.canBeSubmitted() === false ? {
+                                                fontSize: "14px",
+                                                visibility: "visible",
+                                                marginBottom: "20px",
+                                                marginRight: "20px",
+                                                float: 'right',
+                                                marginTop: "2%",
+                                                background: "#E0E0E0",
+                                                color: "Black",
+                                                border: "none"
+                                            } : (this.state.isPanelOpen2 === false ? {
+                                                width: "136",
+                                                fontSize: "14px",
+                                                visibility: "visible",
+                                                background: "#b90f4b",
+                                                marginBottom: "20px",
+                                                marginRight: "20px",
+                                                float: 'right',
+                                                color: "white",
+                                                marginTop: "2%",
+                                            } : {visibility: "hidden"})}
+                                    >
+                                        CONTINUE
+                                    </Button>
                                 </Grid>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
