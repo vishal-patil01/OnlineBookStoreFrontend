@@ -16,12 +16,16 @@ import FormControl from "@material-ui/core/FormControl";
 import {get} from "../../services/HttpService";
 import NavigationBar from "../utils/NavigationBar";
 import "../../css/CartPage.css";
+import OrderSummary from "./OrderSummary";
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import CartService from "../../services/CartService";
 import {withRouter} from 'react-router';
 import Link from "@material-ui/core/Link";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import CustomerService from "../../services/CustomerService";
+import OrderService from "../../services/OrderService";
+import UserService from "../../services/UserService";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import Loader from "react-loader-spinner";
@@ -64,18 +68,63 @@ class CartPage extends React.Component {
         };
     }
 
+    handleCheckout = () => {
+        this.setState({
+            showProgress: true
+        });
+        const customer = {
+            customerPinCode: this.state.cPin,
+            customerLocality: this.state.cLocality,
+            customerAddress: this.state.cAddress,
+            customerTown: this.state.cTown,
+            customerLandmark: this.state.cLandmark,
+            customerAddressType: this.state.type,
+        };
+
+        console.log("customer ", customer);
+        new CustomerService().addCustomer(customer).then((response) => {
+            console.log(response);
+            if (response.status === 200) {
+                new OrderService().placeOrder(this.state.totalPrice).then((response) => {
+                        console.log("order", this.state.totalPrice);
+                        console.log(response);
+                        this.setState({
+                            orderId: response.data.data,
+                            showDialog: false,
+                        }, () => this.props.history.push({
+                            pathname: '/order/successful',
+                            state: {orderId: response.data.data}
+                        }));
+                    }
+                )
+            }
+        });
+    };
+
     handleChange = ({target}) => {
         this.setState({
             [target.id]: target.value,
         });
     };
 
-
     handleButtonClick2 = panel => (event, expanded2) => {
         this.setState({
             expanded2: panel,
             isPanelOpen1: true,
         });
+    };
+
+    handleButtonClick3 = panel => (event, expanded3) => {
+        if (this.canBeSubmitted()) {
+            this.setState({
+                expanded3: panel,
+                isPanelOpen2: true,
+                isValid: true,
+                isTest: true,
+            }, () => this.getBooksAddedToCart());
+
+        }
+        console.log(this.state.isTest)
     };
 
     validation = (event, pattern, message) => {
@@ -114,8 +163,24 @@ class CartPage extends React.Component {
             .catch(error => this.setState({error, isLoading: false}));
     };
 
+    getUserDetails = () => {
+        new UserService().getUserDetails().then(response => {
+            console.log("user fetch");
+            console.log(response);
+            if (response.data.statusCode === 200) {
+                this.setState({
+                    cName: response.data.data.fullName,
+                    cPhone: response.data.data.phoneNo,
+                })
+            }
+        })
+    }
+
+
     componentDidMount() {
         this.getBooksAddedToCart();
+        this.getUserDetails();
+        this.fetchCustomerDetails();
         window.addEventListener("scroll", () => {
             const isTop = window.scrollY < 100;
             console.log(isTop);
@@ -128,19 +193,12 @@ class CartPage extends React.Component {
         });
     };
 
-    formFilledCheck() {
-        return this.state.cPin.trim().length > 0 && this.state.cLocality.trim().length > 0 &&
-            this.state.cAddress.trim().length > 0 && this.state.cTown.trim().length > 0 && this.state.cLandmark.trim().length > 0 && this.state.type !== "";
-    }
 
     errorCheck() {
         return this.state.cPinError.trim().length === 0 && this.state.cLocalityError.trim().length === 0 &&
             this.state.cAddressError.trim().length === 0 && this.state.cTownError.trim().length === 0 && this.state.cLandmarkError.trim().length === 0;
     }
 
-    canBeSubmitted() {
-        return this.errorCheck() && this.formFilledCheck();
-    }
 
     test = () => {
         this.setState({
@@ -182,7 +240,7 @@ class CartPage extends React.Component {
                                 onClose={this.state.showProgress}
                                 aria-labelledby="customized-dialog-title"
                                 open={this.state.showProgress}>
-                            <DialogContent>
+                            <DialogContent >
                                 <div className="loaderDialog">
                                     <Loader
                                         type="ThreeDots"
@@ -257,6 +315,16 @@ class CartPage extends React.Component {
                                 >Customer Details</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails style={{display: "flex", flexDirection: "column"}}>
+                                {this.state.isPanelOpen2 === true ?
+                                    <Typography component="subtitle1"
+                                                variant="subtitle1"
+                                                id="editButton"
+                                    >
+                                        <Button size="small" onClick={this.handleEdit}>
+                                            Edit
+                                        </Button>
+                                    </Typography> : null
+                                }
                                 <Grid container spacing={1} alignItems="center" style={{width: "70%"}}>
                                     <Grid item xs={12} sm={6} md={6}>
                                         <ThemeProvider theme={theme}>

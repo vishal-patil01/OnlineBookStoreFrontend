@@ -6,7 +6,6 @@ export default class CartService {
         return (await post(cart, `cart`));
     }
 
-
     deleteCart(id) {
         return (deleteData(`cart/${id}`))
     }

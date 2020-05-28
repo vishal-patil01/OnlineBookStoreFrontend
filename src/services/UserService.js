@@ -1,4 +1,4 @@
-import {post, update} from "./HttpService";
+import {get, post, update} from "./HttpService";
 
 export default class AdminService {
 
@@ -10,6 +10,10 @@ export default class AdminService {
         return (post(formData, 'user/login'))
     }
 
+    getUserDetails() {
+        return (get('user/details'))
+    }
+
     sendEmailWithTokenLink(email) {
         return (post(email, `user/resend/email/${email}`))
     }
@@ -19,6 +23,6 @@ export default class AdminService {
     }
 
     setNewPassword(password, token) {
-        return (post(password, `user/reset/password/${token}`))
+        return (post(password,`user/reset/password/${token}`))
     }
 }
