@@ -107,6 +107,14 @@ class CartPage extends React.Component {
         });
     };
 
+    handleEdit = () => {
+        this.setState({
+            isTest: false,
+            isPanelOpen2: false,
+            expanded3: ""
+        });
+    };
+
     handleButtonClick2 = panel => (event, expanded2) => {
         this.setState({
             expanded2: panel,
@@ -353,6 +361,16 @@ class CartPage extends React.Component {
                                 >Customer Details</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails style={{display: "flex", flexDirection: "column"}}>
+                                {this.state.isPanelOpen2 === true ?
+                                    <Typography component="subtitle1"
+                                                variant="subtitle1"
+                                                id="editButton"
+                                    >
+                                        <Button size="small" onClick={this.handleEdit}>
+                                            Edit
+                                        </Button>
+                                    </Typography> : null
+                                }
                                 <Grid container spacing={1} alignItems="center" style={{width: "70%"}}>
                                     <Grid item xs={12} sm={6} md={6}>
                                         <ThemeProvider theme={theme}>
