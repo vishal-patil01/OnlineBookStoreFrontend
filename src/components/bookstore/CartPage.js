@@ -176,6 +176,32 @@ class CartPage extends React.Component {
         })
     }
 
+    fetchCustomerDetails = () => {
+        new CustomerService().getCustomerDetails(this.state.type).then(response => {
+            console.log("Customer Details fetch");
+            console.log(response);
+            if (response.data.statusCode === 200) {
+                this.setState({
+                        cPin: response.data.data.customerPinCode.toString(),
+                        cLocality: response.data.data.customerLocality,
+                        cAddress: response.data.data.customerAddress,
+                        cTown: response.data.data.customerTown,
+                        cLandmark: response.data.data.customerLandmark,
+                        type: response.data.data.customerAddressType,
+                    }
+                );
+            } else {
+                this.setState({
+                        cPin: "",
+                        cLocality: "",
+                        cAddress: "",
+                        cTown: "",
+                        cLandmark: "",
+                    }
+                );
+            }
+        });
+    }
 
     componentDidMount() {
         this.getBooksAddedToCart();
@@ -193,13 +219,25 @@ class CartPage extends React.Component {
         });
     };
 
+    formFilledCheck() {
+        return this.state.cPin.trim().length > 0 && this.state.cLocality.trim().length > 0 &&
+            this.state.cAddress.trim().length > 0 && this.state.cTown.trim().length > 0 && this.state.cLandmark.trim().length > 0 && this.state.type !== "";
+    }
 
     errorCheck() {
         return this.state.cPinError.trim().length === 0 && this.state.cLocalityError.trim().length === 0 &&
             this.state.cAddressError.trim().length === 0 && this.state.cTownError.trim().length === 0 && this.state.cLandmarkError.trim().length === 0;
     }
 
+    canBeSubmitted() {
+        return this.errorCheck() && this.formFilledCheck();
+    }
 
+    getTotalPrice = (qValue, cartId) => {
+        new CartService().updateCart(cartId, qValue).then((response) => {
+            console.log(response);
+        })
+    }
     test = () => {
         this.setState({
             totalPrice: this.state.AddedToCart.reduce(function (tot, arr) {
@@ -315,16 +353,6 @@ class CartPage extends React.Component {
                                 >Customer Details</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails style={{display: "flex", flexDirection: "column"}}>
-                                {this.state.isPanelOpen2 === true ?
-                                    <Typography component="subtitle1"
-                                                variant="subtitle1"
-                                                id="editButton"
-                                    >
-                                        <Button size="small" onClick={this.handleEdit}>
-                                            Edit
-                                        </Button>
-                                    </Typography> : null
-                                }
                                 <Grid container spacing={1} alignItems="center" style={{width: "70%"}}>
                                     <Grid item xs={12} sm={6} md={6}>
                                         <ThemeProvider theme={theme}>
