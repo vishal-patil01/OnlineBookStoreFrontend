@@ -280,6 +280,30 @@ class CartPage extends React.Component {
                         <Typography color="textPrimary">Cart</Typography>
                     </Breadcrumbs>
                     <div id="cartContainer">
+                        {this.state.showProgress &&
+                        <Dialog className="processingDialog"
+                                fullWidth={true}
+                                onClose={this.state.showProgress}
+                                aria-labelledby="customized-dialog-title"
+                                open={this.state.showProgress}>
+                            <DialogContent >
+                                <div className="loaderDialog">
+                                    <Loader
+                                        type="ThreeDots"
+                                        color="#fff"
+                                        height={35}
+                                        width={200}
+                                        timeout={50000}
+                                    />
+                                </div>
+                                <div>
+                                    <Typography className="loaderText" variant="h6">
+                                        <b>Wait while we are processing your request...</b>
+                                    </Typography>
+                                </div>
+                            </DialogContent>
+                        </Dialog>
+                        }
                         <ExpansionPanel expanded id="expansionPanel">
                             <Typography component="h5" variant="h5" id="myCartHeader">My Cart
                                 ({count})</Typography>
