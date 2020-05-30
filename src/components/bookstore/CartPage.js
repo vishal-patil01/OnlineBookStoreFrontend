@@ -280,30 +280,6 @@ class CartPage extends React.Component {
                         <Typography color="textPrimary">Cart</Typography>
                     </Breadcrumbs>
                     <div id="cartContainer">
-                        {this.state.showProgress &&
-                        <Dialog className="processingDialog"
-                                fullWidth={true}
-                                onClose={this.state.showProgress}
-                                aria-labelledby="customized-dialog-title"
-                                open={this.state.showProgress}>
-                            <DialogContent >
-                                <div className="loaderDialog">
-                                    <Loader
-                                        type="ThreeDots"
-                                        color="#fff"
-                                        height={35}
-                                        width={200}
-                                        timeout={50000}
-                                    />
-                                </div>
-                                <div>
-                                    <Typography className="loaderText" variant="h6">
-                                        <b>Wait while we are processing your request...</b>
-                                    </Typography>
-                                </div>
-                            </DialogContent>
-                        </Dialog>
-                        }
                         <ExpansionPanel expanded id="expansionPanel">
                             <Typography component="h5" variant="h5" id="myCartHeader">My Cart
                                 ({count})</Typography>
@@ -524,6 +500,47 @@ class CartPage extends React.Component {
                                     </Button>
                                 </Grid>
                             </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <ExpansionPanel expanded={expanded3 === 'panel3'} id="expansionPanel"
+                                        style={{marginTop: "15px"}}>
+                            <Typography component="h5" variant="h5" id="orderSummary"
+                            >Order Summary</Typography>
+                            <div container alignItems="center" id={count > 2 ? "orderScroll" : ""}>
+                                {AddedToCart.map((id) =>
+                                    <div>
+                                        <Grid key={id.id} item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                            <OrderSummary
+                                                bookDetails={id}
+                                                quantity={id.quantity}
+                                            />
+                                            <Divider/>
+                                        </Grid>
+                                    </div>
+                                )}
+                            </div>
+                            <div id="lastCart">
+                                <div id="totalPrice">Total Price : Rs. {this.state.totalPrice}</div>
+                                <Grid item xs={12} sm={12} md={12}>
+                                    <Button
+                                        variant="outlined"
+                                        size="large"
+                                        color="inherit"
+                                        style={{
+                                            width: "136",
+                                            fontSize: "14px",
+                                            visibility: "visible",
+                                            background: "#b90f4b",
+                                            marginBottom: "20px",
+                                            marginRight: "20px",
+                                            float: 'right',
+                                            color: "white",
+                                            marginTop: "2%"
+                                        }}
+                                        onClick={this.handleCheckout}>
+                                        CHECKOUT
+                                    </Button>
+                                </Grid>
+                            </div>
                         </ExpansionPanel>
                     </div>
                 </Grid>

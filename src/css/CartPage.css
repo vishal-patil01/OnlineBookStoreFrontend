@@ -165,16 +165,3 @@
     }
 }
 
-@media only screen
-and (width: 768px) {
-    .address {
-        width: 110% !important;
-    }
-}
-
-@media only screen
-and (width: 1024px) {
-    .address {
-        width: 105% !important;
-    }
-}
