@@ -73,3 +73,204 @@ th {
     font-weight: bold;
     font-size: 25px;
 }
+
+@media (width: 360px) {
+    #orderContainer{
+        width: 300px;
+        margin-left: 15%;
+        /*margin-top: 10%;*/
+    }
+
+    #orderImage {
+        margin: 60px auto 15px 80px;
+        width: 20%;
+    }
+
+    .orderMessage{
+        font-size: 10px;
+        width: 50%;
+        margin-left: 25%;
+    }
+
+    .orderTable{
+        width: 1%;
+        margin-left: 10%;
+    }
+
+    td{
+        /*padding: 2px 8px;*/
+        max-width: 110px;
+        width: 10px;
+    }
+
+    .orderTable{
+        margin-left: 7%;
+    }
+
+    .orderButton{
+        width: 150px;
+        margin-right: 1%;
+    }
+
+    .orderLabel{
+        top: 20%;
+        left: 49%;
+        font-size: 11px;
+    }
+}
+
+@media (width: 411px), (width: 414px) {
+    #orderContainer{
+        width: 300px;
+        margin-left: 20%;
+        /*margin-top: 20%;*/
+    }
+
+    #orderImage {
+        margin: 70px auto 15px 80px;
+        width: 20%;
+    }
+
+    .orderMessage{
+        font-size: 11px;
+        width: 45%;
+        margin-left: 28%;
+    }
+
+    .orderTable{
+        width: 1%;
+        margin-left: 8%;
+    }
+
+    td{
+        /*padding: 2px 8px;*/
+        max-width: 125px;
+        width: 10px;
+    }
+
+    .orderButton{
+        width: 150px;
+        margin-right: 1%;
+    }
+
+    .orderLabel{
+        top: 19%;
+        left: 49%;
+        font-size: 11px;
+    }
+}
+
+@media (width: 320px) {
+    #orderContainer{
+        width: 100px;
+        /*height: auto;*/
+        margin-left: 15%;
+        /*margin-top: 15%;*/
+    }
+
+    #orderImage {
+        margin: 70px auto 15px 75px;
+        width: 80%;
+    }
+
+    .orderMessage{
+        font-size: 11px;
+        width: 45%;
+        margin-left: 30%;
+    }
+
+    .orderTable{
+        width: 1%;
+        margin-left: 8%;
+    }
+
+    td{
+        /*padding: 2px 8px;*/
+        max-width: 90px;
+        width: 10px;
+    }
+
+    .orderButton{
+        width: 150px;
+        margin-right: 1%;
+    }
+
+    .orderLabel{
+        top: 24%;
+        left: 52%;
+        font-size: 9px;
+    }
+}
+
+@media (width: 375px) {
+    #orderContainer{
+        width: 200px;
+        margin-left: 20%;
+        /*margin-top: 5%;*/
+    }
+
+    #orderImage {
+        margin: 80px auto 15px 80px;
+        width: 30%;
+    }
+
+    .orderMessage{
+        font-size: 11px;
+        width: 45%;
+        margin-left: 30%;
+    }
+
+    .orderTable{
+        width: 1%;
+        margin-left: 8%;
+    }
+
+    td{
+        /*padding: 2px 8px;*/
+        max-width: 115px;
+        width: 10px;
+    }
+
+    .orderButton{
+        width: 150px;
+        margin-right: 1%;
+    }
+
+    .orderLabel{
+        top: 22%;
+        left: 52%;
+        font-size: 11px;
+    }
+}
+
+@media (width: 768px) {
+    .orderLabel{
+        top: 16%;
+        left: 50%;
+        font-size: 15px;
+    }
+}
+
+@media (width: 1024px) {
+    .orderLabel{
+        top: 14.5%;
+        left: 50%;
+        font-size: 21px;
+    }
+}
+
+@media (width: 375px) and (height: 812px){
+    .orderLabel{
+        top: 18%;
+        left: 52%;
+        font-size: 11px;
+    }
+}
+
+@media (width: 411px) and (height: 823px){
+    .orderLabel{
+        top: 17%;
+        left: 50%;
+        font-size: 12px;
+    }
+}
