@@ -1,0 +1,75 @@
+.orderTable {
+    border-collapse: collapse;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    margin-top: 30px;
+    height: 80px;
+}
+
+th, td {
+    border: 1px solid black;
+    font-size: 13px;
+    padding: 5px;
+
+}
+
+td {
+    padding: 5px 15px;
+    white-space: nowrap;
+    /*max-width: 200px;*/
+    /*width: 100px;*/
+    max-width: 200px;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+th {
+    background-color: #dcdcdc;
+    font-weight: normal;
+}
+
+#orderImage {
+    margin: 70px auto 15px auto;
+    width: 12%;
+}
+
+.orderMessage {
+    font-size: 18px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.orderButton {
+    outline: none;
+    cursor: pointer;
+    margin-top: 20px;
+    height: 35px;
+    width: 200px;
+    background-color: #b90f4b;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 0.3%;
+}
+
+.orderLabel {
+    position: absolute;
+    top: 37%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22%;
+    width: 60%;
+    font-weight: bold;
+    font-size: 25px;
+}
