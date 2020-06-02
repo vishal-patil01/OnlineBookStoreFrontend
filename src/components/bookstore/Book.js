@@ -14,6 +14,7 @@ import {withRouter} from 'react-router';
 import IconButton from "@material-ui/core/IconButton";
 import {Favorite} from "@material-ui/icons";
 import DialogBoxPage from "../utils/CustomDialogBox";
+import WishListService from "../../services/WishListService";
 import CustomSnackBar from "../utils/CustomSnackBar";
 
 class Book extends React.Component {
@@ -25,6 +26,7 @@ class Book extends React.Component {
             counter: 0,
 
             isDialogBoxVisible: false,
+            isAddToWishList: false,
 
             alertShow: false,
             alertResponse: "",
@@ -58,6 +60,35 @@ class Book extends React.Component {
         });
     };
 
+    handleWishListOperations = () => {
+        this.props.wishList.includes(this.props.bookId.isbnNumber) ?
+            new WishListService().removeFromWishList(this.props.bookId.id).then((response) => {
+                console.log("wishList remove");
+                console.log(response);
+                this.props.updateWishList()
+                if (response.data.statusCode === 200) {
+                    this.setState({
+                        severity: "success",
+                        alertShow: true,
+                        alertResponse: response.data.message
+                    })
+                }
+
+            }) :
+            new WishListService().addToWishList(this.props.bookId.id).then((response) => {
+                console.log("wishList add");
+                console.log(response);
+                if (response.data.statusCode === 200) {
+                    this.props.updateWishList(true)
+                    this.setState({
+                        severity: "success",
+                        alertShow: true,
+                        alertResponse: response.data.message
+                    })
+                }
+            })
+    }
+
     dialogBoxOpen = () => {
         if (localStorage.getItem('token') === null)
             this.setState({
@@ -72,6 +103,13 @@ class Book extends React.Component {
     };
     closeAlertBox = () => {
         this.setState({alertShow: false});
+    };
+
+    updateBook = () => {
+        this.props.history.push({
+            pathname: '/update',
+            state: {bookData: this.props.bookId}
+        })
     };
 
     render() {
@@ -127,8 +165,10 @@ class Book extends React.Component {
                     <IconButton className="wishlist"
                                 onClick={this.dialogBoxOpen}
                                 color="inherit">
-                        <Favorite color="primary"/>
-
+                        {this.props.wishList.includes(this.props.bookId.isbnNumber) ?
+                            <Favorite color="primary" onClick={this.handleWishListOperations}/> :
+                            <Favorite color="disabled" onClick={this.handleWishListOperations}/>
+                        }
                     </IconButton>
                     <p className="bookAuthorName">by {this.props.bookId.authorName}</p>
                     <p className="bookPrice">Rs. {this.props.bookId.bookPrice}</p>
