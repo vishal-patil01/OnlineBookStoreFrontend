@@ -1,4 +1,4 @@
-import {deleteData, post} from "./HttpService";
+import {deleteData, get, post} from "./HttpService";
 
 export default class WishListService {
 
@@ -8,5 +8,9 @@ export default class WishListService {
 
     removeFromWishList(bookId) {
         return (deleteData(`wishlist/${bookId}`))
+    }
+
+    fetchWishList() {
+        return (get(`wishlist/`));
     }
 }
