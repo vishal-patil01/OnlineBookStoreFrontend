@@ -9,9 +9,6 @@ import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
 import BookStoreService from "../../services/BookStoreService";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
-import CartService from "../../services/CartService";
-import Loader from "../utils/Loader";
-import WishListService from "../../services/WishListService";
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -37,15 +34,15 @@ export default class HomePage extends Component {
             .then((response) => {
                     console.log("fetchbook")
                     console.log(response);
-                        response.data.statusCode === 208 ?
-                            this.setState({
-                                bookList: [],
-                                count: 0,
-                            }) :
-                            this.setState({
-                                bookList: response.data.data.content,
-                                count: response.data.data.totalElements,
-                            });
+                    response.data.statusCode === 208 ?
+                        this.setState({
+                            bookList: [],
+                            count: 0,
+                        }) :
+                        this.setState({
+                            bookList: response.data.data.content,
+                            count: response.data.data.totalElements,
+                        });
                 }
             )
             .catch((error) => {
@@ -117,15 +114,14 @@ export default class HomePage extends Component {
                             }
                         </ThemeProvider>
                     </div>
-                    {this.state.loaded === true && this.state.count === 0 &&
+
                     <div className="resultNotFound">
                         <img src={require(`../../assets/uploads/noResult.png`)} alt="No Result Found"
                              width="300px" height="200px"/>
                         <h2>Sorry, no results found!</h2>
-                    </div>}
+                    </div>
 
-                    {this.state.loaded === false && <Loader/>}
-                    {this.state.loaded === true && this.state.count !== 0 &&
+
                     <Grid container spacing={4}>
                         {this.state.bookList.map(id =>
                             <Grid alignItems="center" key={id.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
@@ -139,7 +135,7 @@ export default class HomePage extends Component {
                         )}
 
                     </Grid>
-                    }
+
                     <br/>
                 </Container>
                 <Grid container justify={"center"}>

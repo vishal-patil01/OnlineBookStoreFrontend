@@ -6,6 +6,10 @@ export default class WishListService {
         return (await post(bookId, `wishlist/${bookId}`));
     }
 
+    removeFromWishList(bookId) {
+        return (deleteData(`wishlist/${bookId}`))
+    }
+
     fetchWishList() {
         return (get(`wishlist/`));
     }

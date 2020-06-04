@@ -61,6 +61,20 @@ class Book extends React.Component {
     };
 
     handleWishListOperations = () => {
+        this.props.wishList.includes(this.props.bookId.isbnNumber) ?
+            new WishListService().removeFromWishList(this.props.bookId.id).then((response) => {
+                console.log("wishList remove");
+                console.log(response);
+                this.props.updateWishList()
+                if (response.data.statusCode === 200) {
+                    this.setState({
+                        severity: "success",
+                        alertShow: true,
+                        alertResponse: response.data.message
+                    })
+                }
+
+            }) :
             new WishListService().addToWishList(this.props.bookId.id).then((response) => {
                 console.log("wishList add");
                 console.log(response);
