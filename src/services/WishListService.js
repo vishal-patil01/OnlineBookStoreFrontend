@@ -10,7 +10,4 @@ export default class WishListService {
         return (deleteData(`wishlist/${bookId}`))
     }
 
-    fetchWishList() {
-        return (get(`wishlist/`));
-    }
 }
