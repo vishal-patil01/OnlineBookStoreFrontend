@@ -51,6 +51,22 @@ export default class HomePage extends Component {
         );
     };
 
+    fetchWishList = () => {
+        new WishListService().fetchWishList().then((response) => {
+                console.log("wishList");
+                console.log(response);
+                    (response.data.statusCode === 200) ?
+                        this.setState({
+                            wishList: response.data.data.map(value => value.book.isbnNumber).toString()
+                        })
+                        :
+                        this.setState({
+                            wishList: ""
+                        });
+                }
+        );
+    };
+
     getBooks = () => {
         new BookStoreService().fetchBooks(this.state.pageValue, this.state.searchText, this.state.selectValue)
             .then((response) => {

@@ -23,8 +23,11 @@
 @media only screen and (max-width: 415px){
     #myOrderContainer {
         width: 95%;
+        /*height: auto;*/
         margin-left: 3%;
+        /*text-align: left;*/
         font-size: 15px;
+        /*font-weight: bold;*/
         overflow-x: hidden;
     }
 
@@ -32,5 +35,9 @@
         margin-left: 10px;
         font-size: 30px;
         overflow-x: hidden;
+        /*margin-bottom: 0;*/
+        /*margin-top: 10px;*/
+        /*display: flex;*/
+        /*padding-bottom: 0;*/
     }
 }

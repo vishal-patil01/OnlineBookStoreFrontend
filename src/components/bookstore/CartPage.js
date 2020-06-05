@@ -535,6 +535,11 @@ class CartPage extends React.Component {
                                         <Grid key={id.id} item xs={12} sm={12} md={12} lg={12} xl={12}>
                                             <OrderSummary
                                                 bookDetails={id}
+                                                /*key={id.book.id}
+                                                bookName={id.book.bookName}
+                                                image={id.book.bookImageSrc}
+                                                authorName={id.book.authorName}*/
+                                                /*bookPrice={id.book.bookPrice * id.quantity}*/
                                                 quantity={id.quantity}
                                             />
                                             <Divider/>

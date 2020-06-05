@@ -32,4 +32,14 @@ function update(url) {
     })
 }
 
-export {post, get, update}
+function deleteData(url) {
+    return Axios({
+        method: 'delete',
+        url: `${BASEURL.appUrl}${url}`,
+        headers: {
+            'token': localStorage.getItem('token')
+        }
+    })
+}
+
+export {post, get, update, deleteData}
