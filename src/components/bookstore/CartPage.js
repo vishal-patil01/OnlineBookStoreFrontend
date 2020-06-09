@@ -30,6 +30,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import Loader from "react-loader-spinner";
 import DialogBoxPage from "../utils/CustomDialogBox";
+import Signup from "../user/Signup";
 
 
 class CartPage extends React.Component {
@@ -282,7 +283,7 @@ class CartPage extends React.Component {
                         </Link>
                         <Typography color="textPrimary">Cart</Typography>
                     </Breadcrumbs>
-                    <DialogBoxPage isDialogBoxVisible={this.state.isDialogBoxVisible}/>
+                    <DialogBoxPage component={<Signup/>} isDialogBoxVisible={this.state.isDialogBoxVisible}/>
 
                     <div id="cartContainer">
                         {this.state.showProgress &&

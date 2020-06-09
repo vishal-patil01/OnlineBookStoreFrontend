@@ -7,12 +7,13 @@ import Signin from "./Signin";
 import UserService from "../../services/UserService";
 import Button from "@material-ui/core/Button";
 import CustomSnackBar from "../utils/CustomSnackBar";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Loader from "react-loader-spinner";
 import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
+import {IconButton, InputAdornment} from "@material-ui/core";
 
 class Signup extends Component {
 
@@ -181,7 +182,8 @@ class Signup extends Component {
                 <div className="hero" id="mainContainer">
                     <Card className="formBox"
                           style={{marginTop: '6%', borderRadius: "5%", backgroundColor: " #f2f2f2"}}>
-                        <img alt="BookStore Login" src={require('../../assets/images/Login.png')} className="loginImage"/>
+                        <img alt="BookStore Login" src={require('../../assets/images/Login.png')}
+                             className="loginImage"/>
                         <div style={{marginLeft: "-260px", marginTop: "3%"}}>
                             <h3 style={{marginLeft: '1%', fontWeight: "bold"}}>
                                 e BOOKSTORE
@@ -238,13 +240,21 @@ class Signup extends Component {
                                                            onBlur={textEvent => this.validation(textEvent, "^((?=[^@|#|&|%|$]*[@|&|#|%|$][^@|#|&|%|$]*$)*(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9#@$?]{8,})$", "Please enter valid password")}
                                                            id="password" label="Password"
                                                            type={this.state.passwordState} variant="outlined"
-                                                           fullWidth required autoComplete="off" name="password"/>
-                                                {this.state.isVisible === false ?
-                                                    < VisibilityIcon onClick={this.handlePasswordVisibility}
-                                                                     className="passwordVisibility"/> :
-                                                    <VisibilityOffIcon onClick={this.handlePasswordVisibility}
-                                                                       className="passwordVisibility"/>
-                                                }
+                                                           fullWidth required autoComplete="off" name="password"
+                                                           InputProps={{ // <-- This is where the toggle button is added.
+                                                               endAdornment: (
+                                                                   <InputAdornment position="end">
+                                                                       <IconButton
+                                                                           aria-label="toggle password visibility"
+                                                                           onClick={this.handlePasswordVisibility}
+                                                                       >
+                                                                           {this.props.isVisible ? <Visibility/> :
+                                                                               <VisibilityOff/>}
+                                                                       </IconButton>
+                                                                   </InputAdornment>
+                                                               )
+                                                           }}
+                                                />
                                             </div>
                                             <div className="group1">
                                                 <TextField error={this.state.phoneNumberError.trim().length !== 0}

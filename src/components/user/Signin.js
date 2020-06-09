@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import TextField from "@material-ui/core/TextField";
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import UserService from "../../services/UserService";
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from "@material-ui/core/Button";
 import {withRouter} from 'react-router';
 import {Link} from "react-router-dom";
+import AdminService from "../../services/AdminService";
+import {IconButton, InputAdornment} from "@material-ui/core";
 
 class Signin extends Component {
 
@@ -47,7 +49,8 @@ class Signin extends Component {
             password: this.state.password,
         };
         console.log("User ", user);
-        new UserService().loginUser(user).then((response) => {
+        new UserService().loginUser(user)
+       .then((response) => {
             console.log(response);
             if (response.status === 200) {
                 this.props.showAlert("success", true, response.data.message)
@@ -66,7 +69,7 @@ class Signin extends Component {
             email: "",
             password: "",
         });
-        window.location.href =this.props.location.pathname.toString();
+        window.location.href = this.props.location.pathname.toString();
     };
 
     render() {
@@ -102,19 +105,25 @@ class Signin extends Component {
                                        onBlur={textEvent => this.validation(textEvent, "^((?=[^@|#|&|%|$]*[@|&|#|%|$][^@|#|&|%|$]*$)*(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9#@$?]{8,})$", "Please enter valid password")}
                                        id="password" label="Password"
                                        type="password" variant="outlined"
-                                       fullWidth required autoComplete="off" name="password"/>
-                            {this.props.isVisible === false ?
-                                < VisibilityIcon onClick={this.props.handlePasswordVisibility}
-                                                 className="passwordVisibility"/> :
-                                <VisibilityOffIcon onClick={this.props.handlePasswordVisibility}
-                                                   className="passwordVisibility"/>
-                            }
+                                       fullWidth required autoComplete="off" name="password"
+                                       InputProps={{ // <-- This is where the toggle button is added.
+                                           endAdornment: (
+                                               <InputAdornment position="end">
+                                                   <IconButton
+                                                       aria-label="toggle password visibility"
+                                                       onClick={this.props.handlePasswordVisibility}
+                                                   >
+                                                       {this.props.isVisible ? <Visibility/> : <VisibilityOff/>}
+                                                   </IconButton>
+                                               </InputAdornment>
+                                           )
+                                       }}
+                            />
                         </div>
                         <div className="forgetPassword">
                             <Link to={'/forget/password'}>
                                 <p style={{margin: "20px"}}> Forget Password</p>
                             </Link>
-                            {/*<a href="/forget/password">Forgt Password?</a>*/}
                         </div>
                         <div className="group1">
                             <Button className="loginButton" variant="contained" onClick={this.handleSubmit}>Login
@@ -123,8 +132,7 @@ class Signin extends Component {
                     </div>
                 </ThemeProvider>
             </div>
-        )
-            ;
+        );
     }
 }
 

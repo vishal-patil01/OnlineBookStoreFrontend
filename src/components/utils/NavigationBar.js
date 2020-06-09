@@ -18,6 +18,7 @@ import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutline
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import DialogBoxPage from "./CustomDialogBox";
 import {withRouter} from "react-router";
+import Signup from "../user/Signup";
 
 
 class NavigationBar extends Component {
@@ -58,7 +59,7 @@ class NavigationBar extends Component {
         const isAdminPage = window.location.href.includes("admin");
         return (
             <AppBar id="App-header">
-                <DialogBoxPage isDialogBoxVisible={this.state.isDialogBoxVisible} close={this.handleClose}/>
+                <DialogBoxPage component={<Signup/>} isDialogBoxVisible={this.state.isDialogBoxVisible} close={this.handleClose}/>
                 <Toolbar id="toolbar">
                     <LocalLibraryIcon id="App-icon"/>
                     <Link style={{color: 'white', textDecoration: 'none'}} to={'/'}>

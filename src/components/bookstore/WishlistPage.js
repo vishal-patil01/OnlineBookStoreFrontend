@@ -8,6 +8,7 @@ import Link from "@material-ui/core/Link";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import WishListService from "../../services/WishListService";
 import DialogBoxPage from "../utils/CustomDialogBox";
+import Signup from "../user/Signup";
 
 class WishlistPage extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ class WishlistPage extends Component {
         return (
             <Fragment>
                 <NavigationBar/>
-                <DialogBoxPage isDialogBoxVisible={this.state.isDialogBoxVisible}/>
+                <DialogBoxPage component={<Signup/>} isDialogBoxVisible={this.state.isDialogBoxVisible}/>
                 <Grid container>
                     <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
                         <Link color="inherit" href="/">

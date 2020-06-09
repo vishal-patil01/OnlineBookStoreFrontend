@@ -1,0 +1,44 @@
+.adminLogin {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #B1B1B1;
+    width: 25%;
+    margin: 22vh auto;
+}
+
+.adminLabel {
+    color: #000;
+    margin-top: 10px;
+    font-size: 28px;
+    padding-bottom: 5px;
+    align-self: center;
+    text-transform: uppercase;
+    border-bottom: 5px solid;
+    border-color: #b90f4b;
+}
+
+.adminSignUp {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.loginButton {
+    width: 100%;
+    font-size: 18px !important;
+    background-color: #b90f4b !important;
+    color: white !important;
+}
+
+@media only screen and (max-width: 1024px) {
+    .adminLogin {
+        margin: 24vh auto;
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .adminLogin {
+        margin: 23vh auto;
+        width: 90%;
+    }
+}
