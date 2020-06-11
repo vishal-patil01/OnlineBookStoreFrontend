@@ -20,6 +20,11 @@
     margin-right: -195px !important;
     margin-top: -50px !important;
 }
+.hideWishList{
+    visibility: hidden;
+    margin-right: -195px !important;
+    margin-top: -50px !important;
+}
 
 .bookTitle {
     font-size: 13px;

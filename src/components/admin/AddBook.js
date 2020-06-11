@@ -16,6 +16,9 @@ import "../../css/NavigationBar.css"
 import AdminService from "../../services/AdminService";
 import CustomSnackBar from "../utils/CustomSnackBar";
 import {withRouter} from "react-router";
+import Link from "@material-ui/core/Link";
+import {Typography} from "@material-ui/core";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 
 class AddBook extends React.Component {
     constructor(props) {
@@ -152,7 +155,7 @@ class AddBook extends React.Component {
     };
 
     clearFieldsData = () => {
-        this.props.location.state !== undefined ? this.props.history.push('/admin/') :
+        window.location.href.includes("update") ? this.props.history.push('/admin/') :
             this.setState({
                 isbnNumber: "",
                 bookName: "",
@@ -200,6 +203,12 @@ class AddBook extends React.Component {
                                 alertResponse={this.state.alertResponse}
                                 closeAlertBox={this.closeAlertBox}/>
                 <NavigationBar/>
+                <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
+                    <Link color="inherit" href="/admin">
+                        Home
+                    </Link>
+                    <Typography color="textPrimary">{window.location.href.includes("add")?"AddBook":"UpdateBook"}</Typography>
+                </Breadcrumbs>
                 <Container className="container">
                     <Card className="card">
                         <CardContent>
@@ -338,7 +347,7 @@ class AddBook extends React.Component {
                                                 onClick={this.addBook}
                                                 disabled={!this.canBeSubmitted()}
                                         >
-                                            {this.props.location.state !== undefined ? "Update" : "Save"}
+                                            {window.location.href.includes("update") ? "Update" : "Save"}
                                         </Button>
                                         <Button className="btn"
                                                 variant="contained"
@@ -347,7 +356,7 @@ class AddBook extends React.Component {
                                                 startIcon={<CancelOutlinedIcon/>}
                                                 onClick={this.clearFieldsData}
                                         >
-                                            {this.props.location.state !== undefined ? "Cancel" : "Clear"}
+                                            {window.location.href.includes("update") ? "Cancel" : "Clear"}
                                         </Button>
                                     </div>
                                 </Grid>

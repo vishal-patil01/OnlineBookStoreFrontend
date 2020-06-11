@@ -57,31 +57,18 @@ class Signin extends Component {
                 this.props.showAlert("success", true, response.data.message)
                 localStorage.setItem('token', response.headers.authorization);
                 localStorage.setItem('userName', response.data.data);
-                (this.props.location.pathname === "admin/login" || this.props.location.pathname === "admin/login/" || this.props.location.pathname === "/admin/login") &&
+                (this.props.location.pathname === "admin/login" || this.props.location.pathname === "admin/login/" || this.props.location.pathname === "/admin/login") ?
                     this.props.history.push({
                         pathname: '/admin',
                         state: {authenticated: true}
-                    })
+                    }) :
+                 window.location.href="/";
+
             } else {
                 this.props.showAlert("error", true, response.data.message)
             }
         });
     }
-
-    clearFieldsData = (url) => {
-        alert(url)
-        this.setState({
-            email: "",
-            password: "",
-        })
-        alert(this.props.location.pathname)
-        // url === "admin/login" ?
-        //     this.props.history.push({
-        //         pathname: '/admin',
-        //         state: {authenticated: true}
-        //     }) : window.location.href = url
-
-    };
 
     render() {
         const theme = createMuiTheme({

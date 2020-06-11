@@ -1,7 +1,6 @@
 .container {
-    padding-top: 2% !important;
+    padding-top: 1% !important;
     justify-content: center;
-    margin-top: 5% !important;
 }
 
 .MuiGrid-spacing-xs-1 > .MuiGrid-item {
