@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import DialogContent from "@material-ui/core/DialogContent";
+import Signup from "../user/Signup";
 import Dialog from "@material-ui/core/Dialog";
 
 export default class CustomDialogBox extends Component {
@@ -14,7 +15,7 @@ export default class CustomDialogBox extends Component {
                 aria-labelledby="customized-dialog-title"
                 open={this.props.isDialogBoxVisible}>
                 <DialogContent className="dialogueContent">
-                    {this.props.component}
+                    <Signup/>
                 </DialogContent>
             </Dialog>
         );

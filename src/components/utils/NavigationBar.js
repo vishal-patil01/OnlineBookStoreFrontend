@@ -49,7 +49,7 @@ class NavigationBar extends Component {
         this.props.searchedText(searchText)
     };
 
-    logout() {
+    logout=()=> {
         localStorage.clear();
         window.location.href = '/';
     }
@@ -119,7 +119,7 @@ class NavigationBar extends Component {
                                             <div className="loginPopUp">
                                                 <h6>Welcome</h6>
                                                 <div style={{fontSize: '13px'}}>
-                                                    To access account and manage orders
+                                                    {this.props.location.pathname = "/" ? "To access account and manage orders" : "Welcome Back Admin"}
                                                 </div>
                                                 <Button className="loginSignUp" onClick={this.handleClickOpen}>
                                                     Login/SignUp
@@ -127,17 +127,17 @@ class NavigationBar extends Component {
                                             </div> :
                                             <div className="loginPopUp">
                                                 <p className="logoutTitle">Hello,{localStorage.getItem('userName')}</p>
-
-                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
+                                                {this.props.location.pathname = "/" && <IconButton style={{backgroundColor: "white"}} className="myOrder"
                                                             color="inherit">
                                                     <ShoppingBasketOutlinedIcon fontSize="small"/> <b
                                                     id="listTitle"><Link to="/orders">My Orders</Link></b>
-                                                </IconButton>
-                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
+                                                </IconButton>}
+                                                {this.props.location.pathname = "/" && <IconButton style={{backgroundColor: "white"}} className="myOrder"
                                                             color="inherit">
                                                     <FavoriteBorderOutlinedIcon fontSize="small"/> <b
                                                     id="listTitle"><Link to="/wishlist">Wishlist</Link></b>
                                                 </IconButton>
+                                                }
                                                 <Button id="logout" onClick={this.logout}>
                                                     Logout
                                                 </Button>

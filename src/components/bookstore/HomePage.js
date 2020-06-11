@@ -99,7 +99,11 @@ export default class HomePage extends Component {
     }
 
     componentDidMount() {
-        this.getBooks();
+        if (this.props.location.pathname === "/admin" || this.props.location.pathname === "/admin/" ) {
+            (this.props.location.state === undefined || localStorage.getItem('token') === null) ?
+                window.location.href = "/admin/login" : this.getBooks();
+        }
+        this.getBooks()
     }
 
     onPageChange = (event, value) => {

@@ -17,4 +17,8 @@ export default class AdminService {
     deleteBook(bookId) {
         return (deleteData(`admin/book/${bookId}`))
     }
+
+    adminLogin(loginDetails) {
+        return (post(loginDetails, 'admin/login'))
+    }
 }
