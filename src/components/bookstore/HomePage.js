@@ -34,40 +34,44 @@ export default class HomePage extends Component {
     }
 
     fetchCartList = () => {
-        new CartService().fetchCart("cart").then((response) => {
-                console.log("fff");
-                console.log(response);
-                (response.data.statusCode === 200) ?
-                    this.setState({
-                        counter: response.data.data.length,
-                        cartList: response.data.data.map(value => value.book.isbnNumber).toString()
-                    }) :
-                    (localStorage.getItem('token') === null || response.data.message === "Token Not Valid" || response.data.message === "Token Expired") ?
+        if (this.props.location.pathname === "/") {
+            new CartService().fetchCart("cart").then((response) => {
+                    console.log("fff");
+                    console.log(response);
+                    (response.data.statusCode === 200) ?
                         this.setState({
-                            isDialogBoxVisible: true,
-                        }, () => localStorage.clear()) :
-                        this.setState({
-                            counter: 0,
-                            cartList: ""
-                        })
-            }
-        );
+                            counter: response.data.data.length,
+                            cartList: response.data.data.map(value => value.book.isbnNumber).toString()
+                        }) :
+                        (localStorage.getItem('token') === null || response.data.message === "Token Not Valid" || response.data.message === "Token Expired") ?
+                            this.setState({
+                                isDialogBoxVisible: true,
+                            }, () => localStorage.clear()) :
+                            this.setState({
+                                counter: 0,
+                                cartList: ""
+                            })
+                }
+            );
+        }
     };
 
     fetchWishList = () => {
-        new WishListService().fetchWishList().then((response) => {
-                console.log("wishList");
-                console.log(response);
-                (response.data.statusCode === 200) ?
-                    this.setState({
-                        wishList: response.data.data.map(value => value.book.isbnNumber).toString()
-                    })
-                    :
-                    this.setState({
-                        wishList: ""
-                    });
-            }
-        );
+        if (this.props.location.pathname === "/") {
+            new WishListService().fetchWishList().then((response) => {
+                    console.log("wishList");
+                    console.log(response);
+                    (response.data.statusCode === 200) ?
+                        this.setState({
+                            wishList: response.data.data.map(value => value.book.isbnNumber).toString()
+                        })
+                        :
+                        this.setState({
+                            wishList: ""
+                        });
+                }
+            );
+        }
     };
 
     getBooks = () => {
@@ -99,8 +103,8 @@ export default class HomePage extends Component {
     }
 
     componentDidMount() {
-        if (this.props.location.pathname === "/admin" || this.props.location.pathname === "/admin/" ) {
-            (this.props.location.state === undefined || localStorage.getItem('token') === null) ?
+        if (this.props.location.pathname === "/admin" || this.props.location.pathname === "/admin/") {
+            (localStorage.getItem('userName')!=="Admin") || localStorage.getItem('token') === null ?
                 window.location.href = "/admin/login" : this.getBooks();
         }
         this.getBooks()

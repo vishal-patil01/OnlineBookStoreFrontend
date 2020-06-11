@@ -45,25 +45,23 @@ class Signin extends Component {
     };
 
     handleSubmit = () => {
-        const url=this.props.location.pathname
         const user = {
             email: this.state.email,
             password: this.state.password,
         };
         console.log("User ", user);
-        let loginService = this.props.location.pathname = "/" ? new UserService().loginUser(user) : new AdminService().adminLogin(user);
+        let loginService = this.props.location.pathname === "/" ? new UserService().loginUser(user) : new AdminService().adminLogin(user);
         loginService.then((response) => {
             console.log(response);
             if (response.status === 200) {
                 this.props.showAlert("success", true, response.data.message)
                 localStorage.setItem('token', response.headers.authorization);
-                this.props.location.pathname = "/" && localStorage.setItem('userName', response.data.data);
-                this.props.location.pathname === "admin/login" ?
+                localStorage.setItem('userName', response.data.data);
+                (this.props.location.pathname === "admin/login" || this.props.location.pathname === "admin/login/" || this.props.location.pathname === "/admin/login") &&
                     this.props.history.push({
                         pathname: '/admin',
                         state: {authenticated: true}
-                    }) : window.location.href = url
-                // this.clearFieldsData(this.props.location.pathname);
+                    })
             } else {
                 this.props.showAlert("error", true, response.data.message)
             }

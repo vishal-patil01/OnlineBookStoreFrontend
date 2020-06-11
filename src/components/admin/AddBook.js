@@ -20,7 +20,8 @@ import {withRouter} from "react-router";
 class AddBook extends React.Component {
     constructor(props) {
         super(props);
-
+        if (this.props.location.state === undefined || localStorage.getItem('token') === null )
+            window.location.href = '/admin/login';
         this.state = {
             isbnNumber: "",
             bookName: "",
@@ -49,9 +50,8 @@ class AddBook extends React.Component {
     }
 
     componentDidMount() {
-        console.log("This State")
         console.log(this.props.location.state)
-        if (this.props.location.state !== undefined) {
+        if (this.props.location.state.bookData) {
             const bookData = this.props.location.state.bookData;
             this.setState({
                 isbnNumber: bookData.isbnNumber.toString(),
