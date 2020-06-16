@@ -68,6 +68,12 @@
     padding-top: 20px;
 }
 
+.infoIcon{
+    position: absolute !important;
+    margin-top: -55px !important;
+    margin-left: 97px !important;
+}
+
 .outOfStockLabel {
     position: absolute;
     top: 50%;

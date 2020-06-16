@@ -409,7 +409,7 @@ class CartPage extends React.Component {
                                                    value={this.state.cAddress}
                                                    size="small"
                                                    disabled={this.state.isTest}
-                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z0-9]{1,}[ ]*[A-Za-z0-9]*$", "Address cannot be empty")}
+                                                   onBlur={textEvent => this.validation(textEvent, "^.{6,}$", "Please Enter at least 6 Characters")}
                                                    error={this.state.cAddressError.trim().length !== 0}
                                                    helperText={this.state.cAddressError}
                                                    rows={3} variant="outlined" fullWidth required/>
@@ -423,7 +423,7 @@ class CartPage extends React.Component {
                                                    onChange={this.handleChange}
                                                    value={this.state.cTown}
                                                    size="small"
-                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z]+[ ]*[A-Za-z]{2,}$", "Please enter minimum 3 character")}
+                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z .]{3,}", "Please enter at least 3 character")}
                                                    error={this.state.cTownError.trim().length !== 0}
                                                    helperText={this.state.cTownError}
                                                    fullWidth required/>
@@ -450,7 +450,7 @@ class CartPage extends React.Component {
                                                    disabled={this.state.isTest}
                                                    onChange={this.handleChange}
                                                    size="small"
-                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z]+[ ]*[A-Za-z]{2,}$", "Please enter minimum 3 character")}
+                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z .]{3,}", "Please enter at least 3 character")}
                                                    error={this.state.cLocalityError.trim().length !== 0}
                                                    helperText={this.state.cLocalityError}
                                                    fullWidth required/>
@@ -463,7 +463,7 @@ class CartPage extends React.Component {
                                                    onChange={this.handleChange}
                                                    value={this.state.cLandmark}
                                                    size="small"
-                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z]+[ ]*[A-Za-z]{2,}$", "Please enter minimum 3 character")}
+                                                   onBlur={textEvent => this.validation(textEvent, "^[A-Za-z .]{3,}", "Please enter at least 3 character")}
                                                    error={this.state.cLandmarkError.trim().length !== 0}
                                                    helperText={this.state.cLandmarkError}
                                                    fullWidth required/>

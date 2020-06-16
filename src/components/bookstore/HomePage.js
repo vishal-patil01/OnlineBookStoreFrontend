@@ -12,8 +12,9 @@ import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import CartService from "../../services/CartService";
 import Loader from "../utils/Loader";
 import WishListService from "../../services/WishListService";
+import {withRouter} from "react-router";
 
-export default class HomePage extends Component {
+class HomePage extends Component {
     constructor(props) {
         super(props);
         this.fetchCartList();
@@ -34,7 +35,7 @@ export default class HomePage extends Component {
     }
 
     fetchCartList = () => {
-        if (this.props.location.pathname === "/") {
+        if (!this.props.location.pathname.includes("admin") && localStorage.getItem("userName")!=="Admin") {
             new CartService().fetchCart("cart").then((response) => {
                     console.log("fff");
                     console.log(response);
@@ -57,7 +58,7 @@ export default class HomePage extends Component {
     };
 
     fetchWishList = () => {
-        if (this.props.location.pathname === "/") {
+        if (!this.props.location.pathname.includes("admin") && localStorage.getItem("userName")!=="Admin") {
             new WishListService().fetchWishList().then((response) => {
                     console.log("wishList");
                     console.log(response);
@@ -103,10 +104,6 @@ export default class HomePage extends Component {
     }
 
     componentDidMount() {
-        if (this.props.location.pathname === "/admin" || this.props.location.pathname === "/admin/") {
-            (localStorage.getItem('userName')!=="Admin") || localStorage.getItem('token') === null ?
-                window.location.href = "/admin/login" : this.getBooks();
-        }
         this.getBooks()
     }
 
@@ -171,7 +168,10 @@ export default class HomePage extends Component {
                              width="300px" height="200px"/>
                         <h2>Sorry, no results found!</h2>
                     </div>}
-
+                    {
+                        ((this.props.location.pathname === "/admin" || this.props.location.pathname === "/admin/") && (localStorage.getItem('userName') !== "Admin")) &&
+                           this.props.history.push("/admin/login")
+                    }
                     {this.state.loaded === false && <Loader/>}
                     {this.state.loaded === true && this.state.count !== 0 &&
                     <Grid container spacing={4}>
@@ -202,3 +202,4 @@ export default class HomePage extends Component {
         );
     }
 }
+export default withRouter(HomePage);

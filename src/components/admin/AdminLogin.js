@@ -16,7 +16,7 @@ class AdminLogin extends Component {
     }
 
     componentDidMount() {
-        document.getElementsByClassName('mainDiv')[0].style.minHeight = "73vh";
+        document.getElementsByClassName('mainDiv')[0].style.minHeight = "77vh";
     }
 
     showAlert = (severity, alertShow, alertResponse) => {

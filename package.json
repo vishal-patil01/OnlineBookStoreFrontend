@@ -15,7 +15,8 @@
     "react-dom": "^16.13.1",
     "react-loader-spinner": "^3.1.14",
     "react-router": "latest",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "@material-ui/styles": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

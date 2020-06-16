@@ -243,8 +243,8 @@ class Signup extends Component {
                                                            fullWidth required autoComplete="off" name="password"
                                                            InputProps={{ // <-- This is where the toggle button is added.
                                                                endAdornment: (
-                                                                   <InputAdornment position="end">
-                                                                       <IconButton
+                                                                   <InputAdornment id="PasswordVisiblity" position="end">
+                                                                       <IconButton id="PasswordVisiblity"
                                                                            aria-label="toggle password visibility"
                                                                            onClick={this.handlePasswordVisibility}
                                                                        >

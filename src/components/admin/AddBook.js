@@ -128,7 +128,7 @@ class AddBook extends React.Component {
             publishingYear: this.state.publishingYear
         };
         console.log("book ", book);
-        const service = this.props.location.state === undefined ? new AdminService().addBook(book) : new AdminService().updateBook(book, this.props.location.state.bookData.id)
+        const service = window.location.href.includes("add") ? new AdminService().addBook(book) : new AdminService().updateBook(book, this.props.location.state.bookData.id)
         service.then((response) => {
             console.log(response.data);
             if (response.status === 200) {
@@ -139,7 +139,7 @@ class AddBook extends React.Component {
                 });
                 this.clearFieldsData();
                 if (this.props.location.state !== undefined)
-                    this.props.history.push('/admin/');
+                    this.props.history.push('/admin');
             } else {
                 this.setState({
                     severity: "error",
@@ -155,7 +155,7 @@ class AddBook extends React.Component {
     };
 
     clearFieldsData = () => {
-        window.location.href.includes("update") ? this.props.history.push('/admin/') :
+        window.location.href.includes("update") ? this.props.history.push('/admin') :
             this.setState({
                 isbnNumber: "",
                 bookName: "",
@@ -207,7 +207,7 @@ class AddBook extends React.Component {
                     <Link color="inherit" href="/admin">
                         Home
                     </Link>
-                    <Typography color="textPrimary">{window.location.href.includes("add")?"AddBook":"UpdateBook"}</Typography>
+                    <Typography color="textPrimary">{window.location.href.includes("add")?"AddBook":"UpdateBookDetails"}</Typography>
                 </Breadcrumbs>
                 <Container className="container">
                     <Card className="card">
@@ -239,7 +239,7 @@ class AddBook extends React.Component {
                                                value={this.state.authorName}
                                                variant="outlined"
                                                fullWidth
-                                               onBlur={event => this.validation(event, "^[A-za-z][A-Za-z .]{3,}$", "Enter Minimum 3 Characters(Only Alphabets)")}
+                                               onBlur={event => this.validation(event, "^[A-Za-z][A-Za-z .]{3,}$", "Enter Minimum 3 Characters(Only Alphabets)")}
                                                error={this.state.authorNameError.trim().length !== 0}
                                                helperText={this.state.authorNameError}
                                                required/>

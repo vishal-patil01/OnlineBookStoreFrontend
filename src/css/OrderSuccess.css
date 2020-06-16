@@ -47,22 +47,22 @@ th {
 }
 
 .orderButton {
-    outline: none;
+    outline: none !important;
     cursor: pointer;
-    margin-top: 20px;
-    height: 35px;
-    width: 200px;
-    background-color: #b90f4b;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 14px;
-    padding: 0.3%;
+    margin-top: 20px !important;
+    height: 35px !important;
+    width: 200px !important;
+    background-color: #b90f4b !important;
+    border: none !important;
+    border-radius: 5px !important;
+    color: white !important;
+    font-size: 14px !important;
+    padding: 0.3% !important;
 }
 
 .orderLabel {
     position: absolute;
-    top: 37%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;

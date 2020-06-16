@@ -13,6 +13,7 @@ import CartService from "../../services/CartService";
 import {withRouter} from 'react-router';
 import IconButton from "@material-ui/core/IconButton";
 import {Favorite} from "@material-ui/icons";
+import InfoIcon from '@material-ui/icons/Info';
 import DialogBoxPage from "../utils/CustomDialogBox";
 import WishListService from "../../services/WishListService";
 import CustomSnackBar from "../utils/CustomSnackBar";
@@ -57,7 +58,7 @@ class Book extends React.Component {
                 :
                 this.setState({
                     isDialogBoxVisible: true,
-                })
+                }, () => localStorage.clear())
         });
     };
 
@@ -74,7 +75,6 @@ class Book extends React.Component {
                         alertResponse: response.data.message
                     })
                 }
-
             }) :
             new WishListService().addToWishList(this.props.bookId.id).then((response) => {
                 console.log("wishList add");
@@ -105,6 +105,15 @@ class Book extends React.Component {
     closeAlertBox = () => {
         this.setState({alertShow: false});
     };
+
+    viewMoreDetails = () => {
+        let bookInfo = this.props.bookId;
+        this.props.history.push({
+            pathname: "/book/review",
+            state: {bookInfo: bookInfo}
+        })
+    }
+
     deleteBook = () => {
         new AdminService().deleteBook(this.props.bookId.id).then((response) => {
             console.log("delete book");
@@ -125,6 +134,7 @@ class Book extends React.Component {
             }
         })
     };
+
     updateBook = () => {
         this.props.history.push({
             pathname: '/admin/update/book',
@@ -173,6 +183,7 @@ class Book extends React.Component {
                                    component="img"
                                    image={this.props.bookId.bookImageSrc}
                         />
+                        <InfoIcon className="infoIcon" color={"primary"} onClick={this.viewMoreDetails}/>
                         <div className="outOfStockLabel"
                              style={this.props.bookId.noOfCopies <= 0 ? {visibility: "visible"} : {visibility: "hidden"}}>OUT
                             OF
@@ -182,7 +193,7 @@ class Book extends React.Component {
                 </DetailTooltip>
                 <CardContent id="cardBottom">
                     <p className="bookTitle">{this.props.bookId.bookName}</p>
-                    <IconButton className= {this.state.url === "/"?"wishlist":"hideWishList"}
+                    <IconButton className={this.state.url === "/" ? "wishlist" : "hideWishList"}
                                 onClick={this.dialogBoxOpen}
                                 color="inherit">
                         {this.props.wishList.includes(this.props.bookId.isbnNumber) ?

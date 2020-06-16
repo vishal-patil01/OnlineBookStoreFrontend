@@ -19,7 +19,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import DialogBoxPage from "./CustomDialogBox";
 import {withRouter} from "react-router";
 import Signup from "../user/Signup";
-import BookIcon from '@material-ui/icons/Book';
+import bookImage from "../../assets/images/bookImage.png"
 
 class NavigationBar extends Component {
     constructor(props) {
@@ -62,6 +62,7 @@ class NavigationBar extends Component {
     render() {
         const homepagePath = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
         const isAdminPage = window.location.href.includes("admin");
+        const isAdminLogin = window.location.href.includes("login");
         return (
             <AppBar id="App-header">
                 <DialogBoxPage component={<Signup/>} isDialogBoxVisible={this.state.isDialogBoxVisible}
@@ -74,7 +75,7 @@ class NavigationBar extends Component {
                         </Typography>
                     </Link>
                     <div className="search"
-                         style={homepagePath === '' || isAdminPage ? {visibility: "visible"} : {visibility: "hidden"}}>
+                         style={((homepagePath === '' || isAdminPage) && !isAdminLogin) ? {visibility: "visible"} : {visibility: "hidden"}}>
                         <div className="searchIcon">
                             <SearchIcon/>
                         </div>
@@ -90,24 +91,26 @@ class NavigationBar extends Component {
                     <div className="shoppingCartDiv"
                          style={homepagePath === '' || isAdminPage ? {visibility: "visible"} : {visibility: "hidden"}}
                     >
-                        {!isAdminPage ?
-                            <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
-                                        onClick={this.handleClickOpen}>
-                                <Badge badgeContent={this.props.badgeCount} id="badge"
-                                       style={{border: "2px solid #b90f4b"}}
-                                       color="primary">
-                                    <ShoppingCartOutlinedIcon
-                                        style={{fontSize: '100%', display: 'flex'}}/>
-                                </Badge>
-                            </IconButton> :
-                            <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
-                                        onClick={this.addNewBook}>
-                                <BookIcon color="inherit" style={{fontSize: '100%', display: 'flex'}}/>
-                            </IconButton>
+                        {((homepagePath === "/" || homepagePath === "") && !isAdminLogin) &&
+                        <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
+                                    onClick={this.handleClickOpen}>
+                            <Badge badgeContent={this.props.badgeCount} id="badge"
+                                   style={{border: "2px solid #b90f4b"}}
+                                   color="primary">
+                                <ShoppingCartOutlinedIcon
+                                    style={{fontSize: '100%', display: 'flex'}}/>
+                            </Badge>
+                        </IconButton>}
+                        {(!isAdminLogin && homepagePath !== "/" && homepagePath !== "") &&
+                        <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
+                                    onClick={this.addNewBook}>
+                            <img alt={"addBookIcon"} src={bookImage} color="inherit"
+                                 style={{fontSize: '100%', height: "32px", display: 'flex'}}/>
+                        </IconButton>
                         }
                     </div>
                     <div className="logoutDiv"
-                         style={homepagePath === '' || isAdminPage ? {visibility: "visible"} : {visibility: "hidden"}}
+                         style={((homepagePath === '' || isAdminPage) && !isAdminLogin) ? {visibility: "visible"} : {visibility: "hidden"}}
                     >
                         <PopupState variant="popover" popupId="demo-popup-popover">
                             {(popupState) => (
@@ -143,17 +146,17 @@ class NavigationBar extends Component {
                                             <div className="loginPopUp">
                                                 <p className="logoutTitle">Hello,{localStorage.getItem('userName')}</p>
                                                 {this.props.location.pathname === "/" &&
-                                                    <IconButton style={{backgroundColor: "white"}} className="myOrder"
-                                                                color="inherit">
-                                                        <ShoppingBasketOutlinedIcon fontSize="small"/> <b
-                                                        id="listTitle"><Link to="/orders">My Orders</Link></b>
-                                                    </IconButton>}
+                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
+                                                            color="inherit">
+                                                    <ShoppingBasketOutlinedIcon fontSize="small"/> <b
+                                                    id="listTitle"><Link to="/orders">My Orders</Link></b>
+                                                </IconButton>}
                                                 {this.props.location.pathname === "/" &&
-                                                    <IconButton style={{backgroundColor: "white"}} className="myOrder"
-                                                                color="inherit">
-                                                        <FavoriteBorderOutlinedIcon fontSize="small"/> <b
-                                                        id="listTitle"><Link to="/wishlist">Wishlist</Link></b>
-                                                    </IconButton>
+                                                <IconButton style={{backgroundColor: "white"}} className="myOrder"
+                                                            color="inherit">
+                                                    <FavoriteBorderOutlinedIcon fontSize="small"/> <b
+                                                    id="listTitle"><Link to="/wishlist">Wishlist</Link></b>
+                                                </IconButton>
                                                 }
                                                 <Button id="logout" onClick={this.logout}>
                                                     Logout

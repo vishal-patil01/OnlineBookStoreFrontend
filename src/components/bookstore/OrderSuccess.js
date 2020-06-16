@@ -3,6 +3,7 @@ import NavigationBar from "../utils/NavigationBar";
 import CardMedia from '@material-ui/core/CardMedia';
 import "../../css/OrderSuccess.css"
 import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
 
 export default class UpdateBook extends React.Component {
     constructor(props) {
@@ -51,7 +52,7 @@ export default class UpdateBook extends React.Component {
                     </tr>
                     </tbody>
                 </table>
-                <button className="orderButton" onClick={ window.location.href = '/'}>Continue Shopping</button>
+                <Button href={"/"} className="orderButton">Continue Shopping</Button>
             </Fragment>
         );
     }

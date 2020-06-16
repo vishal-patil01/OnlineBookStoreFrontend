@@ -6,7 +6,6 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from "@material-ui/core/Button";
 import {withRouter} from 'react-router';
-import {Link} from "react-router-dom";
 import AdminService from "../../services/AdminService";
 import {IconButton, InputAdornment} from "@material-ui/core";
 
@@ -43,14 +42,16 @@ class Signin extends Component {
             })
         }
     };
-
+    forgetPassword = () => {
+        window.location.href = '/forget/password'
+    }
     handleSubmit = () => {
         const user = {
             email: this.state.email,
             password: this.state.password,
         };
         console.log("User ", user);
-        let loginService = this.props.location.pathname === "/" ? new UserService().loginUser(user) : new AdminService().adminLogin(user);
+        let loginService = (this.props.location.pathname !== "admin/login" || this.props.location.pathname !== "admin/login/") ? new UserService().loginUser(user) : new AdminService().adminLogin(user);
         loginService.then((response) => {
             console.log(response);
             if (response.status === 200) {
@@ -62,8 +63,7 @@ class Signin extends Component {
                         pathname: '/admin',
                         state: {authenticated: true}
                     }) :
-                 window.location.href="/";
-
+                        window.location.href = this.props.location.pathname;
             } else {
                 this.props.showAlert("error", true, response.data.message)
             }
@@ -106,10 +106,10 @@ class Signin extends Component {
                                        fullWidth required autoComplete="off" name="password"
                                        InputProps={{ // <-- This is where the toggle button is added.
                                            endAdornment: (
-                                               <InputAdornment position="end">
-                                                   <IconButton
-                                                       aria-label="toggle password visibility"
-                                                       onClick={this.props.handlePasswordVisibility}
+                                               <InputAdornment id="PasswordVisiblity" position="end">
+                                                   <IconButton id="PasswordVisiblity"
+                                                               aria-label="toggle password visibility"
+                                                               onClick={this.props.handlePasswordVisibility}
                                                    >
                                                        {this.props.isVisible ? <Visibility/> : <VisibilityOff/>}
                                                    </IconButton>
@@ -119,9 +119,9 @@ class Signin extends Component {
                             />
                         </div>
                         <div className="forgetPassword">
-                            <Link to={'/forget/password'}>
-                                <p style={{margin: "20px"}}> Forget Password</p>
-                            </Link>
+                            <p style={{margin: "2px", position: "absolute", cursor: "pointer"}}
+                               onClick={this.forgetPassword}> Forget
+                                Password</p>
                         </div>
                         <div className="group1">
                             <Button className="loginButton" variant="contained" onClick={this.handleSubmit}>Login

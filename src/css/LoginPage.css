@@ -2,12 +2,16 @@
     width: 55%;
     height: 75.5%;
     margin-top: 40px;
-    margin-left: -130px;
+    margin-left: -100px;
     background-position: center;
     background-size: cover;
     position: absolute;
     display: flex;
     overflow: hidden;
+}
+
+#PasswordVisiblity {
+    padding: 0px !important;
 }
 
 .userLoginForm {
@@ -192,11 +196,16 @@ a {
 }
 
 .forgetPassword {
+    display: flex;
+    flex-direction: row-reverse;
     text-align: right;
     font-size: 12px;
     color: #9D9D9D;
-    margin-bottom: 7%;
     margin-top: -20px;
+    cursor: pointer;
+    position: relative;
+    padding-right: 4px !important;
+    margin-bottom: 48px;
 }
 
 .forgetPassword:hover {
@@ -232,6 +241,7 @@ a {
         font-size: 20px;
     }
 }
+
 /*
 @media (width: 768px) {
     .userLoginForm {
