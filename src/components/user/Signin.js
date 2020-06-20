@@ -63,6 +63,7 @@ class Signin extends Component {
                         pathname: '/admin',
                         state: {authenticated: true}
                     }) :
+                    (this.props.location.pathname === "verify" || this.props.location.pathname === "reset") ? window.location.href = "/" :
                         window.location.href = this.props.location.pathname;
             } else {
                 this.props.showAlert("error", true, response.data.message)
