@@ -5,6 +5,9 @@
     margin-bottom: 15px;
 }
 
+#expansionPanel{
+    width: available !important;
+}
 #cartScroll {
     height: 300px;
     flex: 1;
@@ -97,11 +100,13 @@
 .processingDialog {
     display: flex;
     justify-content: center;
+    margin: auto auto;
 }
 
 .loaderDialog {
     display: flex;
     justify-content: center;
+    margin: auto auto;
 }
 
 .loaderText {

@@ -7,6 +7,7 @@ import Divider from "@material-ui/core/Divider";
 import Link from "@material-ui/core/Link";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import WishListService from "../../services/WishListService";
+import DialogBoxPage from "../utils/CustomDialogBox";
 
 class WishlistPage extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class WishlistPage extends Component {
         this.state = {
             AddedToCart: [],
             count: 0,
+            isDialogBoxVisible:false,
         }
     }
 
@@ -21,15 +23,15 @@ class WishlistPage extends Component {
         new WishListService().fetchWishList().then(response => {
             console.log("cart fetch");
             console.log(response);
-            {
-                (response.data.statusCode === 200) ?
-                    this.setState({
-                        AddedToCart: response.data.data,
-                        count: response.data.data.length
-                    })
-                    :
-                    this.props.history.push("/login")
-            }
+            (response.data.statusCode === 200) ?
+                this.setState({
+                    AddedToCart: response.data.data,
+                    count: response.data.data.length
+                })
+                : (localStorage.getItem('token') === null || response.data.message === "Token Not Valid" || response.data.message === "Token Expired") &&
+                this.setState({
+                    isDialogBoxVisible: true,
+                },()=>localStorage.clear())
         })
     };
 
@@ -42,6 +44,7 @@ class WishlistPage extends Component {
         return (
             <Fragment>
                 <NavigationBar/>
+                <DialogBoxPage isDialogBoxVisible={this.state.isDialogBoxVisible}/>
                 <Grid container>
                     <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
                         <Link color="inherit" href="/">
@@ -69,7 +72,7 @@ class WishlistPage extends Component {
                         </div>
                     </ExpansionPanel>
                 </Grid>
-            <br/>
+                <br/>
             </Fragment>
         );
     }

@@ -100,7 +100,7 @@ class SendEmailLink extends Component {
                     {(this.props.isVerificationLinkSend || this.props.isEmailVerified) &&
                     <Grid container spacing={0} style={{paddingTop: "80px"}}>
                         <Grid item xs={12}>
-                            <img height="150px" width="150px" src={require("../../assets/uploads/successcheck.png")}
+                            <img height="150px" width="150px" src={require("../../assets/images/successcheck.png")}
                                  alt="success"/>
                         </Grid>
                         <Grid item xs={12}>

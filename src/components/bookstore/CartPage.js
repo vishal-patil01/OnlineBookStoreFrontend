@@ -29,11 +29,13 @@ import UserService from "../../services/UserService";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import Loader from "react-loader-spinner";
+import DialogBoxPage from "../utils/CustomDialogBox";
 
 
 class CartPage extends React.Component {
     constructor(props) {
         super(props);
+        this.fetchCartBooks()
         this.state = {
             expanded2: null,
             expanded3: null,
@@ -115,21 +117,21 @@ class CartPage extends React.Component {
         });
     };
 
-    handleButtonClick2 = panel => (event, expanded2) => {
+    handleCustomerDetailExpansionPanel = panel => (event, expanded2) => {
         this.setState({
             expanded2: panel,
             isPanelOpen1: true,
         });
     };
 
-    handleButtonClick3 = panel => (event, expanded3) => {
+    handleOrderSummaryExpansionPanel = panel => (event, expanded3) => {
         if (this.canBeSubmitted()) {
             this.setState({
                 expanded3: panel,
                 isPanelOpen2: true,
                 isValid: true,
                 isTest: true,
-            }, () => this.getBooksAddedToCart());
+            }, () => this.fetchCartBooks());
 
         }
         console.log(this.state.isTest)
@@ -152,21 +154,24 @@ class CartPage extends React.Component {
 
     };
 
-    getBooksAddedToCart() {
+    fetchCartBooks() {
         get("cart").then(response => {
             console.log("cart fetch");
             console.log(response);
-            {
-                (response.data.statusCode === 200) ?
-                    this.setState({
-                        AddedToCart: response.data.data,
-                        count: response.data.data.length,
-                    }, () => this.test())
-                    :
+            (response.data.statusCode === 200) ?
+                this.setState({
+                    AddedToCart: response.data.data,
+                    count: response.data.data.length,
+                }, () => this.calculateTotalPrice())
+                :
+                (localStorage.getItem('token') === null || response.data.message === "Token Not Valid" || response.data.message === "Token Expired") ?
                     this.setState({
                         isDialogBoxVisible: true,
-                    })
-            }
+                    },()=>localStorage.clear()) :
+                    this.setState({
+                            count: 0,
+                        }
+                    )
         })
             .catch(error => this.setState({error, isLoading: false}));
     };
@@ -212,7 +217,6 @@ class CartPage extends React.Component {
     }
 
     componentDidMount() {
-        this.getBooksAddedToCart();
         this.getUserDetails();
         this.fetchCustomerDetails();
         window.addEventListener("scroll", () => {
@@ -223,7 +227,7 @@ class CartPage extends React.Component {
 
     handleRemove = id => event => {
         new CartService().deleteCart(id).then(response => {
-            this.getBooksAddedToCart()
+            this.fetchCartBooks()
         });
     };
 
@@ -241,16 +245,15 @@ class CartPage extends React.Component {
         return this.errorCheck() && this.formFilledCheck();
     }
 
-    getTotalPrice = (qValue, cartId) => {
+    updateCartDetails = (qValue, cartId) => {
         new CartService().updateCart(cartId, qValue).then((response) => {
             console.log(response);
         })
     }
-    test = () => {
+    calculateTotalPrice = () => {
         this.setState({
-            totalPrice: this.state.AddedToCart.reduce(function (tot, arr) {
-                console.log(arr)
-                return tot + arr.quantity * arr.book.bookPrice;
+            totalPrice: this.state.AddedToCart.reduce(function (totalPrice, cartItemList) {
+                return totalPrice + cartItemList.quantity * cartItemList.book.bookPrice;
             }, 0)
         })
 
@@ -279,6 +282,8 @@ class CartPage extends React.Component {
                         </Link>
                         <Typography color="textPrimary">Cart</Typography>
                     </Breadcrumbs>
+                    <DialogBoxPage isDialogBoxVisible={this.state.isDialogBoxVisible}/>
+
                     <div id="cartContainer">
                         {this.state.showProgress &&
                         <Dialog className="processingDialog"
@@ -286,7 +291,7 @@ class CartPage extends React.Component {
                                 onClose={this.state.showProgress}
                                 aria-labelledby="customized-dialog-title"
                                 open={this.state.showProgress}>
-                            <DialogContent >
+                            <DialogContent>
                                 <div className="loaderDialog">
                                     <Loader
                                         type="ThreeDots"
@@ -309,7 +314,7 @@ class CartPage extends React.Component {
                                 ({count})</Typography>
                             {count === 0 ?
                                 <div id="emptyCart">
-                                    <img src={require(`../../assets/uploads/emptyCart.png`)}
+                                    <img src={require(`../../assets/images/emptyCart.png`)}
                                          alt="Empty CartPage"
                                          width="100px" height="100px"/>
                                     <h3>Your cart is empty</h3>
@@ -322,7 +327,7 @@ class CartPage extends React.Component {
                                                     bookDetails={id}
                                                     qValue={id.quantity}
                                                     handleRemove={this.handleRemove}
-                                                    totalPrice={this.getTotalPrice}
+                                                    totalPrice={this.updateCartDetails}
                                                     pannel={this.state.isPanelOpen1}
                                                 />
                                                 {index !== AddedToCart.length - 1 ?
@@ -336,7 +341,7 @@ class CartPage extends React.Component {
                                                 id="confirmOrderButton"
                                                 size="large"
                                                 color="inherit"
-                                                onClick={this.handleButtonClick2('panel2')}
+                                                onClick={this.handleCustomerDetailExpansionPanel('panel2')}
                                                 style={this.state.isPanelOpen1 === false ? {
                                                     width: "136",
                                                     fontSize: "14px",
@@ -388,7 +393,6 @@ class CartPage extends React.Component {
                                     <Grid item xs={12} sm={6} md={6}>
                                         <TextField id="cPhone" label="Phone Number" variant="outlined"
                                                    className="phoneNumber" name="Phone Number"
-                                            // style={{marginLeft: "15%"}}
                                                    value={this.state.cPhone}
                                                    disabled
                                                    size="small"
@@ -427,7 +431,6 @@ class CartPage extends React.Component {
                                         <TextField id="cPin" label="Pin Code" variant="outlined"
                                                    name="Pin Code"
                                                    className="pinCode"
-                                            // style={{marginLeft: "15%"}}
                                                    value={this.state.cPin}
                                                    disabled={this.state.isTest}
                                                    onChange={this.handleChange}
@@ -455,7 +458,6 @@ class CartPage extends React.Component {
                                         <TextField id="cLandmark" label="Landmark" variant="outlined"
                                                    name="Landmark"
                                                    className="landmark"
-                                            // style={{marginLeft: "15%"}}
                                                    disabled={this.state.isTest}
                                                    onChange={this.handleChange}
                                                    value={this.state.cLandmark}
@@ -478,7 +480,7 @@ class CartPage extends React.Component {
                                                                   label="Home"/>
 
                                                 <FormControlLabel value="WORK"
-                                                                  disabled={this.state.isTest} W
+                                                                  disabled={this.state.isTest}
                                                                   control={<Radio style={{color: "#b90f4b"}}/>}
                                                                   label="Work"/>
 
@@ -496,7 +498,7 @@ class CartPage extends React.Component {
                                         size="large"
                                         color="inherit"
                                         disabled={!this.canBeSubmitted()}
-                                        onClick={this.handleButtonClick3('panel3')}
+                                        onClick={this.handleOrderSummaryExpansionPanel('panel3')}
                                         style=
                                             {this.canBeSubmitted() === false ? {
                                                 fontSize: "14px",
@@ -535,11 +537,6 @@ class CartPage extends React.Component {
                                         <Grid key={id.id} item xs={12} sm={12} md={12} lg={12} xl={12}>
                                             <OrderSummary
                                                 bookDetails={id}
-                                                /*key={id.book.id}
-                                                bookName={id.book.bookName}
-                                                image={id.book.bookImageSrc}
-                                                authorName={id.book.authorName}*/
-                                                /*bookPrice={id.book.bookPrice * id.quantity}*/
                                                 quantity={id.quantity}
                                             />
                                             <Divider/>

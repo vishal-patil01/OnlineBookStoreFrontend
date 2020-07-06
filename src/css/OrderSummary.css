@@ -17,34 +17,33 @@
 }
 
 .orderBookName {
-    width: 300px;
+    width: max-content;
     text-align: left;
     font-size: 14px;
     padding-bottom: 5px;
 }
 
 .orderAuthorName {
-    width: auto;
+    width: max-content;
     text-align: left;
     font-size: 10px;
     padding-bottom: 5px;
 }
 
 .orderQuantity{
-    width: auto;
+    width: max-content;
     text-align: left;
     font-size: 11px;
     padding-bottom: 5px;
 }
 
 .orderPrice {
-    width: auto;
+    width: max-content;
     text-align: left;
     font-weight: bold;
     font-size: 15px;
     padding-bottom: 5px;
 }
-
 
 hr{
     width: 95%;

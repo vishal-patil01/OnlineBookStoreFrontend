@@ -105,13 +105,6 @@ class Book extends React.Component {
         this.setState({alertShow: false});
     };
 
-    updateBook = () => {
-        this.props.history.push({
-            pathname: '/update',
-            state: {bookData: this.props.bookId}
-        })
-    };
-
     render() {
         const goToCartButtonLink = (
             <Link style={{color: 'white', textDecoration: 'none'}} to={'/cart'}>
@@ -172,7 +165,6 @@ class Book extends React.Component {
                     </IconButton>
                     <p className="bookAuthorName">by {this.props.bookId.authorName}</p>
                     <p className="bookPrice">Rs. {this.props.bookId.bookPrice}</p>
-                    {this.state.url === "/" ?
                         <Button id="addToCartButton" variant="contained" size="small"
                                 style={this.props.bookId.noOfCopies === 0 ? {
                                     color: "black",
@@ -185,11 +177,6 @@ class Book extends React.Component {
                                 disabled={this.props.bookId.noOfCopies === 0}>
                             {this.props.cart.includes(this.props.bookId.isbnNumber) ? goToCartButtonLink : "Add To Cart"}
                         </Button>
-                        : <Button style={{
-                            color: "white",
-                            backgroundColor: '#b90f4b'
-                        }} onClick={() => this.updateBook(this.props.bookId)}>Update Book </Button>
-                    }
                 </CardContent>
             </Card>
         )

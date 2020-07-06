@@ -1,9 +1,6 @@
 import React, {Component, Fragment} from "react";
 import "../../css/ForgetPass.css";
 import UserService from "../../services/UserService";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
-import {Redirect} from "react-router";
 import SendEmailLink from "../utils/SendEmailLink";
 import CustomSnackBar from "../utils/CustomSnackBar";
 

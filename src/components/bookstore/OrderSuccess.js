@@ -5,8 +5,12 @@ import "../../css/OrderSuccess.css"
 import CardContent from "@material-ui/core/CardContent";
 
 export default class UpdateBook extends React.Component {
-    handle = () => {
-        this.props.history.push('/');
+    constructor(props) {
+        super(props);
+        this.props.location.state === undefined ?
+            window.location.href = '/'
+            :
+            console.log(this.props.location.state.orderId);
     }
 
     render() {
@@ -19,15 +23,13 @@ export default class UpdateBook extends React.Component {
                 <CardContent id="orderContainer">
                     <CardMedia id="orderImage"
                                component="img"
-                               image={require(`../../assets/uploads/OrderSummaryImage.svg`)}
+                               image={require(`../../assets/images/OrderSummaryImage.svg`)}
                     />
-                    <div className="orderLabel"
-                    >Order Placed Successfully
-                    </div>
+                    <b className="orderLabel">Order Placed Successfully</b>
                 </CardContent>
                 <div className="orderMessage">
                     hurray!!! your order is confirmed the order id is
-                   <b> #{this.props.location.state.orderId }</b> save the order id
+                    <b> #{this.props.location.state.orderId}</b> save the order id
                     for further communication...
                 </div>
                 <table className="orderTable">
@@ -40,25 +42,16 @@ export default class UpdateBook extends React.Component {
                     </thead>
                     <tbody>
                     <tr className="tableRow">
-                        <td data-tip data-for='emailId'>{email}
-                            {/*<ReactTooltip id='emailId' aria-haspopup='true' role='example'>*/}
-                            {/*    <p>{email}</p>*/}
-                            {/*</ReactTooltip>*/}
+                        <td data-for='emailId'>{email}
                         </td>
-                        <td data-tip data-for='mobileNumber'>{mobileNumber}
-                            {/*<ReactTooltip id='mobileNumber' aria-haspopup='true' role='example'>*/}
-                            {/*    <p>{mobileNumber}</p>*/}
-                            {/*</ReactTooltip>*/}
+                        <td data-for='mobileNumber'>{mobileNumber}
                         </td>
-                        <td data-tip data-for='address'> {address}
-                            {/*<ReactTooltip id='address' aria-haspopup='true' role='example'>*/}
-                            {/*    <p>{address}</p>*/}
-                            {/*</ReactTooltip>*/}
+                        <td data-for='address'> {address}
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <button className="orderButton" onClick={this.handle}>Continue Shopping</button>
+                <button className="orderButton" onClick={ window.location.href = '/'}>Continue Shopping</button>
             </Fragment>
         );
     }

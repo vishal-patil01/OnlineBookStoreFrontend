@@ -14,11 +14,11 @@ import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
 import PopupState, {bindPopover, bindTrigger} from 'material-ui-popup-state';
-import Divider from "@material-ui/core/Divider";
 import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import DialogBoxPage from "./CustomDialogBox";
 import {withRouter} from "react-router";
+
 
 class NavigationBar extends Component {
     constructor(props) {
@@ -151,4 +151,5 @@ class NavigationBar extends Component {
         );
     }
 }
+
 export default withRouter(NavigationBar);

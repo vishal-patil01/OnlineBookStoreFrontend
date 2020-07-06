@@ -7,6 +7,7 @@ import Link from "@material-ui/core/Link";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import "../../css/MyOrderListPage.css";
 import OrderService from "../../services/OrderService";
+import DialogBoxPage from "../utils/CustomDialogBox";
 
 class MyOrderListPage extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class MyOrderListPage extends Component {
         this.state = {
             OrderedItemsList: [],
             count: 0,
+            isDialogBoxVisible:false,
         }
     }
 
@@ -21,22 +23,20 @@ class MyOrderListPage extends Component {
         new OrderService().fetchOrders().then(response => {
             console.log("order fetch");
             console.log(response);
-            {
-                (response.data.statusCode === 200) ?
-                    this.setState({
-                        OrderedItemsList: response.data.data,
-                        count: response.data.data.length
-                    })
-                    :
-                    this.props.history.push("/login")
-            }
+            (response.data.statusCode === 200) ?
+                this.setState({
+                    OrderedItemsList: response.data.data,
+                    count: response.data.data.length
+                })
+                :(localStorage.getItem('token') === null || response.data.message === "Token Not Valid" || response.data.message === "Token Expired") &&
+                this.setState({
+                    isDialogBoxVisible: true,
+                },()=>localStorage.clear())
         })
     };
-
     componentDidMount() {
         this.getOrderedItemsList();
     }
-
     render() {
         const months = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
@@ -45,6 +45,7 @@ class MyOrderListPage extends Component {
         return (
             <Fragment>
                 <NavigationBar/>
+                <DialogBoxPage isDialogBoxVisible={this.state.isDialogBoxVisible}/>
                 <Grid container>
                     <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
                         <Link color="inherit" href="/">

@@ -54,7 +54,6 @@ class Signin extends Component {
                 localStorage.setItem('token', response.headers.authorization);
                 localStorage.setItem('userName', response.data.data);
                 this.clearFieldsData();
-                this.props.history.push("/");
             } else {
                 this.props.showAlert("error", true, response.data.message)
             }
@@ -67,7 +66,7 @@ class Signin extends Component {
             email: "",
             password: "",
         });
-        window.location.href = '/'
+        window.location.href =this.props.location.pathname.toString();
     };
 
     render() {
@@ -112,8 +111,8 @@ class Signin extends Component {
                             }
                         </div>
                         <div className="forgetPassword">
-                            <Link  to={'/forget/password'}>
-                               <p style={{margin:"20px"}}> Forget Password</p>
+                            <Link to={'/forget/password'}>
+                                <p style={{margin: "20px"}}> Forget Password</p>
                             </Link>
                             {/*<a href="/forget/password">Forgt Password?</a>*/}
                         </div>

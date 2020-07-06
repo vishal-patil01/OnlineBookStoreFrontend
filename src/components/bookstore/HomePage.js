@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import "../../css/HomePage.css";
+
 import "../../css/scrollbar.css";
 import Grid from "@material-ui/core/Grid";
 import Card from "./Book";
@@ -36,18 +36,21 @@ export default class HomePage extends Component {
     fetchCartList = () => {
         new CartService().fetchCart("cart").then((response) => {
                 console.log("fff");
-                 console.log(response);
-                    (response.data.statusCode === 200) ?
+                console.log(response);
+                (response.data.statusCode === 200) ?
+                    this.setState({
+                        counter: response.data.data.length,
+                        cartList: response.data.data.map(value => value.book.isbnNumber).toString()
+                    }) :
+                    (localStorage.getItem('token') === null || response.data.message === "Token Not Valid" || response.data.message === "Token Expired") ?
                         this.setState({
-                            counter: response.data.data.length,
-                            cartList: response.data.data.map(value => value.book.isbnNumber).toString()
-                        })
-                        :
+                            isDialogBoxVisible: true,
+                        }, () => localStorage.clear()) :
                         this.setState({
                             counter: 0,
                             cartList: ""
-                        });
-                }
+                        })
+            }
         );
     };
 
@@ -55,15 +58,15 @@ export default class HomePage extends Component {
         new WishListService().fetchWishList().then((response) => {
                 console.log("wishList");
                 console.log(response);
-                    (response.data.statusCode === 200) ?
-                        this.setState({
-                            wishList: response.data.data.map(value => value.book.isbnNumber).toString()
-                        })
-                        :
-                        this.setState({
-                            wishList: ""
-                        });
-                }
+                (response.data.statusCode === 200) ?
+                    this.setState({
+                        wishList: response.data.data.map(value => value.book.isbnNumber).toString()
+                    })
+                    :
+                    this.setState({
+                        wishList: ""
+                    });
+            }
         );
     };
 
@@ -72,15 +75,15 @@ export default class HomePage extends Component {
             .then((response) => {
                     console.log("fetchbook")
                     console.log(response);
-                        response.data.statusCode === 208 ?
-                            this.setState({
-                                bookList: [],
-                                count: 0,
-                            }) :
-                            this.setState({
-                                bookList: response.data.data.content,
-                                count: response.data.data.totalElements,
-                            });
+                    response.data.statusCode === 208 ?
+                        this.setState({
+                            bookList: [],
+                            count: 0,
+                        }) :
+                        this.setState({
+                            bookList: response.data.data.content,
+                            count: response.data.data.totalElements,
+                        });
                 }
             )
             .catch((error) => {
@@ -154,11 +157,10 @@ export default class HomePage extends Component {
                     </div>
                     {this.state.loaded === true && this.state.count === 0 &&
                     <div className="resultNotFound">
-                        <img src={require(`../../assets/uploads/noResult.png`)} alt="No Result Found"
+                        <img src={require(`../../assets/images/noResult.png`)} alt="No Result Found"
                              width="300px" height="200px"/>
                         <h2>Sorry, no results found!</h2>
                     </div>}
-
                     {this.state.loaded === false && <Loader/>}
                     {this.state.loaded === true && this.state.count !== 0 &&
                     <Grid container spacing={4}>

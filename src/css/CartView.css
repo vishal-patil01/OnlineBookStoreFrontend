@@ -17,21 +17,21 @@
 }
 
 .bookName {
-    width: 300px;
+    width: max-content;
     text-align: left;
     font-size: 14px;
     padding-bottom: 5px;
 }
 
 .authorName {
-    width: 300px;
+    width: max-content;
     text-align: left;
     font-size: 10px;
     padding-bottom: 5px;
 }
 
 .price {
-    width: auto;
+    width: max-content;
     text-align: left;
     font-weight: bold;
     font-size: 15px;

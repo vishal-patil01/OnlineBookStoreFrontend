@@ -51,7 +51,7 @@ export default class AddBook extends React.Component {
     componentDidMount() {
         console.log("This State")
         console.log(this.props.location.state)
-        if (this.props.location.state !==undefined) {
+        if (this.props.location.state !== undefined) {
             this.setState({
                 isbnNumber: this.props.location.state.bookData.isbnNumber.toString(),
                 bookName: this.props.location.state.bookData.bookName.toString(),

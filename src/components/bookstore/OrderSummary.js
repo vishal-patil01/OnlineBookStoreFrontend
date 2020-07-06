@@ -13,7 +13,7 @@ export default class OrderSummary extends React.Component {
     render() {
         return (
             <Fragment>
-                <div container className="orderDisplayCart">
+                <div className="orderDisplayCart">
                     <CardMedia className="orderImageCart"
                                component="img"
                                image={this.props.bookDetails.book.bookImageSrc}

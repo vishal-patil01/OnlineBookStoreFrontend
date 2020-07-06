@@ -113,7 +113,7 @@ th {
     }
 
     .orderLabel{
-        top: 20%;
+        top: 19%;
         left: 49%;
         font-size: 11px;
     }
@@ -154,7 +154,7 @@ th {
     }
 
     .orderLabel{
-        top: 19%;
+        top: 18%;
         left: 49%;
         font-size: 11px;
     }
@@ -261,7 +261,7 @@ th {
 
 @media (width: 375px) and (height: 812px){
     .orderLabel{
-        top: 18%;
+        top: 17%;
         left: 52%;
         font-size: 11px;
     }
@@ -269,7 +269,7 @@ th {
 
 @media (width: 411px) and (height: 823px){
     .orderLabel{
-        top: 17%;
+        top: 16%;
         left: 50%;
         font-size: 12px;
     }
