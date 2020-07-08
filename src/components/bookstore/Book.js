@@ -58,7 +58,7 @@ class Book extends React.Component {
                 :
                 this.setState({
                     isDialogBoxVisible: true,
-                }, () => localStorage.clear())
+                },()=>localStorage.clear())
         });
     };
 

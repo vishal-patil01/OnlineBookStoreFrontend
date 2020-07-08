@@ -10,6 +10,7 @@ import ForgetPassword from "../components/user/ForgetPassword";
 import ResetPassword from "../components/user/ResetPassword";
 import VerifyEmail from "../components/user/VerifyEmail";
 import AdminLogin from "../components/admin/AdminLogin";
+import ProductReview from "../components/bookstore/ProductReview";
 
 export default class DefaultRoutes extends React.Component {
     render() {
@@ -28,6 +29,7 @@ export default class DefaultRoutes extends React.Component {
                     <Route path={"/forget/password"} exact component={ForgetPassword}/>
                     <Route path={"/reset/password"} exact component={ResetPassword}/>
                     <Route path={"/verify/email/"} exact component={VerifyEmail}/>
+                    <Route path={"/book/review"} exact component={ProductReview}/>
                 </Switch>
             </BrowserRouter>
 
