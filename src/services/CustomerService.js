@@ -13,4 +13,8 @@ export default class CustomerService {
     addFeedback(data) {
         return (post(data, `comment`));
     }
+
+    getAllFeedback(isbnNumber) {
+        return (get(`comments/?isbnNumber=${isbnNumber}`));
+    }
 }

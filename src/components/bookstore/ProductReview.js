@@ -30,10 +30,21 @@ export default class ProductReview extends React.Component {
         this.setState({
             bookInfo: this.props.location.state.bookInfo
         });
+        this.getFeedback(this.props.location.state.bookInfo);
     }
 
     handleChange(field, event) {
         this.setState({[event.target.name]: event.target.value});
+    }
+
+    getFeedback=(object)=> {
+        new CustomerService().getAllFeedback(object.isbnNumber).then((response) => {
+            this.setState({
+                feedbacks: response.data.data
+            });
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     addFeedback = (e) => {
@@ -91,6 +102,37 @@ export default class ProductReview extends React.Component {
 
     render() {
         const isAdminPage = localStorage.getItem('userName') === "Admin";
+        let displayFeedback;
+        if (this.state.feedbacks.length > 0) {
+            displayFeedback = this.state.feedbacks.map(iteam => {
+
+                return (
+                    <div className="product-feedback-container">
+                        <div style={{display: "flex"}}>
+                            <div className="customer-profile-icon">
+                            <span className="customer-profile-icon-content">
+                                {iteam.isbn.substr(0, 1)}
+                            </span>
+                            </div>
+                            <div className="customer-feedback-name">
+                                <span className="product-review-book-name-size">
+                                    {iteam.isbn}
+                                </span>
+                            </div>
+                        </div>
+                        <Rating name="simple-controlled" value={iteam.rating} readOnly="true" className="product-customer-rating"/>
+                        <p className="product-feedback ">
+                            {iteam.feedbackMessage}
+                        </p>
+                    </div>
+
+                );
+            });
+        }
+
+        if(this.state.feedbacks.length===0){
+            displayFeedback=<div className="product-feedback-container product-feedback"> <span>No review available for this book</span></div>
+        }
         let feedbackForm = [];
         if(localStorage.getItem("token") !== null){
             feedbackForm =
@@ -174,6 +216,7 @@ export default class ProductReview extends React.Component {
                                 <span className="customer-feedback product-review-font">Customer Review</span>
                                 {feedbackForm}
                             </div>
+                            {displayFeedback}
                         </div>
                     </div>
                 </div>

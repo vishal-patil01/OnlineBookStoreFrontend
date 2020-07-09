@@ -1,3 +1,4 @@
+
 .product-review-main {
     display: flex;
     justify-content: center;
@@ -115,6 +116,46 @@
 .product-review-book-price {
     font-size: 23px;
     align-self: flex-start;
+}
+
+.product-feedback-container {
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.customer-profile-icon {
+    background-color: whitesmoke;
+    border: 1px solid silver;
+    border-radius: 50px;
+    padding: 3px 8px;
+}
+
+.customer-profile-icon-content {
+    font-size: 15px;
+    color: Maroon;
+    font-weight: bold;
+}
+
+.customer-feedback-name {
+    margin: 5px;
+}
+
+.product-review-book-name-size {
+    font-size: 15px;
+
+}
+
+.product-customer-rating {
+    display: flex !important;
+    margin-left: 35px;
+    align-items: flex-start;
+}
+
+.product-feedback {
+    font-size: 12px;
+    margin-left: 40px;
+    text-align: left;
 }
 
 .product-feedback-button-container {
