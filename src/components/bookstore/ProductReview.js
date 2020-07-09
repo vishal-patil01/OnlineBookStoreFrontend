@@ -10,6 +10,7 @@ import '../../css/ProductReview.css';
 import {ThemeProvider} from '@material-ui/styles';
 import NavigationBar from "../utils/NavigationBar";
 import Link from "@material-ui/core/Link";
+import CustomerService from "../../services/CustomerService";
 
 export default class ProductReview extends React.Component {
 
@@ -36,23 +37,40 @@ export default class ProductReview extends React.Component {
     }
 
     addFeedback = (e) => {
+        var data = {
+            rating: this.state.rating,
+            feedbackMessage: this.state.feedback,
+            isbn: this.state.bookInfo.isbnNumber
+        };
+
+        new CustomerService().addFeedback(data).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        this.setState({
+            rating: '',
+            feedback: ''
+        },()=>e.preventDefault());
+        window.location.reload(false);
     }
 
-    handleReadMore = () => {
+    handleReadMore=()=> {
         this.setState({readMore: false});
         return (
             this.displayBookDetail()
         );
     }
 
-    handleReadLess = () => {
+    handleReadLess=()=> {
         this.setState({readMore: true});
         return (
             this.displayBookDetail()
         );
     }
 
-    displayBookDetail = () => {
+    displayBookDetail=()=> {
         let bookDiscription = [];
         if (this.state.readMore) {
             var text = String(this.state.bookInfo.bookDetail);
@@ -74,7 +92,7 @@ export default class ProductReview extends React.Component {
     render() {
         const isAdminPage = localStorage.getItem('userName') === "Admin";
         let feedbackForm = [];
-        if (localStorage.getItem("token") !== null) {
+        if(localStorage.getItem("token") !== null){
             feedbackForm =
                 <div className="customer-feedback-form product-review-font">
                     <span className="product-review-bookdetail-size">Overall rating</span>
@@ -97,13 +115,13 @@ export default class ProductReview extends React.Component {
                         />
                     </ThemeProvider>
                     <div className="product-feedback-button-container">
-                        <Button id="productfeedbackbutton" onClick={e => this.addFeedback(e)}>Submit</Button>
+                        <Button id="productfeedbackbutton" onClick={e=>this.addFeedback(e)}>Submit</Button>
                     </div>
                 </div>
 
         }
-        if (this.state.feedbackLength > 0 || isAdminPage) {
-            feedbackForm = [];
+        if(this.state.feedbackLength>0 || isAdminPage){
+            feedbackForm=[];
         }
 
         return (
@@ -111,7 +129,7 @@ export default class ProductReview extends React.Component {
                 <NavigationBar/>
                 <div className="orderTitle">
                     <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
-                        <Link color="inherit" href={isAdminPage ? "/admin" : "/"}>
+                        <Link color="inherit" href={isAdminPage?"/admin":"/"}>
                             Home
                         </Link>
                         <Typography color="textPrimary">Comments</Typography>
@@ -136,7 +154,7 @@ export default class ProductReview extends React.Component {
                                         {this.state.bookInfo.bookName}
                                     </span>
                                     <span className="product-review-author-name product-review-font">by
-                                        {" " + this.state.bookInfo.authorName}
+                                        {" "+this.state.bookInfo.authorName}
                                     </span>
                                     <div className="product-rating">
                                         <span className="product-rating-count product-review-font"> 4.4 </span>

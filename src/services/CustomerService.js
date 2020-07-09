@@ -9,4 +9,8 @@ export default class CustomerService {
     getCustomerDetails(addressType) {
         return (get(`/customer/${addressType}`))
     }
+
+    addFeedback(data) {
+        return (post(data, `comment`));
+    }
 }
