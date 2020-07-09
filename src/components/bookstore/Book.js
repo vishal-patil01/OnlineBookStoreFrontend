@@ -16,6 +16,7 @@ import {Favorite} from "@material-ui/icons";
 import DialogBoxPage from "../utils/CustomDialogBox";
 import WishListService from "../../services/WishListService";
 import CustomSnackBar from "../utils/CustomSnackBar";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class Book extends React.Component {
     constructor(props) {
@@ -104,6 +105,12 @@ class Book extends React.Component {
     closeAlertBox = () => {
         this.setState({alertShow: false});
     };
+    updateBook = () => {
+        this.props.history.push({
+            pathname: '/admin/update/book',
+            state: {bookData: this.props.bookId}
+        })
+    };
 
     render() {
         const goToCartButtonLink = (
@@ -147,7 +154,7 @@ class Book extends React.Component {
                                    image={this.props.bookId.bookImageSrc}
                         />
                         <div className="outOfStockLabel"
-                             style={this.props.bookId.noOfCopies === 0 ? {visibility: "visible"} : {visibility: "hidden"}}>OUT
+                             style={this.props.bookId.noOfCopies <= 0 ? {visibility: "visible"} : {visibility: "hidden"}}>OUT
                             OF
                             STOCK
                         </div>
@@ -155,16 +162,25 @@ class Book extends React.Component {
                 </DetailTooltip>
                 <CardContent id="cardBottom">
                     <p className="bookTitle">{this.props.bookId.bookName}</p>
-                    <IconButton className="wishlist"
-                                onClick={this.dialogBoxOpen}
-                                color="inherit">
-                        {this.props.wishList.includes(this.props.bookId.isbnNumber) ?
-                            <Favorite color="primary" onClick={this.handleWishListOperations}/> :
-                            <Favorite color="disabled" onClick={this.handleWishListOperations}/>
-                        }
-                    </IconButton>
+                    {this.state.url === "/" ?
+                        <IconButton className="wishlist"
+                                    onClick={this.dialogBoxOpen}
+                                    color="inherit">
+                            {this.props.wishList.includes(this.props.bookId.isbnNumber) ?
+                                <Favorite color="primary" onClick={this.handleWishListOperations}/> :
+                                <Favorite color="disabled" onClick={this.handleWishListOperations}/>
+                            }
+                        </IconButton> :
+                        <IconButton className="wishlist"
+                                    onClick={this.deleteBook}
+                                    color="inherit">
+                            <DeleteIcon color={"primary"} />
+                        </IconButton>
+                    }
+
                     <p className="bookAuthorName">by {this.props.bookId.authorName}</p>
                     <p className="bookPrice">Rs. {this.props.bookId.bookPrice}</p>
+                    {this.state.url === "/" ?
                         <Button id="addToCartButton" variant="contained" size="small"
                                 style={this.props.bookId.noOfCopies === 0 ? {
                                     color: "black",
@@ -177,10 +193,14 @@ class Book extends React.Component {
                                 disabled={this.props.bookId.noOfCopies === 0}>
                             {this.props.cart.includes(this.props.bookId.isbnNumber) ? goToCartButtonLink : "Add To Cart"}
                         </Button>
+                        : <Button style={{
+                            color: "white",
+                            backgroundColor: '#b90f4b'
+                        }} onClick={() => this.updateBook(this.props.bookId)}>Update Book </Button>
+                    }
                 </CardContent>
             </Card>
         )
     };
 }
-
 export default withRouter(Book);

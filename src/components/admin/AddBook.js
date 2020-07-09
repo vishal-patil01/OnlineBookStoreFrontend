@@ -15,9 +15,9 @@ import NavigationBar from "../utils/NavigationBar";
 import "../../css/NavigationBar.css"
 import AdminService from "../../services/AdminService";
 import CustomSnackBar from "../utils/CustomSnackBar";
+import {withRouter} from "react-router";
 
-
-export default class AddBook extends React.Component {
+class AddBook extends React.Component {
     constructor(props) {
         super(props);
 
@@ -52,14 +52,17 @@ export default class AddBook extends React.Component {
         console.log("This State")
         console.log(this.props.location.state)
         if (this.props.location.state !== undefined) {
+            const bookData = this.props.location.state.bookData;
             this.setState({
-                isbnNumber: this.props.location.state.bookData.isbnNumber.toString(),
-                bookName: this.props.location.state.bookData.bookName.toString(),
-                authorName: this.props.location.state.bookData.authorName.toString(),
-                bookPrice: this.props.location.state.bookData.bookPrice.toString(),
-                noOfCopies: this.props.location.state.bookData.noOfCopies.toString(),
-                bookDetails: this.props.location.state.bookData.bookDetail.toString(),
-                publishingYear: this.props.location.state.bookData.publishingYear.toString(),
+                isbnNumber: bookData.isbnNumber.toString(),
+                bookName: bookData.bookName.toString(),
+                authorName: bookData.authorName.toString(),
+                bookPrice: bookData.bookPrice.toString(),
+                noOfCopies: bookData.noOfCopies.toString(),
+                bookDetails: bookData.bookDetail.toString(),
+                publishingYear: bookData.publishingYear.toString(),
+                bookImageSrc: bookData.bookImageSrc.substring(bookData.bookImageSrc.lastIndexOf('/') + 1),
+                url: bookData.bookImageSrc.toString(),
             });
         }
     }
@@ -122,7 +125,8 @@ export default class AddBook extends React.Component {
             publishingYear: this.state.publishingYear
         };
         console.log("book ", book);
-        new AdminService().addBook(book).then((response) => {
+        const service = this.props.location.state === undefined ? new AdminService().addBook(book) : new AdminService().updateBook(book, this.props.location.state.bookData.id)
+        service.then((response) => {
             console.log(response.data);
             if (response.status === 200) {
                 this.setState({
@@ -131,6 +135,8 @@ export default class AddBook extends React.Component {
                     alertResponse: response.data.message
                 });
                 this.clearFieldsData();
+                if (this.props.location.state !== undefined)
+                    this.props.history.push('/admin/');
             } else {
                 this.setState({
                     severity: "error",
@@ -146,16 +152,17 @@ export default class AddBook extends React.Component {
     };
 
     clearFieldsData = () => {
-        this.setState({
-            isbnNumber: "",
-            bookName: "",
-            authorName: "",
-            bookPrice: "",
-            noOfCopies: "",
-            bookDetails: "",
-            bookImageSrc: "",
-            publishingYear: "",
-        });
+        this.props.location.state !== undefined ? this.props.history.push('/admin/') :
+            this.setState({
+                isbnNumber: "",
+                bookName: "",
+                authorName: "",
+                bookPrice: "",
+                noOfCopies: "",
+                bookDetails: "",
+                bookImageSrc: "",
+                publishingYear: "",
+            });
     };
     closeAlertBox = () => {
         this.setState({alertShow: false});
@@ -331,7 +338,7 @@ export default class AddBook extends React.Component {
                                                 onClick={this.addBook}
                                                 disabled={!this.canBeSubmitted()}
                                         >
-                                            Save
+                                            {this.props.location.state !== undefined ? "Update" : "Save"}
                                         </Button>
                                         <Button className="btn"
                                                 variant="contained"
@@ -339,7 +346,8 @@ export default class AddBook extends React.Component {
                                                 size="large"
                                                 startIcon={<CancelOutlinedIcon/>}
                                                 onClick={this.clearFieldsData}
-                                        >Clear
+                                        >
+                                            {this.props.location.state !== undefined ? "Cancel" : "Clear"}
                                         </Button>
                                     </div>
                                 </Grid>
@@ -351,3 +359,5 @@ export default class AddBook extends React.Component {
         );
     }
 }
+
+export default withRouter(AddBook);

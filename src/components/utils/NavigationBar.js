@@ -54,8 +54,8 @@ class NavigationBar extends Component {
     }
 
     render() {
-        const urlPath = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
-
+        const homepagePath = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+        const isAdminPage = window.location.href.includes("admin");
         return (
             <AppBar id="App-header">
                 <DialogBoxPage isDialogBoxVisible={this.state.isDialogBoxVisible} close={this.handleClose}/>
@@ -67,7 +67,7 @@ class NavigationBar extends Component {
                         </Typography>
                     </Link>
                     <div className="search"
-                         style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}>
+                         style={homepagePath === '' || isAdminPage ? {visibility: "visible"} : {visibility: "hidden"}}>
                         <div className="searchIcon">
                             <SearchIcon/>
                         </div>
@@ -81,7 +81,7 @@ class NavigationBar extends Component {
                     </div>
                     <div className="grow"/>
                     <div className="shoppingCartDiv"
-                         style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}
+                         style={homepagePath === '' ? {visibility: "visible"} : {visibility: "hidden"}}
                     >
                         <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
                                     onClick={this.handleClickOpen}>
@@ -93,7 +93,7 @@ class NavigationBar extends Component {
                         </IconButton>
                     </div>
                     <div className="logoutDiv"
-                         style={urlPath === '' ? {visibility: "visible"} : {visibility: "hidden"}}
+                         style={homepagePath === '' || isAdminPage? {visibility: "visible"} : {visibility: "hidden"}}
                     >
                         <PopupState variant="popover" popupId="demo-popup-popover">
                             {(popupState) => (

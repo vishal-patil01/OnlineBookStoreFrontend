@@ -133,7 +133,6 @@ export default class HomePage extends Component {
         });
         return (
             <Fragment>
-
                 <NavigationBar searchedText={this.getSearchFieldTextValue} badgeCount={this.state.counter}/>
                 <Container id="homePageContainer">
                     <div className="BooksCountSortFieldDiv">
@@ -148,6 +147,9 @@ export default class HomePage extends Component {
                                         variant="outlined"
                                         onChange={event => this.handleChange(event.target.value)}>
                                     <option value={"DEFAULT"}>Filter</option>
+                                    {this.props.location.pathname !== "/" &&
+                                    <option value={"QUANTITY_LOW_TO_HIGH"}>Quantity:Low To High</option>
+                                    }
                                     <option value={"LOW_TO_HIGH"}>Price : Low To High</option>
                                     <option value={"HIGH_TO_LOW"}>Price : High To Low</option>
                                     <option value={"NEW_ARRIVALS"}>New Arrival</option>
@@ -161,6 +163,7 @@ export default class HomePage extends Component {
                              width="300px" height="200px"/>
                         <h2>Sorry, no results found!</h2>
                     </div>}
+
                     {this.state.loaded === false && <Loader/>}
                     {this.state.loaded === true && this.state.count !== 0 &&
                     <Grid container spacing={4}>
@@ -173,6 +176,7 @@ export default class HomePage extends Component {
                                     wishList={this.state.wishList}
                                     updateCartList={this.fetchCartList}
                                     updateWishList={this.fetchWishList}
+                                    updateBookList={this.getBooks}
                                 />
                             </Grid>
                         )}
@@ -190,4 +194,3 @@ export default class HomePage extends Component {
         );
     }
 }
-

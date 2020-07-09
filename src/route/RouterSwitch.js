@@ -15,7 +15,9 @@ export default class DefaultRoutes extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path={"/admin/adbook"} exact component={AddBook}/>
+                    <Route path={"/admin/add/book"} exact component={AddBook}/>
+                    <Route path={"/admin/update/book"} exact component={AddBook}/>
+                    <Route path={"/admin/"} exact component={HomePage}/>
                     <Route path={"/"} exact component={HomePage}/>
                     <Route path={"/cart"} exact component={CartPage}/>
                     <Route path={"/order/successful"} exact component={OrderSuccess}/>
