@@ -9,4 +9,8 @@ export default class AdminService {
     uploadImage = (formData) => {
         return (post(formData, 'admin/image'))
     }
+
+    updateBook(bookData, bookId) {
+        return (post(bookData, `admin/book/${bookId}`))
+    }
 }
