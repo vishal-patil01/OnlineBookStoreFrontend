@@ -1,4 +1,4 @@
-import {post} from "./HttpService";
+import {deleteData, post} from "./HttpService";
 
 export default class AdminService {
 
@@ -12,5 +12,9 @@ export default class AdminService {
 
     updateBook(bookData, bookId) {
         return (post(bookData, `admin/book/${bookId}`))
+    }
+
+    deleteBook(bookId) {
+        return (deleteData(`admin/book/${bookId}`))
     }
 }

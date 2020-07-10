@@ -17,6 +17,7 @@ import DialogBoxPage from "../utils/CustomDialogBox";
 import WishListService from "../../services/WishListService";
 import CustomSnackBar from "../utils/CustomSnackBar";
 import DeleteIcon from '@material-ui/icons/Delete';
+import AdminService from "../../services/AdminService";
 
 class Book extends React.Component {
     constructor(props) {
@@ -104,6 +105,27 @@ class Book extends React.Component {
     };
     closeAlertBox = () => {
         this.setState({alertShow: false});
+    };
+    deleteBook = () => {
+        new AdminService().deleteBook(this.props.bookId.id).then((response) => {
+            console.log("delete book");
+            console.log(response);
+            if (response.data.statusCode === 200) {
+                this.props.updateBookList()
+                this.setState({
+                    severity: "success",
+                    alertShow: true,
+                    alertResponse: response.data.message
+                })
+            }
+            else {
+                this.setState({
+                    severity: "error",
+                    alertShow: true,
+                    alertResponse: response.data.message
+                })
+            }
+        })
     };
     updateBook = () => {
         this.props.history.push({
