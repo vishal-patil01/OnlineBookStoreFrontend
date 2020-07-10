@@ -1,4 +1,5 @@
 import React from 'react';
+// import Service from '../service/Service';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Divider from '@material-ui/core/Divider';
@@ -12,35 +13,47 @@ import NavigationBar from "../utils/NavigationBar";
 import Link from "@material-ui/core/Link";
 import CustomerService from "../../services/CustomerService";
 
+
 export default class ProductReview extends React.Component {
 
     constructor(props) {
         super(props);
+        if (this.props.location.state === undefined)
+            window.location.href = "/"
         this.state = {
-            rating: '',
             bookInfo: '',
             feedback: '',
             feedbacks: [],
             feedbackLength: 0,
             readMore: true,
+            rating: "NaN",
+            averageRating: 0
         }
     }
 
     componentDidMount() {
+        console.log(this.props.location.state.bookInfo);
         this.setState({
             bookInfo: this.props.location.state.bookInfo
         });
         this.getFeedback(this.props.location.state.bookInfo);
+        this.getCustomerFeedback();
     }
 
     handleChange(field, event) {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    getFeedback=(object)=> {
+    getFeedback = (object) => {
+        console.log("object.isbnNumber");
         new CustomerService().getAllFeedback(object.isbnNumber).then((response) => {
+            console.log(response.data.data);
+            console.log(this.state.feedbacks)
             this.setState({
-                feedbacks: response.data.data
+                feedbacks: response.data.data,
+                averageRating: response.data.data.reduce(function (averageRating, feedbackData) {
+                    return averageRating + feedbackData.rating
+                }, 0) / response.data.data.length
             });
         }).catch((error) => {
             console.log(error);
@@ -48,10 +61,12 @@ export default class ProductReview extends React.Component {
     }
 
     addFeedback = (e) => {
+        e.preventDefault();
+        console.log(this.state.bookInfo)
         var data = {
             rating: this.state.rating,
             feedbackMessage: this.state.feedback,
-            isbn: this.state.bookInfo.isbnNumber
+            isbNumber: this.state.bookInfo.isbnNumber
         };
 
         new CustomerService().addFeedback(data).then((response) => {
@@ -63,29 +78,46 @@ export default class ProductReview extends React.Component {
         this.setState({
             rating: '',
             feedback: ''
-        },()=>e.preventDefault());
+        }, () => e.preventDefault());
+        console.log(this.state.feedback);
+        e.preventDefault();
+        //this.getFeedback(this.state.bookInfo);
         window.location.reload(false);
     }
 
-    handleReadMore=()=> {
+    handleReadMore = () => {
         this.setState({readMore: false});
         return (
             this.displayBookDetail()
         );
     }
 
-    handleReadLess=()=> {
+    handleReadLess = () => {
         this.setState({readMore: true});
         return (
             this.displayBookDetail()
         );
     }
 
-    displayBookDetail=()=> {
+    getCustomerFeedback = () => {
+        var bookId = this.props.location.state.bookInfo.id;
+        new CustomerService().getCustomerFeedback(bookId).then(response => {
+            if (response.data.data[0].feedbackMessage.length > 0) {
+                this.setState({feedbackLength: response.data.data[0].feedbackMessage.length});
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
+    displayBookDetail = () => {
         let bookDiscription = [];
+
         if (this.state.readMore) {
             var text = String(this.state.bookInfo.bookDetail);
-            text = text.split(" ");
+
+            text = text.split(" ")
+
             bookDiscription = text.slice(0, 40).join(" ");
             return (<p>{bookDiscription}...<span className="read-more" onClick={() => {
                 this.handleReadMore(this)
@@ -99,6 +131,15 @@ export default class ProductReview extends React.Component {
             }}>Read Less</span></p>)
         }
     }
+    calculateRating = () => {
+        // alert(this.feedbacks)
+        // this.setState({
+        //     rating: this.state.feedbacks.reduce(function (rating, feedbackData) {
+        //         return rating + feedbackData.rating
+        //     }, 0)
+        //     ,aggregateRating:this.state.rating/this.feedbacks.length})
+
+    }
 
     render() {
         const isAdminPage = localStorage.getItem('userName') === "Admin";
@@ -111,16 +152,17 @@ export default class ProductReview extends React.Component {
                         <div style={{display: "flex"}}>
                             <div className="customer-profile-icon">
                             <span className="customer-profile-icon-content">
-                                {iteam.isbn.substr(0, 1)}
+                                {iteam.userName.substr(0, 1).toUpperCase()}
                             </span>
                             </div>
                             <div className="customer-feedback-name">
                                 <span className="product-review-book-name-size">
-                                    {iteam.isbn}
+                                    {iteam.userName}
                                 </span>
                             </div>
                         </div>
-                        <Rating name="simple-controlled" value={iteam.rating} readOnly="true" className="product-customer-rating"/>
+                        <Rating name="simple-controlled" value={iteam.rating} readOnly="true"
+                                className="product-customer-rating"/>
                         <p className="product-feedback ">
                             {iteam.feedbackMessage}
                         </p>
@@ -130,11 +172,12 @@ export default class ProductReview extends React.Component {
             });
         }
 
-        if(this.state.feedbacks.length===0){
-            displayFeedback=<div className="product-feedback-container product-feedback"> <span>No review available for this book</span></div>
+        if (this.state.feedbacks.length === 0) {
+            displayFeedback = <div className="product-feedback-container product-feedback"><span>No review available for this book</span>
+            </div>
         }
         let feedbackForm = [];
-        if(localStorage.getItem("token") !== null){
+        if (localStorage.getItem("token") !== null) {
             feedbackForm =
                 <div className="customer-feedback-form product-review-font">
                     <span className="product-review-bookdetail-size">Overall rating</span>
@@ -157,13 +200,13 @@ export default class ProductReview extends React.Component {
                         />
                     </ThemeProvider>
                     <div className="product-feedback-button-container">
-                        <Button id="productfeedbackbutton" onClick={e=>this.addFeedback(e)}>Submit</Button>
+                        <Button id="productfeedbackbutton" onClick={e => this.addFeedback(e)}>Submit</Button>
                     </div>
                 </div>
 
         }
-        if(this.state.feedbackLength>0 || isAdminPage){
-            feedbackForm=[];
+        if (this.state.feedbackLength > 0 || isAdminPage) {
+            feedbackForm = [];
         }
 
         return (
@@ -171,7 +214,7 @@ export default class ProductReview extends React.Component {
                 <NavigationBar/>
                 <div className="orderTitle">
                     <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
-                        <Link color="inherit" href={isAdminPage?"/admin":"/"}>
+                        <Link color="inherit" href={isAdminPage ? "/admin" : "/"}>
                             Home
                         </Link>
                         <Typography color="textPrimary">Comments</Typography>
@@ -196,13 +239,16 @@ export default class ProductReview extends React.Component {
                                         {this.state.bookInfo.bookName}
                                     </span>
                                     <span className="product-review-author-name product-review-font">by
-                                        {" "+this.state.bookInfo.authorName}
+                                        {" " + this.state.bookInfo.authorName}
                                     </span>
-                                    <div className="product-rating">
-                                        <span className="product-rating-count product-review-font"> 4.4 </span>
-                                        <div className="product-review-rating-icon product-review-font"><StarIcon
-                                            id="iconSize"/></div>
-                                    </div>
+                                    {
+                                        this.state.averageRating.toString() !== "NaN" && <div className="product-rating">
+                                        <span
+                                            className="product-rating-count product-review-font">{this.state.averageRating}</span>
+                                            <div className="product-review-rating-icon product-review-font"><StarIcon
+                                                id="iconSize"/></div>
+                                        </div>
+                                    }
                                     <span className="product-review-book-price product-review-font">Rs.
                                         {this.state.bookInfo.bookPrice}
                                     </span>

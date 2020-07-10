@@ -10,11 +10,15 @@ export default class CustomerService {
         return (get(`/customer/${addressType}`))
     }
 
-    addFeedback(data) {
-        return (post(data, `comment`));
+    addFeedback(data){
+        return (post(data,`comment`));
     }
 
-    getAllFeedback(isbnNumber) {
-        return (get(`comments/?isbnNumber=${isbnNumber}`));
+    getAllFeedback(isbnNumber){
+        return(get(`comments/?isbnNumber=${isbnNumber}`));
+    }
+
+    getCustomerFeedback(bookId){
+        return(get(`/customer/feedback/?bookId=${bookId}`))
     }
 }

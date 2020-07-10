@@ -127,13 +127,15 @@
 .customer-profile-icon {
     background-color: whitesmoke;
     border: 1px solid silver;
-    border-radius: 50px;
+    border-radius: 32px;
+    width: 32px;
+    height: 32px;
     padding: 3px 8px;
 }
 
 .customer-profile-icon-content {
     font-size: 15px;
-    color: Maroon;
+    color: #b90f4b;
     font-weight: bold;
 }
 
@@ -153,6 +155,7 @@
 }
 
 .product-feedback {
+    overflow-wrap: break-word;
     font-size: 12px;
     margin-left: 40px;
     text-align: left;
@@ -271,3 +274,5 @@
         width: 13%;
     }
 }
+
+
