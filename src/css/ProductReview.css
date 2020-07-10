@@ -1,4 +1,7 @@
-
+.ProductReviewMainDiv{
+    min-height: calc(100vh - 102px);
+    position:relative;
+}
 .product-review-main {
     display: flex;
     justify-content: center;

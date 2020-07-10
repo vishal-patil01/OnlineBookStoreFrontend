@@ -3,6 +3,8 @@ import NavigationBar from "../utils/NavigationBar";
 import Signin from "../user/Signin";
 import "../../css/AdminLogin.css";
 import Card from "@material-ui/core/Card";
+import Footer from "../utils/Footer";
+import CustomSnackBar from "../utils/CustomSnackBar";
 
 class AdminLogin extends Component {
     constructor(props) {
@@ -13,10 +15,6 @@ class AdminLogin extends Component {
             alertShow: "",
             alertResponse: "",
         }
-    }
-
-    componentDidMount() {
-        document.getElementsByClassName('mainDiv')[0].style.minHeight = "77vh";
     }
 
     showAlert = (severity, alertShow, alertResponse) => {
@@ -44,14 +42,21 @@ class AdminLogin extends Component {
     render() {
         return (
             <Fragment>
-                <NavigationBar/>
-                <Card className="adminLogin">
-                    <div className="adminLabel">Admin Login</div>
-                    <div className="adminSignUp">
-                        <Signin showAlert={this.showAlert} isVisible={this.state.isVisible}
-                                handlePasswordVisibility={this.handlePasswordVisibility}/>
-                    </div>
-                </Card>
+                <div className="AdminLoginMainDiv">
+                    <NavigationBar/>
+                    <CustomSnackBar alertShow={this.state.alertShow}
+                                    severity={this.state.severity}
+                                    alertResponse={this.state.alertResponse}
+                                    closeAlertBox={this.closeAlertBox}/>
+                    <Card className="adminLogin">
+                        <div className="adminLabel">Admin Login</div>
+                        <div className="adminSignUp">
+                            <Signin showAlert={this.showAlert} isVisible={this.state.isVisible}
+                                    handlePasswordVisibility={this.handlePasswordVisibility}/>
+                        </div>
+                    </Card>
+                </div>
+                <Footer/>
             </Fragment>
         )
     }

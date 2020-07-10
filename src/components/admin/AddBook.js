@@ -19,6 +19,7 @@ import {withRouter} from "react-router";
 import Link from "@material-ui/core/Link";
 import {Typography} from "@material-ui/core";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Footer from "../utils/Footer";
 
 class AddBook extends React.Component {
     constructor(props) {
@@ -124,7 +125,7 @@ class AddBook extends React.Component {
             bookPrice: this.state.bookPrice,
             noOfCopies: this.state.noOfCopies,
             bookDetail: this.state.bookDetails,
-            bookImageSrc: this.state.url,
+            bookImageSrc: this.state.url.split(" ").join("").toLowerCase(),
             publishingYear: this.state.publishingYear
         };
         console.log("book ", book);
@@ -198,6 +199,7 @@ class AddBook extends React.Component {
         });
         return (
             <Fragment>
+                <div className="AddBookMainDiv">
                 <CustomSnackBar alertShow={this.state.alertShow}
                                 severity={this.state.severity}
                                 alertResponse={this.state.alertResponse}
@@ -364,6 +366,8 @@ class AddBook extends React.Component {
                         </CardContent>
                     </Card>
                 </Container>
+                </div>
+                <Footer/>
             </Fragment>
         );
     }

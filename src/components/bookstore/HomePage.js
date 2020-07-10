@@ -13,6 +13,7 @@ import CartService from "../../services/CartService";
 import Loader from "../utils/Loader";
 import WishListService from "../../services/WishListService";
 import {withRouter} from "react-router";
+import Footer from "../utils/Footer";
 
 class HomePage extends Component {
     constructor(props) {
@@ -198,6 +199,7 @@ class HomePage extends Component {
                                 onChange={this.onPageChange}/>
                 </Grid>
                 <br/>
+                <Footer/>
             </Fragment>
         );
     }

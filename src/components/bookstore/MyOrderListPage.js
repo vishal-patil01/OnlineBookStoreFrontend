@@ -9,6 +9,7 @@ import "../../css/MyOrderListPage.css";
 import OrderService from "../../services/OrderService";
 import DialogBoxPage from "../utils/CustomDialogBox";
 import Signup from "../user/Signup";
+import Footer from "../utils/Footer";
 
 class MyOrderListPage extends Component {
     constructor(props) {
@@ -45,6 +46,7 @@ class MyOrderListPage extends Component {
         const OrderedItemsList = this.state.OrderedItemsList;
         return (
             <Fragment>
+                <div className="WishListMainDiv">
                 <NavigationBar/>
                 <DialogBoxPage component={<Signup/>} isDialogBoxVisible={this.state.isDialogBoxVisible}/>
                 <Grid container>
@@ -77,6 +79,8 @@ class MyOrderListPage extends Component {
                         )}
                     </div>
                 </Grid>
+                </div>
+                <Footer/>
             </Fragment>
         );
     }

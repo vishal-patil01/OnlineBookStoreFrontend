@@ -4,6 +4,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import "../../css/OrderSuccess.css"
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
+import Footer from "../utils/Footer";
 
 export default class UpdateBook extends React.Component {
     constructor(props) {
@@ -20,6 +21,7 @@ export default class UpdateBook extends React.Component {
         const address = "Malhotra Chambers, First Floor, Govandi East, Mumbai, Maharashtra 400088";
         return (
             <Fragment>
+                <div className="WishListMainDiv">
                 <NavigationBar/>
                 <CardContent id="orderContainer">
                     <CardMedia id="orderImage"
@@ -53,6 +55,8 @@ export default class UpdateBook extends React.Component {
                     </tbody>
                 </table>
                 <Button href={"/"} className="orderButton">Continue Shopping</Button>
+                </div>
+                <Footer/>
             </Fragment>
         );
     }

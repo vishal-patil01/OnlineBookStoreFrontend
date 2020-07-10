@@ -12,6 +12,7 @@ import {ThemeProvider} from '@material-ui/styles';
 import NavigationBar from "../utils/NavigationBar";
 import Link from "@material-ui/core/Link";
 import CustomerService from "../../services/CustomerService";
+import Footer from "../utils/Footer";
 
 
 export default class ProductReview extends React.Component {
@@ -211,6 +212,7 @@ export default class ProductReview extends React.Component {
 
         return (
             <div>
+                <div className="ProductReviewMainDiv">
                 <NavigationBar/>
                 <div className="orderTitle">
                     <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
@@ -266,6 +268,8 @@ export default class ProductReview extends React.Component {
                         </div>
                     </div>
                 </div>
+                </div>
+                <Footer/>
             </div>
         );
     }

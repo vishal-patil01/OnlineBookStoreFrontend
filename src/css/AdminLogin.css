@@ -1,11 +1,15 @@
+.AdminLoginMainDiv{
+    margin-top: 133px;
+    min-height: calc(100vh - 164px);
+    position:relative;
+}
 .adminLogin {
     display: flex;
     flex-direction: column;
     border: 1px solid #B1B1B1;
     width: 28%;
     height: 350px;
-    padding-top: 30px;
-    margin: 18vh auto;
+    margin:auto;
 }
 
 .adminLabel {
@@ -33,14 +37,14 @@
 
 @media only screen and (max-width: 1024px) {
     .adminLogin {
-        margin: 24vh auto;
+        /*margin: 24vh auto;*/
         width: 50%;
     }
 }
 
 @media only screen and (max-width: 415px) {
     .adminLogin {
-        margin: 23vh auto;
+        /*margin: 23vh auto;*/
         width: 90%;
     }
 }

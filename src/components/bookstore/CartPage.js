@@ -31,6 +31,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import Loader from "react-loader-spinner";
 import DialogBoxPage from "../utils/CustomDialogBox";
 import Signup from "../user/Signup";
+import Footer from "../utils/Footer";
 
 
 class CartPage extends React.Component {
@@ -275,6 +276,7 @@ class CartPage extends React.Component {
         const count = this.state.count;
         return (
             <Fragment>
+                <div className="WishListMainDiv">
                 <NavigationBar/>
                 <Grid container>
                     <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
@@ -571,6 +573,8 @@ class CartPage extends React.Component {
                         </ExpansionPanel>
                     </div>
                 </Grid>
+                </div>
+                <Footer/>
             </Fragment>
         );
     }

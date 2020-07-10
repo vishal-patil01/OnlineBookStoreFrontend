@@ -1,5 +1,8 @@
+.AddBookMainDiv{
+    min-height: calc(100vh - 101px);
+    position:relative;
+}
 .container {
-    padding-top: 1% !important;
     justify-content: center;
 }
 
@@ -39,9 +42,9 @@
     width: 200px;
 }
 
-.MuiCardContent-root {
-    padding: 3px 50px;
-}
+/*.MuiCardContent-root {*/
+/*    padding: 3px 50px;*/
+/*}*/
 
 .btn {
     margin: 5px 5px 5px 10px !important;
@@ -59,18 +62,13 @@ h3 {
         width: 80%;
     }
 
-    .MuiCardContent-root {
-        padding: 5px 10px;
-    }
+    /*.MuiCardContent-root {*/
+    /*    padding: 5px 10px;*/
+    /*}*/
 
     .card {
         width: 100%;
         margin: auto;
-    }
-
-    .container {
-        padding-top: 15% !important;
-        height: 138vh;
     }
 
     .imageIcon {
@@ -99,9 +97,6 @@ and (-webkit-min-device-pixel-ratio: 1) {
         margin: auto;
     }
 
-    .container {
-        height: 100vh;
-    }
     .imageIcon {
         position: absolute !important;
         margin-top: -6% !important;

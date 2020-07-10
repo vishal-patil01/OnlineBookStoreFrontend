@@ -9,6 +9,7 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import WishListService from "../../services/WishListService";
 import DialogBoxPage from "../utils/CustomDialogBox";
 import Signup from "../user/Signup";
+import Footer from "../utils/Footer";
 
 class WishlistPage extends Component {
     constructor(props) {
@@ -44,6 +45,7 @@ class WishlistPage extends Component {
         const AddedToCart = this.state.AddedToCart;
         return (
             <Fragment>
+                <div className="WishListMainDiv">
                 <NavigationBar/>
                 <DialogBoxPage component={<Signup/>} isDialogBoxVisible={this.state.isDialogBoxVisible}/>
                 <Grid container>
@@ -74,6 +76,8 @@ class WishlistPage extends Component {
                     </ExpansionPanel>
                 </Grid>
                 <br/>
+                </div>
+                <Footer/>
             </Fragment>
         );
     }

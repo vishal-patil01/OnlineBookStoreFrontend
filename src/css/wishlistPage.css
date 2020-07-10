@@ -11,7 +11,10 @@
     border-bottom: none;
     border-radius: 5px;
 }
-
+.WishListMainDiv{
+    min-height: calc(100vh - 31px);
+    position:relative;
+}
 #wishlistContainer {
     width: 75%;
     height: auto;

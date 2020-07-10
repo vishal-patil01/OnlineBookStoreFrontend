@@ -2,8 +2,8 @@
     padding-left: 10%;
     padding-right: 10%;
     margin-top: 50px;
-    position: relative;
-    min-height: 91vh;
+    min-height: calc(100vh - 129px);
+    position:relative;
 }
 
 .resultNotFound{
@@ -51,9 +51,6 @@
 
 /* Media Query To Adjust BooksCount And Sort Field Div On Small Screen */
 @media only screen and (max-width: 400px) {
-    #homePageContainer{
-        margin-top: 65px;
-    }
     .BooksCountSortFieldDiv {
         font-size: 12px;
     }

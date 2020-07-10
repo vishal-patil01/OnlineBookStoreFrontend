@@ -14,6 +14,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import DialogBoxPage from "../utils/CustomDialogBox";
 import NavigationBar from "../utils/NavigationBar";
+import Footer from "../utils/Footer";
 
 export default class ResetPassword extends Component {
 
@@ -141,6 +142,7 @@ export default class ResetPassword extends Component {
         });
         return (
             <Fragment>
+            <div className="WishListMainDiv">
                 <NavigationBar/>
                 <div style={{paddingTop: "3%"}}>
                     <CustomSnackBar alertShow={this.state.alertShow}
@@ -272,6 +274,8 @@ export default class ResetPassword extends Component {
                         </Grid>
                     </ThemeProvider>
                 </div>
+            </div>
+                <Footer/>
             </Fragment>
         )
     };

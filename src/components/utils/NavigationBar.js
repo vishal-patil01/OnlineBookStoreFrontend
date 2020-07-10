@@ -63,6 +63,7 @@ class NavigationBar extends Component {
         const homepagePath = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
         const isAdminPage = window.location.href.includes("admin");
         const isAdminLogin = window.location.href.includes("login");
+        const isAddOrUpdateBookPage = window.location.href.includes("book");
         return (
             <AppBar id="App-header">
                 <DialogBoxPage component={<Signup/>} isDialogBoxVisible={this.state.isDialogBoxVisible}
@@ -101,7 +102,7 @@ class NavigationBar extends Component {
                                     style={{fontSize: '100%', display: 'flex'}}/>
                             </Badge>
                         </IconButton>}
-                        {(!isAdminLogin && homepagePath !== "/" && homepagePath !== "") &&
+                        {(!isAdminLogin && !isAddOrUpdateBookPage && homepagePath !== "/" && homepagePath !== "") &&
                         <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
                                     onClick={this.addNewBook}>
                             <img alt={"addBookIcon"} src={bookImage} color="inherit"

@@ -3,6 +3,7 @@ import "../../css/ForgetPass.css";
 import UserService from "../../services/UserService";
 import SendEmailLink from "../utils/SendEmailLink";
 import CustomSnackBar from "../utils/CustomSnackBar";
+import Footer from "../utils/Footer";
 
 export default class verifyEmail extends Component {
 
@@ -42,6 +43,7 @@ export default class verifyEmail extends Component {
     render() {
         return (
             <Fragment>
+                <div className="WishListMainDiv">
                 <CustomSnackBar alertShow={this.state.alertShow}
                                 severity={this.state.severity}
                                 alertResponse={this.state.alertResponse}
@@ -52,6 +54,8 @@ export default class verifyEmail extends Component {
                                responseMessage="Reset Password Link Has Been Sent"
                                isVerified={false}
                 />
+                </div>
+                <Footer/>
             </Fragment>
         )
     };

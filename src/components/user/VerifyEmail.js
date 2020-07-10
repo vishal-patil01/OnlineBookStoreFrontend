@@ -4,6 +4,7 @@ import UserService from "../../services/UserService";
 import {withRouter} from "react-router";
 import SendEmailLink from "../utils/SendEmailLink";
 import CustomSnackBar from "../utils/CustomSnackBar";
+import Footer from "../utils/Footer";
 
 class VerifyEmail extends Component {
 
@@ -82,6 +83,7 @@ class VerifyEmail extends Component {
                                responseMessage={this.state.alertResponse}
                                sendData={this.sendVerificationEmail}/>
                 }
+                <Footer/>
             </Fragment>
         )
     };
