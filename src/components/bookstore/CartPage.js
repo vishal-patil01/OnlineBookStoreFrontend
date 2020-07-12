@@ -31,7 +31,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import Loader from "react-loader-spinner";
 import DialogBoxPage from "../utils/CustomDialogBox";
 import Signup from "../user/Signup";
-import Footer from "../utils/Footer";
 
 
 class CartPage extends React.Component {
@@ -111,7 +110,17 @@ class CartPage extends React.Component {
         });
     };
 
-    handleEdit = () => {
+    handleEditCartView = () => {
+        this.setState({
+            isTest: false,
+            isPanelOpen1:false,
+            isPanelOpen2: false,
+            expanded2:"",
+            expanded3: ""
+        });
+    };
+
+    handleEditCustomerForm = () => {
         this.setState({
             isTest: false,
             isPanelOpen2: false,
@@ -276,7 +285,6 @@ class CartPage extends React.Component {
         const count = this.state.count;
         return (
             <Fragment>
-                <div className="WishListMainDiv">
                 <NavigationBar/>
                 <Grid container>
                     <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
@@ -322,6 +330,16 @@ class CartPage extends React.Component {
                                          width="100px" height="100px"/>
                                     <h3>Your cart is empty</h3>
                                 </div> : <div>
+                                    {this.state.isPanelOpen1 === true ?
+                                        <Typography component="subtitle1"
+                                                    variant="subtitle1"
+                                                    id="editButton"
+                                        >
+                                            <Button size="small" onClick={this.handleEditCartView}>
+                                                Edit
+                                            </Button>
+                                        </Typography> : null
+                                    }
                                     <div id={count > 2 ? "cartScroll" : ""}>
                                         {AddedToCart.map((id, index) =>
                                             <Grid key={id.id} item xs={24} sm={24} md={24} lg={12} xl={12}>
@@ -374,7 +392,7 @@ class CartPage extends React.Component {
                                                 variant="subtitle1"
                                                 id="editButton"
                                     >
-                                        <Button size="small" onClick={this.handleEdit}>
+                                        <Button size="small" onClick={this.handleEditCustomerForm}>
                                             Edit
                                         </Button>
                                     </Typography> : null
@@ -573,8 +591,6 @@ class CartPage extends React.Component {
                         </ExpansionPanel>
                     </div>
                 </Grid>
-                </div>
-                <Footer/>
             </Fragment>
         );
     }

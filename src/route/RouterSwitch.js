@@ -32,7 +32,6 @@ export default class DefaultRoutes extends React.Component {
                     <Route path={"/book/review"} exact component={ProductReview}/>
                 </Switch>
             </BrowserRouter>
-
         );
     }
 }
