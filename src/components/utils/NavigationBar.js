@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from '@material-ui/icons/Search';
+import Cancel from '@material-ui/icons/Cancel';
 import '../../css/NavigationBar.css'
 import IconButton from "@material-ui/core/IconButton";
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
@@ -27,6 +28,8 @@ class NavigationBar extends Component {
         this.state = {
             isDialogBoxVisible: false,
             url: "",
+            width:window.innerWidth,
+            open:true
         };
     }
 
@@ -59,11 +62,32 @@ class NavigationBar extends Component {
         window.location.href = '/';
     }
 
+    openSearch = () => {
+        if(this.state.open){
+            document.getElementById("searchbar").className="search responsive_search_bar";
+            document.getElementById("searchicon").className="searchIcon search_Icon";
+        }
+        if(!this.state.open){
+            document.getElementById("searchbar").className="search search_bar"
+            document.getElementById("searchicon").className="searchIcon search_icon";
+        }
+        this.setState({open:!this.state.open});
+    }
+
+    getUpdatedDimensions = () => { 
+        this.setState({ width:window.innerWidth });
+		if(window.innerWidth>=451){
+			document.getElementById("searchbar").className=" search search_bar";
+			this.setState({open:true});
+		}
+	}
+
     render() {
         const homepagePath = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
         const isAdminPage = window.location.href.includes("admin");
         const isAdminLogin = window.location.href.includes("login");
         const isAddOrUpdateBookPage = window.location.href.includes("book");
+        window.addEventListener('resize',this.getUpdatedDimensions);
         return (
             <AppBar id="App-header">
                 <DialogBoxPage component={<Signup/>} isDialogBoxVisible={this.state.isDialogBoxVisible}
@@ -75,10 +99,11 @@ class NavigationBar extends Component {
                             e BookStore
                         </Typography>
                     </Link>
-                    <div className="search"
+                    <div id="searchbar" className="search search_bar"
                          style={((homepagePath === '' || isAdminPage) && !isAdminLogin) ? {visibility: "visible"} : {visibility: "hidden"}}>
-                        <div className="searchIcon">
-                            <SearchIcon/>
+                        <div id="searchicon" className={(this.state.width<451)?"searchIcon search_icon"
+                                                                    :"searchIcon search_Icon"}>
+                            <SearchIcon onClick={(this.state.width<451) && this.openSearch.bind(this)}/>
                         </div>
                         <InputBase fullWidth
                                    id="searchText"
@@ -87,6 +112,8 @@ class NavigationBar extends Component {
                                    inputProps={{'aria-label': 'search'}}
                                    onChange={(event) => this.returnSearchTextValue(event.target.value)}
                         />
+                        { (!this.state.open) && <Cancel onClick={this.openSearch.bind(this)} 
+                        style={{color:"silver",margin:"1%"}}/>}
                     </div>
                     <div className="grow"/>
                     <div className="shoppingCartDiv"

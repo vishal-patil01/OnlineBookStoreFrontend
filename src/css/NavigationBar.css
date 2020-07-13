@@ -38,22 +38,39 @@
 }
 
 .search {
-    position: relative;
-    left: 4%;
     display: flex;
-    width: 40%;
     height: 30px;
     border-radius: 6px;
+    background-color: white
+}
+
+.search_bar {
+    position: relative;
     margin-top: 1%;
     margin-bottom: 1%;
-    background-color: white
+    left: 4%;
+    width: 40%;   
+}
+
+.responsive_search_bar {
+    position: absolute;
+    width: 73%;
+    z-index: 1;
 }
 
 .searchIcon {
     padding: 3px 5px;
     height: 6px;
-    color: black;
+}
+
+.search_Icon {
+    color:	black;
     opacity: 20%;
+}
+
+.search_icon {
+    color:	snow;
+    opacity: 100%;
 }
 
 #searchText {
@@ -161,6 +178,18 @@ h6{
     margin-bottom: 10px;
 }
 /*For Mobile Devices*/
+@media (width: 450px) {
+    .search_bar {
+		margin-left: 63px;
+		margin-top: 1.5%;
+		width: 0%;
+    }
+    
+    .responsive_search_bar {
+        width: 58%;
+    }
+}
+
 @media only screen and (max-width: 415px) {
     #App-header {
         padding-left: 1%;
@@ -184,10 +213,61 @@ h6{
         transition: none;
         font-size: 22px;
     }
+
+    .search_bar {
+        margin-left: 148px;
+        width:0%;
+    }
+    
+    .responsive_search_bar {
+        width: 75%;
+    }
+}
+
+@media (width: 375px) {
+    .search_bar {
+        margin-left: 115px;
+        width:0%;
+    }
+    
+    .responsive_search_bar {
+        width: 73%;
+    }
+}
+
+@media (width: 360px){
+    .search_bar {
+        margin-left: 103px;
+        width:0%;
+    }
+
+    .responsive_search_bar {
+        width: 73%;
+    }
 }
 
 @media (width: 320px) {
     #Headers-font {
         font-size: 13px;
+    }
+
+    .search_bar {
+        margin-left: 83px;
+        width:0%;
+    }
+    
+    .responsive_search_bar {
+        width: 70%;
+    }
+}
+
+@media (width: 280px) {
+    .search_bar {
+        margin-left: 33px;
+        width:0%;
+	}
+    
+    .responsive_search_bar {
+        width: 65%;
     }
 }
