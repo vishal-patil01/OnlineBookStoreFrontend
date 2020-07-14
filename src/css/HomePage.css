@@ -80,3 +80,8 @@
         max-width: 1800px;
     }
 }
+
+/*Skeleton Loader*/
+.MuiSkeleton-fitContent {
+     max-width: initial !important;
+}
