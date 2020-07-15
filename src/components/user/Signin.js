@@ -15,13 +15,16 @@ class Signin extends Component {
         super(props, context);
         this.state = {
             email: "",
-            password: "",
+            loginPassword: "",
 
             emailError: " ",
-            passwordError: " ",
+            loginPasswordError: " ",
             alertShow: false,
             alertResponse: "",
-            url: this.props.location.pathname
+            url: this.props.location.pathname,
+
+            isVisible: false,
+            passwordState: "password",
         }
     }
 
@@ -29,6 +32,22 @@ class Signin extends Component {
         this.setState({
             [target.id]: target.value,
         });
+    };
+    handlePasswordVisibility = (obj) => {
+        obj = document.getElementById('loginPassword');
+        if (obj.type === "password") {
+            obj.type = "text";
+            this.setState({
+                isVisible: true,
+                passwordState: "text",
+            });
+        } else {
+            obj.type = "password";
+            this.setState({
+                isVisible: false,
+                passwordState: "password",
+            });
+        }
     };
 
     validation = (event, pattern, message) => {
@@ -48,7 +67,7 @@ class Signin extends Component {
     handleSubmit = () => {
         const user = {
             email: this.state.email,
-            password: this.state.password,
+            password: this.state.loginPassword,
         };
         console.log("User ", user);
         let loginService = (this.props.location.pathname !== "admin/login" || this.props.location.pathname !== "admin/login/") ? new UserService().loginUser(user) : new AdminService().adminLogin(user);
@@ -96,13 +115,13 @@ class Signin extends Component {
                                 fullWidth required autoComplete="off" name="email"/>
                         </div>
                         <div className="password">
-                            <TextField error={this.state.passwordError.trim().length !== 0}
-                                       value={this.state.password}
-                                       helperText={this.state.passwordError}
+                            <TextField error={this.state.loginPasswordError.trim().length !== 0}
+                                       value={this.state.loginPassword}
+                                       helperText={this.state.loginPasswordError}
                                        onChange={this.handleChange}
                                        className="password"
                                        onBlur={textEvent => this.validation(textEvent, "^((?=[^@|#|&|%|$]*[@|&|#|%|$][^@|#|&|%|$]*$)*(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9#@$?]{8,})$", "Please enter valid password")}
-                                       id="password" label="Password"
+                                       id="loginPassword" label="Password"
                                        type="password" variant="outlined"
                                        fullWidth required autoComplete="off" name="password"
                                        InputProps={{ // <-- This is where the toggle button is added.
@@ -110,9 +129,9 @@ class Signin extends Component {
                                                <InputAdornment id="PasswordVisiblity" position="end">
                                                    <IconButton id="PasswordVisiblity"
                                                                aria-label="toggle password visibility"
-                                                               onClick={this.props.handlePasswordVisibility}
+                                                               onClick={this.handlePasswordVisibility}
                                                    >
-                                                       {this.props.isVisible ? <Visibility/> : <VisibilityOff/>}
+                                                       {this.state.isVisible ? <Visibility/> : <VisibilityOff/>}
                                                    </IconButton>
                                                </InputAdornment>
                                            )

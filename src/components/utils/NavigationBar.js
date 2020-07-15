@@ -103,7 +103,7 @@ class NavigationBar extends Component {
                          style={((homepagePath === '' || isAdminPage) && !isAdminLogin) ? {visibility: "visible"} : {visibility: "hidden"}}>
                         <div id="searchicon" className={(this.state.width<451)?"searchIcon search_icon"
                                                                     :"searchIcon search_Icon"}>
-                            <SearchIcon onClick={(this.state.width<451) && this.openSearch.bind(this)}/>
+                            <SearchIcon onClick={(this.state.width<451) && this.openSearch}/>
                         </div>
                         <InputBase fullWidth
                                    id="searchText"

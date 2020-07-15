@@ -177,7 +177,7 @@ h6{
     margin: 0 0 10px;
 }
 /*For Mobile Devices*/
-@media (width: 450px) {
+@media (max-width: 450px) {
     .search_bar {
 		margin-left: 63px;
 		margin-top: 1.5%;

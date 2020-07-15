@@ -248,7 +248,7 @@ class Signup extends Component {
                                                                            aria-label="toggle password visibility"
                                                                            onClick={this.handlePasswordVisibility}
                                                                        >
-                                                                           {this.props.isVisible ? <Visibility/> :
+                                                                           {this.state.isVisible ? <Visibility/> :
                                                                                <VisibilityOff/>}
                                                                        </IconButton>
                                                                    </InputAdornment>
