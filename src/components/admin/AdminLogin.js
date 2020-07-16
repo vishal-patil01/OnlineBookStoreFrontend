@@ -23,7 +23,8 @@ class AdminLogin extends Component {
             alertShow: alertShow,
             alertResponse: alertResponse
         })
-    }
+    };
+
     handlePasswordVisibility = (obj) => {
         obj = document.getElementById('password');
         if (obj.type === "password") {
@@ -37,6 +38,9 @@ class AdminLogin extends Component {
                 isVisible: false,
             });
         }
+    };
+    closeAlertBox = () => {
+        this.setState({alertShow: false});
     };
 
     render() {

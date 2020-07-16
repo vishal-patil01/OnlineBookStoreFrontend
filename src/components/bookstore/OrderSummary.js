@@ -20,19 +20,13 @@ export default class OrderSummary extends React.Component {
                                title={this.props.bookDetails.book.bookName}
                     />
                     <div className="orderDetails">
-                        {console.log(this.props.bookDetails.book.bookName)}
-                        <Typography component="h2" className="orderBookName"
-                        >
+                        <Typography component="h2" className="orderBookName">
                             {this.props.bookDetails.book.bookName}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary"
-                                    className="orderAuthorName"
-                        >
+                        <Typography variant="body2" color="textSecondary" className="orderAuthorName">
                             by {this.props.bookDetails.book.authorName}
                         </Typography>
-                        <Typography component="h2"
-                                    className="orderQuantity"
-                        >
+                        <Typography component="h2" className="orderQuantity">
                             Quantity {this.props.quantity}
                         </Typography>
                         <Typography component="h2"

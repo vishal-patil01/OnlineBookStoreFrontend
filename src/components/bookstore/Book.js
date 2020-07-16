@@ -8,7 +8,6 @@ import "../../css/Book.css";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {Link} from "react-router-dom";
 import CartService from "../../services/CartService";
 import {withRouter} from 'react-router';
 import IconButton from "@material-ui/core/IconButton";
@@ -48,19 +47,19 @@ class Book extends React.Component {
             price: this.props.bookId.bookPrice
         };
         this.setState({buttonText: 'Added To CartPage'});
-
-        new CartService().addToCart(cart).then((response) => {
-            console.log(cart);
-            console.log(response);
-
-            (response.data.statusCode === 200) ?
-                this.props.updateCartList()
-                :
-                this.setState({
-                    isDialogBoxVisible: true,
-                },()=>localStorage.clear())
-        });
+        let response = await new CartService().addToCart(cart);
+        (response.data.statusCode === 200 || response.data.message === "Book Already Exists In Cart") ?
+            this.props.updateCartList()
+            :
+            this.setState({
+                isDialogBoxVisible: true,
+            }, () => this.clearTokens());
     };
+
+    clearTokens = () => {
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userName');
+    }
 
     handleWishListOperations = () => {
         this.props.wishList.includes(this.props.bookId.isbnNumber) ?
@@ -91,7 +90,7 @@ class Book extends React.Component {
     }
 
     dialogBoxOpen = () => {
-        if (localStorage.getItem('token') === null)
+        if (localStorage.getItem('userToken') === null)
             this.setState({
                 isDialogBoxVisible: true,
             });
@@ -143,10 +142,6 @@ class Book extends React.Component {
     };
 
     render() {
-        const goToCartButtonLink = (
-            <Link style={{color: 'white', textDecoration: 'none'}} to={'/cart'}>
-                Go To Cart
-            </Link>);
         const DetailTooltip = withStyles((theme) => ({
             arrow: {
                 color: theme.palette.common.white,
@@ -212,9 +207,9 @@ class Book extends React.Component {
                                     color: "white",
                                     backgroundColor: "#4d8cb9"
                                 } : {color: "white", backgroundColor: "#b90f4b"})}
-                                onClick={() => this.props.cart.includes(this.props.bookId.isbnNumber) ? console.log() : this.addToCart(this.props.bookId.id)}
+                                onClick={() => this.props.cart.includes(this.props.bookId.isbnNumber) ? this.props.history.push('/cart') : this.addToCart(this.props.bookId.id)}
                                 disabled={this.props.bookId.noOfCopies === 0}>
-                            {this.props.cart.includes(this.props.bookId.isbnNumber) ? goToCartButtonLink : "Add To Cart"}
+                            {this.props.cart.includes(this.props.bookId.isbnNumber) ? "Go To Cart" : "Add To Cart"}
                         </Button>
                         : <Button style={{
                             color: "white",

@@ -21,6 +21,7 @@ class WishlistPage extends Component {
         }
     }
 
+
     getBooksAddedToCart() {
         new WishListService().fetchWishList().then(response => {
             console.log("cart fetch");
@@ -30,13 +31,17 @@ class WishlistPage extends Component {
                     AddedToCart: response.data.data,
                     count: response.data.data.length
                 })
-                : (localStorage.getItem('token') === null || response.data.message === "Token Not Valid" || response.data.message === "Token Expired") &&
+                : (localStorage.getItem('userToken') === null || response.data.message === "Token Not Valid" || response.data.message === "Token Expired") &&
                 this.setState({
                     isDialogBoxVisible: true,
-                },()=>localStorage.clear())
+                },()=> this.clearTokens())
         })
     };
 
+    clearTokens = () =>{
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userName');
+    }
     componentDidMount() {
         this.getBooksAddedToCart();
     }
@@ -58,21 +63,29 @@ class WishlistPage extends Component {
                     <Typography component="h5" variant="h5" id="wishlistTitle"
                     >My Wishlist ({this.state.count})</Typography>
                     <ExpansionPanel id="wishlistContainer">
-                        <div container alignItems="center">
-                            {AddedToCart.map((id, index) =>
-                                <div>{console.log(AddedToCart)}
-                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                        <OrderSummary
-                                            bookDetails={id}
-                                            quantity={1}
-                                        />
-                                        {index !== AddedToCart.length - 1 ?
-                                            <Divider/> : console.log()
-                                        }
-                                    </Grid>
-                                </div>
-                            )}
-                        </div>
+                        {this.state.count === 0 ?
+                            <div id="emptyCart">
+                                <img src={require(`../../assets/images/emptyWishlist.jpg`)}
+                                     alt="Empty CartPage"
+                                     width="250px" height="150px"/>
+                                <h3>Your wishlist is empty</h3>
+                            </div> :
+                            <div container alignItems="center">
+                                {AddedToCart.map((id, index) =>
+                                    <div>{console.log(AddedToCart)}
+                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                            <OrderSummary
+                                                bookDetails={id}
+                                                quantity={1}
+                                            />
+                                            {index !== AddedToCart.length - 1 ?
+                                                <Divider/> : console.log()
+                                            }
+                                        </Grid>
+                                    </div>
+                                )}
+                            </div>
+                        }
                     </ExpansionPanel>
                 </Grid>
                 <br/>

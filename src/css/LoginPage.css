@@ -1,8 +1,8 @@
 .hero {
     width: 55%;
     height: 75.5%;
-    margin-top: 40px;
-    margin-left: -100px;
+    margin-left: -50px;
+    margin-top: 30px;
     background-position: center;
     background-size: cover;
     position: absolute;
@@ -10,23 +10,15 @@
     overflow: hidden;
 }
 
-#PasswordVisiblity {
-    padding: 0px !important;
-}
-
 .userLoginForm {
-    /*
-        margin-top: 3%;
-        margin-left: 17%;*/
     display: flex;
 }
 
 .formBox {
     width: 624px;
     height: 400px;
-    /*height: 350px;*/
     position: relative;
-    margin: 4% 0 !important;
+    margin: 40px 0 !important;
     background: #ffffff;
     padding: 5px;
     border-radius: 10%;
@@ -38,8 +30,8 @@
 .loginBox {
     height: 453px;
     width: 389px;
-    margin-top: 0 !important;
-    margin-left: -27%;
+    margin-top: 10px !important;
+    margin-left: -280px;
     position: relative;
     box-shadow: 0 8px 16px 0 #b90f4b;
 }
@@ -82,7 +74,6 @@ a {
 #fullname, #email, #password, #phoneNumber, #password123 {
     font-size: 16px;
     height: 15px;
-    /*padding-bottom: 23px;*/
 }
 
 .loginHtml .signUpHtml {
@@ -124,7 +115,7 @@ a {
 .loginHtml .tab1 {
     font-size: 22px;
     margin-left: 20px;
-    margin-right: 100px;
+    margin-right: 120px;
     padding-bottom: 5px;
     display: inline-block;
     color: gray;
@@ -134,6 +125,8 @@ a {
 
 .loginHtml .tab2 {
     font-size: 22px;
+    margin-left: 20px;
+    margin-right: 20px;
     padding-bottom: 5px;
     display: inline-block;
     color: gray;
@@ -220,7 +213,7 @@ a {
     color: #B1B1B1;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1280px) {
 
     .hero {
         width: 90%;
@@ -233,7 +226,6 @@ a {
 
     .loginHtml .tab1 {
         font-size: 20px;
-        margin-right: 25%;
         margin-left: 15%;
     }
 
@@ -242,51 +234,21 @@ a {
     }
 }
 
-/*
-@media (width: 768px) {
-    .userLoginForm {
-        margin-top: 25%;
-        margin-left: 35%;
-        display: flex;
-    }
-}*/
-/*
-
-@media (min-width: 770px) and (max-width: 1024px) {
-    .userLoginForm {
-        margin-top: 25%;
-        margin-left: 25%;
-        display: flex;
-    }
-
-    .formBox {
-        width: 610px;
-    }
-
-    .loginHtml {
-        padding: 24px 24px 47px 24px;
-    }
-
-    .loginHtml .tab1 {
-        margin-right: 80px;
-    }
-}
-*/
-
-@media only screen and (max-width: 415px) {
+@media only screen and (max-width: 750px) {
     .formBox {
         display: none;
     }
 
     .hero {
         width: 100%;
-        margin-top: 20px;
-        margin-left: -15px;
+        margin-top: 50px;
+        margin-left: -30px;
+        height: auto;
     }
 
     .loginBox {
-        width: 90%;
-        margin-left: 0;
+        max-width: 95%;
+        margin: auto;
     }
 
     .loginHtml {

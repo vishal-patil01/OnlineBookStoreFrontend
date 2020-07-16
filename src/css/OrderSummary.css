@@ -17,14 +17,15 @@
 }
 
 .orderBookName {
-    width: max-content;
+    width: 38vw;
     text-align: left;
     font-size: 14px;
     padding-bottom: 5px;
+    overflow-wrap: break-word;
 }
 
 .orderAuthorName {
-    width: max-content;
+    width: 38vw;
     text-align: left;
     font-size: 10px;
     padding-bottom: 5px;
@@ -51,6 +52,3 @@ hr{
     margin-left: 3% !important;
 }
 
-@media only screen and (max-width: 415px){
-
-}

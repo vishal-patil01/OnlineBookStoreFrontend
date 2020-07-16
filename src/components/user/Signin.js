@@ -61,6 +61,7 @@ class Signin extends Component {
             })
         }
     };
+
     forgetPassword = () => {
         window.location.href = '/forget/password'
     }
@@ -70,13 +71,18 @@ class Signin extends Component {
             password: this.state.loginPassword,
         };
         console.log("User ", user);
-        let loginService = (this.props.location.pathname !== "admin/login" || this.props.location.pathname !== "admin/login/") ? new UserService().loginUser(user) : new AdminService().adminLogin(user);
+        let loginService = !this.props.location.pathname.includes("admin") ? new UserService().loginUser(user) : new AdminService().adminLogin(user);
         loginService.then((response) => {
             console.log(response);
             if (response.status === 200) {
                 this.props.showAlert("success", true, response.data.message)
-                localStorage.setItem('token', response.headers.authorization);
-                localStorage.setItem('userName', response.data.data);
+                if (this.props.location.pathname === "admin/login" || this.props.location.pathname === "admin/login/" || this.props.location.pathname === "/admin/login") {
+                    localStorage.setItem('adminToken', response.headers.authorization);
+                    localStorage.setItem('adminName', response.data.data);
+                } else {
+                    localStorage.setItem('userToken', response.headers.authorization);
+                    localStorage.setItem('userName', response.data.data);
+                }
                 (this.props.location.pathname === "admin/login" || this.props.location.pathname === "admin/login/" || this.props.location.pathname === "/admin/login") ?
                     this.props.history.push({
                         pathname: '/admin',

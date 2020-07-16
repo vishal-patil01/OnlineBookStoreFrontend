@@ -2,8 +2,8 @@ import {get, post} from "./HttpService";
 
 export default class CartService {
 
-    placeOrder(totalPrice) {
-        return (post( "",`order/${totalPrice}`));
+    placeOrder(orederDTO) {
+        return (post(orederDTO ,`order`));
     }
 
     fetchOrders() {

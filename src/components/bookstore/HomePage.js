@@ -35,8 +35,13 @@ class HomePage extends Component {
         };
     }
 
+    clearTokens = () => {
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userName');
+    }
+
     fetchCartList = () => {
-        if (!this.props.location.pathname.includes("admin") && localStorage.getItem("userName")!=="Admin") {
+        if (!this.props.location.pathname.includes("admin") && localStorage.getItem("userToken") !== null) {
             new CartService().fetchCart("cart").then((response) => {
                     console.log("fff");
                     console.log(response);
@@ -45,10 +50,10 @@ class HomePage extends Component {
                             counter: response.data.data.length,
                             cartList: response.data.data.map(value => value.book.isbnNumber).toString()
                         }) :
-                        (localStorage.getItem('token') === null || response.data.message === "Token Not Valid" || response.data.message === "Token Expired") ?
+                        (localStorage.getItem('userToken') === null || response.data.message === "Token Not Valid" || response.data.message === "Token Expired") ?
                             this.setState({
                                 isDialogBoxVisible: true,
-                            }, () => localStorage.clear()) :
+                            }, () => this.clearTokens()) :
                             this.setState({
                                 counter: 0,
                                 cartList: ""
@@ -59,7 +64,7 @@ class HomePage extends Component {
     };
 
     fetchWishList = () => {
-        if (!this.props.location.pathname.includes("admin") && localStorage.getItem("userName")!=="Admin") {
+        if (!this.props.location.pathname.includes("admin") && localStorage.getItem("userToken") !== null) {
             new WishListService().fetchWishList().then((response) => {
                     console.log("wishList");
                     console.log(response);
@@ -100,7 +105,7 @@ class HomePage extends Component {
                 loaded: true
             });
 
-        }, 2000)
+        }, 900)
         window.scrollTo(0, 0);
     }
 
@@ -170,8 +175,8 @@ class HomePage extends Component {
                         <h2>Sorry, no results found!</h2>
                     </div>}
                     {
-                        ((this.props.location.pathname === "/admin" || this.props.location.pathname === "/admin/") && (localStorage.getItem('userName') !== "Admin")) &&
-                           this.props.history.push("/admin/login")
+                        ((this.props.location.pathname === "/admin" || this.props.location.pathname === "/admin/") && (localStorage.getItem('adminToken') === null)) &&
+                        this.props.history.push("/admin/login")
                     }
                     {this.state.loaded === false && <Loader/>}
                     {this.state.loaded === true && this.state.count !== 0 &&
@@ -204,4 +209,5 @@ class HomePage extends Component {
         );
     }
 }
+
 export default withRouter(HomePage);

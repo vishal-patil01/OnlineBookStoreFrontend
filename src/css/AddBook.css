@@ -1,8 +1,9 @@
 .AddBookMainDiv{
-    min-height: calc(100vh - 101px);
+    min-height: calc(100vh - 121px);
     position:relative;
 }
 .container {
+    margin-top: 4%;
     justify-content: center;
 }
 
@@ -12,7 +13,7 @@
 }
 
 .card {
-    width: 30%;
+    width: fit-content;
     margin: 0;
     padding: 0;
 }
@@ -21,30 +22,9 @@
     width: fit-content;
 }
 
-.fileInputDiv {
-    padding-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.imageIcon {
-    position: absolute !important;
-    margin-top: -1.8% !important;
-    margin-left: 16.5% !important;
-}
-
-.imageUrl {
-    height: 7px;
-    width: 170% !important;
-}
-
 .input {
     width: 200px;
 }
-
-/*.MuiCardContent-root {*/
-/*    padding: 3px 50px;*/
-/*}*/
 
 .btn {
     margin: 5px 5px 5px 10px !important;
@@ -62,26 +42,10 @@ h3 {
         width: 80%;
     }
 
-    /*.MuiCardContent-root {*/
-    /*    padding: 5px 10px;*/
-    /*}*/
-
     .card {
         width: 100%;
         margin: auto;
     }
-
-    .imageIcon {
-        position: absolute !important;
-        margin-top: -12.5% !important;
-        margin-left: 39% !important;
-    }
-
-    .imageUrl {
-        width: 133% !important;
-        margin-bottom: 15% !important;
-    }
-
 }
 
 @media only screen
@@ -96,29 +60,6 @@ and (-webkit-min-device-pixel-ratio: 1) {
         width: 75%;
         margin: auto;
     }
-
-    .imageIcon {
-        position: absolute !important;
-        margin-top: -6% !important;
-        margin-left: 12% !important;
-    }
-
-    .imageUrl {
-        width: 112% !important;
-        margin-bottom: 15% !important;
-    }
-}
-
-@media only screen and (width: 1024px){
-    .imageIcon {
-        position: absolute !important;
-        margin-top: -4.3% !important;
-        margin-left: 13.8% !important;
-    }
-    .imageUrl {
-        width: 133% !important;
-        margin-bottom: 15% !important;
-    }
 }
 
 @media only screen
@@ -128,13 +69,8 @@ and (-webkit-min-device-pixel-ratio: 1) {
     .root {
         width: 35%;
     }
-
     .card {
         width: 65%;
         margin: auto;
-    }
-
-    .imageUrl {
-        width: 18vw;
     }
 }

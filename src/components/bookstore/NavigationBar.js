@@ -28,8 +28,8 @@ class NavigationBar extends Component {
         this.state = {
             isDialogBoxVisible: false,
             url: "",
-            width: window.innerWidth,
-            open: true
+            width:window.innerWidth,
+            open:true
         };
     }
 
@@ -38,7 +38,7 @@ class NavigationBar extends Component {
             pathname: '/admin/add/book',
             state: {authenticated: true}
         })
-    };
+    }
     handleClickOpen = () => {
         localStorage.getItem('userToken') === null ?
             this.setState({
@@ -58,44 +58,63 @@ class NavigationBar extends Component {
     };
 
     logout = () => {
-        let isAdminPage = window.location.href.includes("admin");
-        if (isAdminPage) {
+        if(window.location.href.includes("admin")){
             localStorage.removeItem('adminToken');
             localStorage.removeItem('adminName');
         }
-        if (!isAdminPage) {
+        if(!window.location.href.includes("admin")){
             localStorage.removeItem('userToken');
-            localStorage.removeItem('userName');
+            localStorage.removeItem('userName'); 
         }
+        
         window.location.href = '/';
-    };
+    }
 
-    openSearch = () => {
-        if (this.state.open) {
-            document.getElementById("searchbar").className = "search responsive_search_bar";
-            document.getElementById("searchicon").className = "searchIcon search_Icon";
-        }
-        if (!this.state.open) {
-            document.getElementById("searchbar").className = "search search_bar";
-            document.getElementById("searchicon").className = "searchIcon search_icon";
-        }
-        this.setState({open: !this.state.open});
-    };
+    getSearch = (homepagePath,isAdminPage,isAdminLogin) =>{
+        return (<div id="searchbar" className="search search_bar"
+            style={((homepagePath === '' || isAdminPage) && !isAdminLogin) ? {visibility: "visible"} : {visibility: "hidden"}}>
+            <div id="searchicon" className={(this.state.width<617)?"searchIcon search_icon"
+                                                        :"searchIcon search_Icon"}>
+                <SearchIcon onClick={(this.state.open && this.state.width<617) && this.openSearch.bind()}/>
+            </div>
+            <InputBase fullWidth
+                        id="searchText"
+                        placeholder=" Search"
+                        className="inputRoot inputInput"
+                        inputProps={{'aria-label': 'search'}}
+                        onChange={(event) => this.returnSearchTextValue(event.target.value)}
+            />
+            { (!this.state.open) && <Cancel onClick={this.openSearch.bind(this)} 
+                style={{color:"silver",margin:"1%"}}/>}
+        </div>);
+    }
 
-    getUpdatedDimensions = () => {
-        this.setState({width: window.innerWidth});
-        if (window.innerWidth >= 560) {
-            document.getElementById("searchbar").className = " search search_bar";
-            this.setState({open: true});
+    openSearch = () => { 
+        if(this.state.open){
+            document.getElementById("searchbar").className="search responsive_search_bar";
+            document.getElementById("searchicon").className="searchIcon search_Icon";
         }
-    };
+        if(!this.state.open){
+            document.getElementById("searchbar").className="search search_bar"
+            document.getElementById("searchicon").className="searchIcon search_icon";
+        }
+        this.setState({open:!this.state.open});
+    }
+
+    getUpdatedDimensions = () => { 
+        this.setState({ width:window.innerWidth });
+        if(window.innerWidth>=617){
+            document.getElementById("searchbar").className="search search_bar";
+            this.setState({ open:true });
+        }
+    }
 
     render() {
         const homepagePath = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
         const isAdminPage = window.location.href.includes("admin");
         const isAdminLogin = window.location.href.includes("login");
         const isAddOrUpdateBookPage = window.location.href.includes("book");
-        window.addEventListener('resize', this.getUpdatedDimensions);
+        window.addEventListener('resize',this.getUpdatedDimensions);
         return (
             <AppBar id="App-header">
                 <DialogBoxPage component={<Signup/>} isDialogBoxVisible={this.state.isDialogBoxVisible}
@@ -107,27 +126,15 @@ class NavigationBar extends Component {
                             e BookStore
                         </Typography>
                     </Link>
-                    <div id="searchbar" className="search search_bar"
-                         style={((homepagePath === '' || isAdminPage) && !isAdminLogin) ? {visibility: "visible",marginTop:"1vw" +
-                                 ""} : {visibility: "hidden"}}>
-                        <div id="searchicon" className={(this.state.width < 561) ? "searchIcon search_icon"
-                            : "searchIcon search_Icon"}>
-                            <SearchIcon onClick={(this.state.width < 561) && this.openSearch}/>
-                        </div>
-                        <InputBase fullWidth
-                                   id="searchText"
-                                   placeholder=" Search"
-                                   className="inputRoot inputInput"
-                                   inputProps={{'aria-label': 'search'}}
-                                   onChange={(event) => this.returnSearchTextValue(event.target.value)}
-                        />
-                        {(!this.state.open) && <Cancel onClick={this.openSearch.bind(this)}
-                                                       style={{color: "silver", margin: "1%"}}/>}
-                    </div>
+                    {/*{(!this.state.width<617) && this.getSearch(homepagePath,isAdminPage,isAdminLogin) }*/}
+
+                    
                     <div className="grow"/>
                     <div className="shoppingCartDiv"
-                         style={homepagePath === '' || isAdminPage ? {visibility: "visible"} : {visibility: "hidden"}}
+                        style={homepagePath === '' || isAdminPage ? {visibility: "visible"} : {visibility: "hidden"}}
                     >
+                        { (this.state.width<617) && this.getSearch(homepagePath,isAdminPage,isAdminLogin) }
+						{ (this.state.width<617) && <div style={{width:"25px"}}></div>}
                         {((homepagePath === "/" || homepagePath === "") && !isAdminLogin) &&
                         <IconButton id="profileIcon" aria-label="show 4 new mails" color="inherit"
                                     onClick={this.handleClickOpen}>
@@ -168,20 +175,20 @@ class NavigationBar extends Component {
                                             horizontal: 'right',
                                         }}
                                     >
-                                        {(this.props.location.pathname === "/" && localStorage.getItem("userName")===null) ?
+                                        {localStorage.length === 0 ?
                                             <div className="loginPopUp">
                                                 <h6>Welcome</h6>
                                                 <div style={{fontSize: '13px'}}>
                                                     {this.props.location.pathname === "/" ? "To access account and manage orders" : "Welcome Back Admin"}
                                                 </div>
-                                                {(this.props.location.pathname === "/" && localStorage.getItem("userName")===null) &&
+                                                {this.props.location.pathname === "/" &&
                                                 <Button className="loginSignUp" onClick={this.handleClickOpen}>
                                                     Login/SignUp
                                                 </Button>
                                                 }
                                             </div> :
                                             <div className="loginPopUp">
-                                                <p className="logoutTitle">Hello,{isAdminPage ? localStorage.getItem('adminName') : localStorage.getItem('userName')}</p>
+                                                <p className="logoutTitle">Hello,{isAdminPage?localStorage.getItem('adminName'):localStorage.getItem('userName')}</p>
                                                 {this.props.location.pathname === "/" &&
                                                 <IconButton style={{backgroundColor: "white"}} className="myOrder"
                                                             color="inherit">
@@ -198,8 +205,7 @@ class NavigationBar extends Component {
                                                 <Button id="logout" onClick={this.logout}>
                                                     Logout
                                                 </Button>
-                                            </div>
-                                        }
+                                            </div>}
                                     </Popover>
                                 </div>
                             )}
@@ -210,4 +216,5 @@ class NavigationBar extends Component {
         );
     }
 }
+
 export default withRouter(NavigationBar);

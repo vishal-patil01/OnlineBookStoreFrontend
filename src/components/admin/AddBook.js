@@ -17,14 +17,14 @@ import AdminService from "../../services/AdminService";
 import CustomSnackBar from "../utils/CustomSnackBar";
 import {withRouter} from "react-router";
 import Link from "@material-ui/core/Link";
-import {Typography} from "@material-ui/core";
+import {InputAdornment, Typography} from "@material-ui/core";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Footer from "../utils/Footer";
 
 class AddBook extends React.Component {
     constructor(props) {
         super(props);
-        if (this.props.location.state === undefined || localStorage.getItem('token') === null )
+        if (this.props.location.state === undefined || localStorage.getItem('adminToken') === null)
             window.location.href = '/admin/login';
         this.state = {
             isbnNumber: "",
@@ -168,6 +168,7 @@ class AddBook extends React.Component {
                 publishingYear: "",
             });
     };
+
     closeAlertBox = () => {
         this.setState({alertShow: false});
     };
@@ -200,172 +201,178 @@ class AddBook extends React.Component {
         return (
             <Fragment>
                 <div className="AddBookMainDiv">
-                <CustomSnackBar alertShow={this.state.alertShow}
-                                severity={this.state.severity}
-                                alertResponse={this.state.alertResponse}
-                                closeAlertBox={this.closeAlertBox}/>
-                <NavigationBar/>
-                <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
-                    <Link color="inherit" href="/admin">
-                        Home
-                    </Link>
-                    <Typography color="textPrimary">{window.location.href.includes("add")?"AddBook":"UpdateBookDetails"}</Typography>
-                </Breadcrumbs>
-                <Container className="container">
-                    <Card className="card">
-                        <CardContent>
-                            <Grid container spacing={1}>
-                                <Grid item xs={12}>
-                                    <h3>
-                                        Book Details
-                                    </h3>
-                                </Grid>
-                                <ThemeProvider theme={theme}>
+                    <CustomSnackBar alertShow={this.state.alertShow}
+                                    severity={this.state.severity}
+                                    alertResponse={this.state.alertResponse}
+                                    closeAlertBox={this.closeAlertBox}/>
+                    <NavigationBar/>
+                    <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
+                        <Link color="inherit" href="/admin">
+                            Home
+                        </Link>
+                        <Typography
+                            color="textPrimary">{window.location.href.includes("add") ? "AddBook" : "UpdateBookDetails"}</Typography>
+                    </Breadcrumbs>
+                    <Container className="container">
+                        <Card className="card">
+                            <CardContent>
+                                <Grid container spacing={1}>
+                                    <Grid item xs={12}>
+                                        <h3>
+                                            Book Details
+                                        </h3>
+                                    </Grid>
+                                    <ThemeProvider theme={theme}>
+                                        <Grid item xs={12} sm={6} md={6}>
+                                            <TextField id="bookName" label="Book Name" onChange={this.handleChange}
+                                                       name="Book Name"
+                                                       value={this.state.bookName}
+                                                       variant="outlined"
+                                                       fullWidth
+                                                       size="small"
+                                                       onBlur={event => this.validation(event, "^.{3,}$", "Enter Minimum 3 Characters")}
+                                                       error={this.state.bookNameError.trim().length !== 0}
+                                                       helperText={this.state.bookNameError}
+                                                       required/>
+                                        </Grid>
+                                    </ThemeProvider>
                                     <Grid item xs={12} sm={6} md={6}>
-                                        <TextField id="bookName" label="Book Name" onChange={this.handleChange}
-                                                   name="Book Name"
-                                                   value={this.state.bookName}
+                                        <TextField id="authorName" label="Author Name" onChange={this.handleChange}
+                                                   name="Author Name"
+                                                   size="small"
+                                                   value={this.state.authorName}
+                                                   variant="outlined"
+                                                   fullWidth
+                                                   onBlur={event => this.validation(event, "^[A-Za-z][A-Za-z .]{3,}$", "Enter Minimum 3 Characters(Only Alphabets)")}
+                                                   error={this.state.authorNameError.trim().length !== 0}
+                                                   helperText={this.state.authorNameError}
+                                                   required/>
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={4} md={4}>
+                                        <TextField id="isbnNumber" label="ISBN" onChange={this.handleChange}
+                                                   name="ISBN" value={this.state.isbnNumber} variant="outlined"
+                                                   fullWidth
+                                                   size="small"
+                                                   onFocus
+                                                   onBlur={event => this.validation(event, "^.{10,13}$", "Enter 10-13 Characters")}
+                                                   error={this.state.isbnNumberError.trim().length !== 0}
+                                                   helperText={this.state.isbnNumberError}
+                                                   required/>
+                                    </Grid>
+                                    <Grid item xs={12} sm={4} md={4}>
+                                        <TextField id="noOfCopies" label="Stock Quantity"
+                                                   onChange={this.handleChange}
+                                                   name="Stock Quantity"
+                                                   value={this.state.noOfCopies}
                                                    variant="outlined"
                                                    fullWidth
                                                    size="small"
-                                                   onBlur={event => this.validation(event, "^.{3,}$", "Enter Minimum 3 Characters")}
-                                                   error={this.state.bookNameError.trim().length !== 0}
-                                                   helperText={this.state.bookNameError}
+                                                   onBlur={event => this.validation(event, "^[1-9]{1}[0-9]{0,}", "Enter Value (greater Than 0)")}
+                                                   error={this.state.noOfCopiesError.trim().length !== 0}
+                                                   helperText={this.state.noOfCopiesError}
                                                    required/>
                                     </Grid>
-                                </ThemeProvider>
-                                <Grid item xs={12} sm={6} md={6}>
-                                    <TextField id="authorName" label="Author Name" onChange={this.handleChange}
-                                               name="Author Name"
-                                               size="small"
-                                               value={this.state.authorName}
-                                               variant="outlined"
-                                               fullWidth
-                                               onBlur={event => this.validation(event, "^[A-Za-z][A-Za-z .]{3,}$", "Enter Minimum 3 Characters(Only Alphabets)")}
-                                               error={this.state.authorNameError.trim().length !== 0}
-                                               helperText={this.state.authorNameError}
-                                               required/>
-                                </Grid>
+                                    <Grid item xs={12} sm={4} md={4}>
+                                        <TextField
+                                            id="bookPrice" label="Price" onChange={this.handleChange}
+                                            name="Price"
+                                            value={this.state.bookPrice}
+                                            variant="outlined"
+                                            fullWidth
+                                            size="small"
+                                            onBlur={event => this.validation(event, "^[1-9]{1}[0-9]{0,}", "Enter Value (greater Than 0)")}
+                                            error={this.state.bookPriceError.trim().length !== 0}
+                                            helperText={this.state.bookPriceError}
+                                            required/>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} md={6}>
+                                        <TextField
+                                            id="publishingYear" label="Year" name="Year"
+                                            value={this.state.publishingYear}
+                                            onChange={this.handleChange}
+                                            variant="outlined"
+                                            fullWidth
+                                            size="small"
+                                            onBlur={event => this.validation(event, `^(140[0-9]|19[5-9]\\d|20[0-${[2] - 1}]\\d|20${[2]}[0-${[1]}])$`, "Enter value greater than 1400 to 2023")}
+                                            error={this.state.publishingYearError.trim().length !== 0}
+                                            helperText={this.state.publishingYearError}
+                                            required/>
+                                    </Grid>
 
-                                <Grid item xs={12} sm={4} md={4}>
-                                    <TextField id="isbnNumber" label="ISBN" onChange={this.handleChange}
-                                               name="ISBN" value={this.state.isbnNumber} variant="outlined"
-                                               fullWidth
-                                               size="small"
-                                               onFocus
-                                               onBlur={event => this.validation(event, "^.{10,13}$", "Enter 10-13 Characters")}
-                                               error={this.state.isbnNumberError.trim().length !== 0}
-                                               helperText={this.state.isbnNumberError}
-                                               required/>
-                                </Grid>
-                                <Grid item xs={12} sm={4} md={4}>
-                                    <TextField id="noOfCopies" label="Stock Quantity"
-                                               onChange={this.handleChange}
-                                               name="Stock Quantity"
-                                               value={this.state.noOfCopies}
-                                               variant="outlined"
-                                               fullWidth
-                                               size="small"
-                                               onBlur={event => this.validation(event, "^[1-9]{1}[0-9]{0,}", "Enter Value (greater Than 0)")}
-                                               error={this.state.noOfCopiesError.trim().length !== 0}
-                                               helperText={this.state.noOfCopiesError}
-                                               required/>
-                                </Grid>
-                                <Grid item xs={12} sm={4} md={4}>
-                                    <TextField
-                                        id="bookPrice" label="Price" onChange={this.handleChange}
-                                        name="Price"
-                                        value={this.state.bookPrice}
-                                        variant="outlined"
-                                        fullWidth
-                                        size="small"
-                                        onBlur={event => this.validation(event, "^[1-9]{1}[0-9]{0,}", "Enter Value (greater Than 0)")}
-                                        error={this.state.bookPriceError.trim().length !== 0}
-                                        helperText={this.state.bookPriceError}
-                                        required/>
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={6}>
-                                    <TextField
-                                        id="publishingYear" label="Year" name="Year"
-                                        value={this.state.publishingYear}
-                                        onChange={this.handleChange}
-                                        variant="outlined"
-                                        fullWidth
-                                        size="small"
-                                        onBlur={event => this.validation(event, `^(140[0-9]|19[5-9]\\d|20[0-${[2] - 1}]\\d|20${[2]}[0-${[1]}])$`, "Enter value greater than 1400 to 2023")}
-                                        error={this.state.publishingYearError.trim().length !== 0}
-                                        helperText={this.state.publishingYearError}
-                                        required/>
-                                </Grid>
-
-                                <Grid item xs={12} sm={6} md={6}>
-                                    <div className="fileInputDiv">
+                                    <Grid item xs={12} sm={6} md={6}>
                                         <input accept="image/*"
-                                               style={{visibility: "hidden", height: "0px", width: "0px"}}
+                                               style={{display: "none"}}
                                                className=""
                                                id="bookImageSrc" type="file"
                                                onChange={event => this.imageNotNullValidation(event)}
                                         />
                                         <label htmlFor="bookImageSrc">
-                                            <TextField className="imageUrl"
-                                                       id="bookImageSrc" label="Image" name="CoverImage"
-                                                       value={this.state.bookImageSrc}
-                                                       variant="outlined"
-                                                       size="small"
-                                                       disabled
-                                                       fullWidth
-                                                       helperText=" "
-                                                       onChange={(e) => this.onFileChangeHandler(e)}
-                                                       required/>
-                                            <IconButton className="imageIcon" color="primary"
-                                                        aria-label="upload picture"
-                                                        component="span">
-                                                <PhotoLibraryIcon color="secondary"/>
-                                            </IconButton>
+                                            <TextField
+                                                id="bookImageSrc" label="Image" name="CoverImage"
+                                                value={this.state.bookImageSrc}
+                                                variant="outlined"
+                                                size="small"
+                                                disabled
+                                                fullWidth
+                                                helperText=" "
+                                                onChange={(e) => this.onFileChangeHandler(e)}
+                                                required
+                                                InputProps={{ // <-- This is where the toggle button is added.
+                                                    endAdornment: (
+                                                        <InputAdornment position="end">
+                                                            <IconButton color="primary"
+                                                                        aria-label="upload picture"
+                                                                        component="span">
+                                                                <PhotoLibraryIcon color="secondary"/>
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    )
+                                                }}
+                                            />
                                         </label>
-                                    </div>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12}>
+                                        <TextField id="bookDetails" label="Book Description" multiline rows={2}
+                                                   name="Details"
+                                                   onChange={this.handleChange}
+                                                   value={this.state.bookDetails}
+                                                   variant="outlined"
+                                                   fullWidth
+                                                   size="small"
+                                                   onBlur={event => this.validation(event, "^.{10,}$", "Enter Minimum 10 Character")}
+                                                   error={this.state.bookDetailsError.trim().length !== 0}
+                                                   helperText={this.state.bookDetailsError}
+                                                   required/>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12}>
+                                        <div style={{display: "flex", justifyContent: "center", padding: "10px"}}>
+                                            <Button className="btn"
+                                                    type="submit"
+                                                    variant="contained"
+                                                    color="primary"
+                                                    size="large"
+                                                    startIcon={<SaveIcon/>}
+                                                    onClick={this.addBook}
+                                                    disabled={!this.canBeSubmitted()}
+                                            >
+                                                {window.location.href.includes("update") ? "Update" : "Save"}
+                                            </Button>
+                                            <Button className="btn"
+                                                    variant="contained"
+                                                    color="secondary"
+                                                    size="large"
+                                                    startIcon={<CancelOutlinedIcon/>}
+                                                    onClick={this.clearFieldsData}
+                                            >
+                                                {window.location.href.includes("update") ? "Cancel" : "Clear"}
+                                            </Button>
+                                        </div>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12}>
-                                    <TextField id="bookDetails" label="Book Description" multiline rows={2}
-                                               name="Details"
-                                               onChange={this.handleChange}
-                                               value={this.state.bookDetails}
-                                               variant="outlined"
-                                               fullWidth
-                                               size="small"
-                                               onBlur={event => this.validation(event, "^.{10,}$", "Enter Minimum 10 Character")}
-                                               error={this.state.bookDetailsError.trim().length !== 0}
-                                               helperText={this.state.bookDetailsError}
-                                               required/>
-                                </Grid>
-                                <Grid item xs={12} sm={12} md={12}>
-                                    <div style={{display: "flex", justifyContent: "center", padding: "10px"}}>
-                                        <Button className="btn"
-                                                type="submit"
-                                                variant="contained"
-                                                color="primary"
-                                                size="large"
-                                                startIcon={<SaveIcon/>}
-                                                onClick={this.addBook}
-                                                disabled={!this.canBeSubmitted()}
-                                        >
-                                            {window.location.href.includes("update") ? "Update" : "Save"}
-                                        </Button>
-                                        <Button className="btn"
-                                                variant="contained"
-                                                color="secondary"
-                                                size="large"
-                                                startIcon={<CancelOutlinedIcon/>}
-                                                onClick={this.clearFieldsData}
-                                        >
-                                            {window.location.href.includes("update") ? "Cancel" : "Clear"}
-                                        </Button>
-                                    </div>
-                                </Grid>
-                            </Grid>
-                        </CardContent>
-                    </Card>
-                </Container>
+                            </CardContent>
+                        </Card>
+                    </Container>
                 </div>
                 <Footer/>
             </Fragment>

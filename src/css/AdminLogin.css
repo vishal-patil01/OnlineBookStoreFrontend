@@ -38,14 +38,12 @@
 
 @media only screen and (max-width: 1024px) {
     .adminLogin {
-        /*margin: 24vh auto;*/
         width: 50%;
     }
 }
 
 @media only screen and (max-width: 415px) {
     .adminLogin {
-        /*margin: 23vh auto;*/
         width: 90%;
     }
 }

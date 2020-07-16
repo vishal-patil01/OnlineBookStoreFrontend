@@ -143,7 +143,7 @@ export default class ProductReview extends React.Component {
     }
 
     render() {
-        const isAdminPage = localStorage.getItem('userName') === "Admin";
+        const isAdminPage = localStorage.getItem('adminToken') !== null;
         let displayFeedback;
         if (this.state.feedbacks.length > 0) {
             displayFeedback = this.state.feedbacks.map(iteam => {
@@ -178,7 +178,7 @@ export default class ProductReview extends React.Component {
             </div>
         }
         let feedbackForm = [];
-        if (localStorage.getItem("token") !== null) {
+        if (localStorage.getItem("userToken") !== null) {
             feedbackForm =
                 <div className="customer-feedback-form product-review-font">
                     <span className="product-review-bookdetail-size">Overall rating</span>

@@ -7,7 +7,7 @@ function post(bookData, url) {
         url: `${BASEURL.appUrl}${url}`,
         data: bookData,
         headers: {
-            'token': localStorage.getItem('token')
+            'token': url.includes("admin")?localStorage.getItem('adminToken') : localStorage.getItem('userToken')
         }
     })
 }
@@ -17,7 +17,7 @@ function get(url) {
         method: 'get',
         url: `${BASEURL.appUrl}${url}`,
         headers: {
-            'token': localStorage.getItem('token')
+            'token': url.includes("admin")?localStorage.getItem('adminToken') : localStorage.getItem('userToken')
         }
     })
 }
@@ -27,7 +27,7 @@ function update(url) {
         method: 'put', //you can set what request you want to be
         url: `${BASEURL.appUrl}${url}`,
         headers: {
-            'token': localStorage.getItem('token')
+            'token': url.includes("admin")?localStorage.getItem('adminToken') : localStorage.getItem('userToken')
         }
     })
 }
@@ -37,7 +37,7 @@ function deleteData(url) {
         method: 'delete',
         url: `${BASEURL.appUrl}${url}`,
         headers: {
-            'token': localStorage.getItem('token')
+            'token': url.includes("admin")?localStorage.getItem('adminToken') : localStorage.getItem('userToken')
         }
     })
 }

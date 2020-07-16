@@ -71,6 +71,7 @@ class VerifyEmail extends Component {
     render() {
         return (
             <Fragment>
+                <div className="WishListMainDiv">
                 <CustomSnackBar alertShow={this.state.alertShow}
                                 severity={this.state.severity}
                                 alertResponse={this.state.alertResponse}
@@ -83,6 +84,7 @@ class VerifyEmail extends Component {
                                responseMessage={this.state.alertResponse}
                                sendData={this.sendVerificationEmail}/>
                 }
+                </div>
                 <Footer/>
             </Fragment>
         )

@@ -131,7 +131,7 @@ class SendEmailLink extends Component {
                     </Grid>
                     }
                     {(!this.state.showProgress && !(this.props.isVerificationLinkSend || this.props.isEmailVerified)) &&
-                    <Grid id="resetContainer" spacing={0} style={{paddingTop: "3%"}}>
+                    <Grid id="resetContainer" spacing={0} style={{marginTop:"10vh"}}>
                         <Grid item xs={12} sm={12} md={12}>
                             <Typography>
                                 <b id="resetText">{this.props.title}</b>

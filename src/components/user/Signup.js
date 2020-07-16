@@ -184,7 +184,7 @@ class Signup extends Component {
                           style={{marginTop: '6%', borderRadius: "5%", backgroundColor: " #f2f2f2"}}>
                         <img alt="BookStore Login" src={require('../../assets/images/Login.png')}
                              className="loginImage"/>
-                        <div style={{marginLeft: "-260px", marginTop: "3%"}}>
+                        <div style={{marginLeft: "112px", marginTop: "3%"}}>
                             <h3 style={{marginLeft: '1%', fontWeight: "bold"}}>
                                 e BOOKSTORE
                             </h3>
