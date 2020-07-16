@@ -15,7 +15,7 @@ export default class CartView extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentWillReceiveProps(nextProps, nextContext) {
         this.setState({qValue: this.props.qValue})
     }
 
