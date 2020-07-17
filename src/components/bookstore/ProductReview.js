@@ -1,5 +1,5 @@
 import React from 'react';
-// import Service from '../service/Service';
+
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Divider from '@material-ui/core/Divider';
@@ -20,7 +20,7 @@ export default class ProductReview extends React.Component {
     constructor(props) {
         super(props);
         if (this.props.location.state === undefined)
-            window.location.href = "/"
+            this.props.history.push('/forget/password');
         this.state = {
             bookInfo: '',
             feedback: '',
@@ -213,61 +213,64 @@ export default class ProductReview extends React.Component {
         return (
             <div>
                 <div className="ProductReviewMainDiv">
-                <NavigationBar/>
-                <div className="orderTitle">
-                    <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
-                        <Link color="inherit" href={isAdminPage ? "/admin" : "/"}>
-                            Home
-                        </Link>
-                        <Typography color="textPrimary">Comments</Typography>
-                    </Breadcrumbs>
-                </div>
-                <div className="product-review-main">
-                    <div className="product-review-product-info">
-                        <div id="productreviewimage">
-                            <img style={{height: "100%", width: "100%"}}
-                                 src={`${this.state.bookInfo.bookImageSrc}`}
-                                 alt="book"/>
-                        </div>
-                        <div className="product-info">
-                            < div className="product-review-book-info">
-                                <div style={{
-                                    height: "150px",
-                                    display: "flex",
-                                    justifyContent: "space-evenly",
-                                    flexDirection: "column"
-                                }}>
+                    <NavigationBar/>
+                    <div className="orderTitle">
+                        <Breadcrumbs aria-label="breadcrumb" id="breadcrumb">
+                            <Link color="inherit" href={isAdminPage ? "/admin" : "/"}>
+                                Home
+                            </Link>
+                            <Typography color="textPrimary">Comments</Typography>
+                        </Breadcrumbs>
+                    </div>
+                    <div className="product-review-main">
+                        <div className="product-review-product-info">
+                            <div id="productreviewimage">
+                                <img style={{height: "100%", width: "100%"}}
+                                     src={`${this.state.bookInfo.bookImageSrc}`}
+                                     alt="book"/>
+                            </div>
+                            <div className="product-info">
+                                < div className="product-review-book-info">
+                                    <div style={{
+                                        height: "150px",
+                                        display: "flex",
+                                        justifyContent: "space-evenly",
+                                        flexDirection: "column"
+                                    }}>
                                     <span className="product-review-book-name product-review-font">
                                         {this.state.bookInfo.bookName}
                                     </span>
-                                    <span className="product-review-author-name product-review-font">by
-                                        {" " + this.state.bookInfo.authorName}
+                                        <span className="product-review-author-name product-review-font">by
+                                            {" " + this.state.bookInfo.authorName}
                                     </span>
-                                    {
-                                        this.state.averageRating.toString() !== "NaN" && <div className="product-rating">
+                                        {
+                                            this.state.averageRating.toString() !== "NaN" &&
+                                            <div className="product-rating">
                                         <span
                                             className="product-rating-count product-review-font">{this.state.averageRating}</span>
-                                            <div className="product-review-rating-icon product-review-font"><StarIcon
-                                                id="iconSize"/></div>
-                                        </div>
-                                    }
-                                    <span className="product-review-book-price product-review-font">Rs.
-                                        {this.state.bookInfo.bookPrice}
+                                                <div className="product-review-rating-icon product-review-font">
+                                                    <StarIcon
+                                                        id="iconSize"/></div>
+                                            </div>
+                                        }
+                                        <span className="product-review-book-price product-review-font">Rs.
+                                            {this.state.bookInfo.bookPrice}
                                     </span>
+                                    </div>
+                                    <Divider/>
+                                    <span
+                                        className="product-review-bookdetail product-review-font">Book Description:</span>
+                                    <p className="product-review-bookdetail-size product-review-font">
+                                        {this.displayBookDetail()}
+                                    </p>
+                                    <Divider/>
+                                    <span className="customer-feedback product-review-font">Customer Review</span>
+                                    {feedbackForm}
                                 </div>
-                                <Divider/>
-                                <span className="product-review-bookdetail product-review-font">Book Description:</span>
-                                <p className="product-review-bookdetail-size product-review-font">
-                                    {this.displayBookDetail()}
-                                </p>
-                                <Divider/>
-                                <span className="customer-feedback product-review-font">Customer Review</span>
-                                {feedbackForm}
+                                {displayFeedback}
                             </div>
-                            {displayFeedback}
                         </div>
                     </div>
-                </div>
                 </div>
                 <Footer/>
             </div>

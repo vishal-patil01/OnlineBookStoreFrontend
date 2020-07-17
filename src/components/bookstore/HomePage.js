@@ -94,18 +94,13 @@ class HomePage extends Component {
                         this.setState({
                             bookList: response.data.data.content,
                             count: response.data.data.totalElements,
+                            loaded: true,
                         });
                 }
             )
             .catch((error) => {
                 console.log(error)
             });
-        setTimeout(() => {
-            this.setState({
-                loaded: true
-            });
-
-        }, 900)
         window.scrollTo(0, 0);
     }
 

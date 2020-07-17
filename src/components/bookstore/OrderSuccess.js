@@ -8,7 +8,7 @@ export default class UpdateBook extends React.Component {
     constructor(props) {
         super(props);
         this.props.location.state === undefined ?
-            window.location.href = '/'
+            this.props.history.push('/')
             :
             console.log(this.props.location.state.orderId);
     }

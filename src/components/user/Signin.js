@@ -63,7 +63,7 @@ class Signin extends Component {
     };
 
     forgetPassword = () => {
-        window.location.href = '/forget/password'
+        this.props.history.push('/forget/password');
     }
     handleSubmit = () => {
         const user = {
@@ -89,11 +89,12 @@ class Signin extends Component {
                         state: {authenticated: true}
                     }) :
                     (this.props.location.pathname.includes("verify") || this.props.location.pathname.includes("reset")) ? window.location.href = "/" :
-                        window.location.href = this.props.location.pathname;
+                        this.props.history.push(this.props.location.pathname);
             } else {
                 this.props.showAlert("error", true, response.data.message)
             }
-        });
+        })
+        setTimeout(() => {this.props.closeDialogBox();}, 1000)
     }
 
     render() {

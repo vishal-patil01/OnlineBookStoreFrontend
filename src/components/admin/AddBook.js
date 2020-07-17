@@ -25,7 +25,7 @@ class AddBook extends React.Component {
     constructor(props) {
         super(props);
         if (this.props.location.state === undefined || localStorage.getItem('adminToken') === null)
-            window.location.href = '/admin/login';
+            this.props.history.push('/admin/login');
         this.state = {
             isbnNumber: "",
             bookName: "",

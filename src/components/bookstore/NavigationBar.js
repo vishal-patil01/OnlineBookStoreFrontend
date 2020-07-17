@@ -66,8 +66,7 @@ class NavigationBar extends Component {
             localStorage.removeItem('userToken');
             localStorage.removeItem('userName'); 
         }
-        
-        window.location.href = '/';
+        this.props.history.push('/');
     }
 
     getSearch = (homepagePath,isAdminPage,isAdminLogin) =>{

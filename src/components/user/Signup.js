@@ -140,6 +140,9 @@ class Signup extends Component {
             alertResponse: alertResponse
         })
     }
+    closeDialog=()=>{
+        this.props.closeDialog();
+    }
 
     render() {
         const theme = createMuiTheme({
@@ -207,7 +210,7 @@ class Signup extends Component {
 
                                 <div className="loginForm">
                                     <Signin showAlert={this.showAlert} isVisible={this.state.isVisible}
-                                            handlePasswordVisibility={this.handlePasswordVisibility}/>
+                                            handlePasswordVisibility={this.handlePasswordVisibility} closeDialogBox={this.closeDialog}/>
                                     <div className="signUpHtml">
                                         <ThemeProvider theme={theme}>
                                             <div className="group1">

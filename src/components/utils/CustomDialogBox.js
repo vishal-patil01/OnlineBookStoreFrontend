@@ -5,17 +5,21 @@ import Dialog from "@material-ui/core/Dialog";
 
 export default class CustomDialogBox extends Component {
 
+    closeDialog = () => {
+        this.props.close();
+    }
+
     render() {
         return (
             <Dialog
                 fullWidth={true}
                 id="mainDialogBox"
                 style={{maxWidth: "none"}}
-                onClose={this.props.close}
+                onClose={this.closeDialog}
                 aria-labelledby="customized-dialog-title"
                 open={this.props.isDialogBoxVisible}>
                 <DialogContent className="dialogueContent">
-                    <Signup/>
+                    <Signup closeDialog={this.closeDialog}/>
                 </DialogContent>
             </Dialog>
         );
